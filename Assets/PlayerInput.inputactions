@@ -1,6 +1,55 @@
 {
     "name": "PlayerInput",
-    "maps": [],
+    "maps": [
+        {
+            "name": "Player",
+            "id": "d6c24185-578c-48a0-b789-ea534a1bcdb2",
+            "actions": [
+                {
+                    "name": "LeftStrafe",
+                    "type": "Value",
+                    "id": "b1f0c60d-3a71-4121-86bc-b42fc7f6dd8b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightStrafe",
+                    "type": "Button",
+                    "id": "fcb36121-e564-47c7-a62c-7d3554f3ccc5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "52b03291-b848-48c1-83d1-607104735b2e",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "RightStrafe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05077f9d-7ceb-4b4c-96ad-74c260247133",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "LeftStrafe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
     "controlSchemes": [
         {
             "name": "KeyboardAndMouse",
