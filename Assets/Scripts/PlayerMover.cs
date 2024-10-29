@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-[RequireComponent(typeof(PlayerInput))]
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private float _forwardSpeed = 3f;
     [SerializeField] private Planet _targetPlanet;
+    [SerializeField] private float _forwardSpeed = 3f;
+    [SerializeField] private float _strafeSpeed = 0.025f;
 
+    private PlayerInput _input;
+
+    private Vector3 _strafeDirection;
     private Transform _transform;
     private Vector3 _deadLine;
 
@@ -15,22 +18,25 @@ public class PlayerMover : MonoBehaviour
 
     private void Awake()
     {
+        _input = new PlayerInput();
+
+       // _input.Player.Move.performed += OnMove;
+
         _transform = transform;
     }
 
     private void OnEnable()
     {
+        _input.Enable();
+
         _targetPlanet.Destroyed += MoveBoost;
     }
 
     private void OnDisable()
     {
+        _input.Disable();
+
         _targetPlanet.Destroyed -= MoveBoost;
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
@@ -38,6 +44,8 @@ public class PlayerMover : MonoBehaviour
         _deadLine = new Vector3(_transform.position.x, _targetPlanet.transform.position.y, _targetPlanet.transform.position.z);
 
         _transform.position = Vector3.MoveTowards(_transform.position, _deadLine, _forwardSpeed * Time.deltaTime);
+
+        Move();
 
         //_transform.LookAt(_deadLine);
     }
@@ -51,13 +59,15 @@ public class PlayerMover : MonoBehaviour
         _transform.position = Vector3.Lerp(_transform.position, defaultHeight, 1);
     }
 
-    public void OnLeftStrafe()
-    {
-        _transform.Translate(Vector3.left * 0.2f);
-    }
+    //private void OnMove(InputAction.CallbackContext context)
+    //{
+    //    _strafeDirection = context.action.ReadValue<Vector2>();
+    //}
 
-    public void OnRightStrafe()
+    private void Move()
     {
-        _transform.Translate(Vector3.right * 0.2f);
+        _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
+
+        _transform.Translate(_strafeDirection * _strafeSpeed);
     }
 }

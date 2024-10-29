@@ -6,44 +6,57 @@
             "id": "d6c24185-578c-48a0-b789-ea534a1bcdb2",
             "actions": [
                 {
-                    "name": "LeftStrafe",
+                    "name": "Move",
                     "type": "Value",
-                    "id": "b1f0c60d-3a71-4121-86bc-b42fc7f6dd8b",
-                    "expectedControlType": "",
+                    "id": "2b61027e-c259-4f94-8e4d-1c4dd6dd82e2",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "RightStrafe",
-                    "type": "Button",
-                    "id": "fcb36121-e564-47c7-a62c-7d3554f3ccc5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "52b03291-b848-48c1-83d1-607104735b2e",
-                    "path": "<Keyboard>/d",
+                    "name": "2D Vector",
+                    "id": "5cf3e81d-0ee6-41bf-b643-66640db4354b",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
-                    "action": "RightStrafe",
-                    "isComposite": false,
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "05077f9d-7ceb-4b4c-96ad-74c260247133",
+                    "name": "left",
+                    "id": "86690104-c0ff-42fb-8907-95d7460d7f5c",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
-                    "action": "LeftStrafe",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "a89ae517-84ec-4eb3-8116-3185a672f1af",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "aed45867-5928-491f-b63a-6fcf227572f0",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
