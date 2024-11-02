@@ -18,7 +18,15 @@ public class Planet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroyed?.Invoke();
-
         Debug.Log("TRIGER");
+
+        if (other.TryGetComponent(out PlayerMover player))
+        {
+            player.MoveBoost();
+        }
+        
+
+        gameObject.SetActive(false);
+
     }
 }

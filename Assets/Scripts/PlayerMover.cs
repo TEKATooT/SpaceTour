@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private Planet _targetPlanet;
+    [SerializeField] private PlanetSpawner _planetSpawner;
     [SerializeField] private float _forwardSpeed = 3f;
-    [SerializeField] private float _strafeSpeed = 0.025f;
+    [SerializeField] private float _strafeSpeed = 0.05f;
 
     private PlayerInput _input;
-
+    [SerializeField] private float _speedBooster = 1.01f;
     private Vector3 _strafeDirection;
     private Transform _transform;
     private Vector3 _deadLine;
@@ -20,7 +19,7 @@ public class PlayerMover : MonoBehaviour
     {
         _input = new PlayerInput();
 
-       // _input.Player.Move.performed += OnMove;
+        // _input.Player.Move.performed += OnMove;
 
         _transform = transform;
     }
@@ -29,14 +28,19 @@ public class PlayerMover : MonoBehaviour
     {
         _input.Enable();
 
-        _targetPlanet.Destroyed += MoveBoost;
+        //_targetPlanet.Destroyed += MoveBoost;
     }
 
     private void OnDisable()
     {
         _input.Disable();
 
-        _targetPlanet.Destroyed -= MoveBoost;
+        //_targetPlanet.Destroyed -= MoveBoost;
+    }
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(AccelerateTime), 1, 1);
     }
 
     private void Update()
@@ -47,16 +51,18 @@ public class PlayerMover : MonoBehaviour
 
         Move();
 
-        //_transform.LookAt(_deadLine);
+        //_transform.LookAt(_deadLine * Time.deltaTime);
     }
 
-    private void MoveBoost()
+    public void MoveBoost()
     {
         Vector3 defaultHeight = _transform.position;
 
         defaultHeight.y = _startHeight;
 
         _transform.position = Vector3.Lerp(_transform.position, defaultHeight, 1);
+
+        _targetPlanet = _planetSpawner.Generate();
     }
 
     //private void OnMove(InputAction.CallbackContext context)
@@ -69,5 +75,13 @@ public class PlayerMover : MonoBehaviour
         _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
 
         _transform.Translate(_strafeDirection * _strafeSpeed);
+    }
+
+    private void AccelerateTime()
+    {
+        _forwardSpeed *= _speedBooster;
+        _strafeSpeed *= _speedBooster;
+
+        Debug.Log(_forwardSpeed);
     }
 }
