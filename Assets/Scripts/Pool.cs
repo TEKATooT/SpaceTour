@@ -1,4 +1,3 @@
-using System.Collections;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -6,15 +5,11 @@ using UnityEngine.Pool;
 public class Pool : MonoBehaviour
 {
     [SerializeField] private Planet _planet;
+
     private ObjectPool<Planet> _planetsPool;
+    private int _minSize = 50;
+    private int _maxSize = 51;
 
-    private int _minPoolSize = 50;
-    private int _maxPoolSize = 51;
-
-    private readonly float _minCubeLifeTime = 2;
-    private readonly float _maxCubeLifeTime = 5;
-
-    public event Action<Transform> TurnedOff;
     public event Action PlanetCreated;
 
     private void Awake()
@@ -36,26 +31,20 @@ public class Pool : MonoBehaviour
         }, pollObject =>
         {
             Destroy(pollObject.gameObject);
-        }, false, _minPoolSize, _maxPoolSize);
+        }, false, _minSize, _maxSize);
     }
 
     public Planet GetPlanet()
     {
         Planet newPlanet = _planetsPool.Get();
 
-        PlanetCreated.Invoke();
-
-        StartCoroutine(Release(newPlanet));
+        PlanetCreated?.Invoke();
 
         return newPlanet;
     }
 
-    public IEnumerator Release(Planet newPlanet)
+    public void Release(Planet newPlanet)
     {
-        float randomlifeTime = UnityEngine.Random.Range(_minCubeLifeTime, _maxCubeLifeTime);
-
-        yield return new WaitForSeconds(randomlifeTime);
-
         _planetsPool.Release(newPlanet);
     }
 }

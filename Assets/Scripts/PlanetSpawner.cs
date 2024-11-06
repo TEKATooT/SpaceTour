@@ -1,61 +1,68 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Pool))]
 public class PlanetSpawner : MonoBehaviour
 {
-    [SerializeField] private Pool _pool;
+    private Pool _pool;
+    private Planet _planetToTarget;
 
-    [SerializeField] private Planet _planet;
+    private Queue<Planet> _planetInQueue = new Queue<Planet>();
 
-    private Transform[] _spawenPoints;
-         
     private Vector3 _nextPosition;
-    private Vector3 _startPosition = new Vector3(0, 0, 10);
-
-    private WaitForSeconds _second = new WaitForSeconds(1);
+    private Vector3 _firstPosition = new Vector3(0, 0, 5);
 
     private float _offsetZPosition = 7.5f;
 
+    private readonly int _oneSpawnQuantuty = 1;
+    private readonly int _startSpawnQuantuty = 10;
+
+    private readonly float _minOffsetX = -10f;
+    private readonly float _maxOffsetX = 10f;
+
     private void Awake()
     {
-        _nextPosition = _startPosition;
+        _pool = GetComponent<Pool>();
+
+        _nextPosition = _firstPosition;
+
+        GenerateNextPlanet(_startSpawnQuantuty);
     }
 
-    private void OnEnable()
+    public Planet GetTarget()
     {
-        //_pool.TurnedOff += Generate;
+        _planetToTarget = _planetInQueue.Dequeue();
+
+        _planetToTarget.Destroyed += CyclePlanet;
+
+        return _planetToTarget;
     }
 
-    private void OnDisable()
+    private void GenerateNextPlanet(int quantity)
     {
-        //_pool.TurnedOff -= Generate;
-    }
+        for (int i = 0; i < quantity; i++)
+        {
+            Planet planet = _pool.GetPlanet();
+            planet.transform.position = GetPosition();
 
-    private void Start()
-    {
-        Generate();
-        Generate();
-        Generate();
+            _planetInQueue.Enqueue(planet);
+        }
     }
 
     private Vector3 GetPosition()
     {
-        float offsetX = Random.Range(-10f, 10f);
-
-        Debug.Log(offsetX);
+        float offsetX = Random.Range(_minOffsetX, _maxOffsetX);
 
         _nextPosition = new Vector3(_nextPosition.x + offsetX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
 
         return _nextPosition;
     }
 
-    public Planet Generate()
+    private void CyclePlanet()
     {
-        //Planet planet = _pool.GetPlanet();
+        _planetToTarget.Destroyed -= CyclePlanet;
+        _pool.Release(_planetToTarget);
 
-        //planet.transform.position = transform.position;
-
-       Planet nextPlanet = Instantiate(_planet, GetPosition(), Quaternion.identity);
-
-        return nextPlanet;
+        GenerateNextPlanet(_oneSpawnQuantuty);
     }
 }
