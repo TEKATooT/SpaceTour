@@ -10,21 +10,18 @@ public class PlanetSpawner : MonoBehaviour
     private Queue<Planet> _planetInQueue = new Queue<Planet>();
 
     private Vector3 _nextPosition;
-    private Vector3 _firstPosition = new Vector3(0, 0, 5);
 
-    private float _offsetZPosition = 7.5f;
+    private float _offsetZPosition = 5f;
+
+    private int _minPositionX = -5;
+    private int _maxPositionX = 5;
+    private int _startSpawnQuantuty = 5;
 
     private readonly int _oneSpawnQuantuty = 1;
-    private readonly int _startSpawnQuantuty = 10;
-
-    private readonly float _minOffsetX = -10f;
-    private readonly float _maxOffsetX = 10f;
 
     private void Awake()
     {
         _pool = GetComponent<Pool>();
-
-        _nextPosition = _firstPosition;
 
         GenerateNextPlanet(_startSpawnQuantuty);
     }
@@ -33,7 +30,7 @@ public class PlanetSpawner : MonoBehaviour
     {
         _planetToTarget = _planetInQueue.Dequeue();
 
-        _planetToTarget.Destroyed += CyclePlanet;
+        _planetToTarget.Destroyed += CyclePlanets;
 
         return _planetToTarget;
     }
@@ -51,16 +48,18 @@ public class PlanetSpawner : MonoBehaviour
 
     private Vector3 GetPosition()
     {
-        float offsetX = Random.Range(_minOffsetX, _maxOffsetX);
+        float positionX = Random.Range(_minPositionX, _maxPositionX);
 
-        _nextPosition = new Vector3(_nextPosition.x + offsetX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
+        Debug.Log(positionX);
+
+        _nextPosition = new Vector3(positionX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
 
         return _nextPosition;
     }
 
-    private void CyclePlanet()
+    private void CyclePlanets()
     {
-        _planetToTarget.Destroyed -= CyclePlanet;
+        _planetToTarget.Destroyed -= CyclePlanets;
         _pool.Release(_planetToTarget);
 
         GenerateNextPlanet(_oneSpawnQuantuty);
