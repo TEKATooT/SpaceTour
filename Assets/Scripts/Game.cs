@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private PlayerMover _player;
+    [SerializeField] private PlayerEngine _player;
     [SerializeField] private TextMeshProUGUI _text;
 
     private float _playerScore = -1;

@@ -9,7 +9,7 @@ public class Planet : MonoBehaviour
     {
         Destroyed?.Invoke();
 
-        if (other.TryGetComponent(out PlayerMover player))
+        if (other.TryGetComponent(out PlayerEngine player))
         {
             player.UpBoost();
         }

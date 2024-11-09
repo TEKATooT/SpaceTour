@@ -26,13 +26,13 @@ public class PlanetSpawner : MonoBehaviour
         GenerateNextPlanet(_startSpawnQuantuty);
     }
 
-    public Planet GetTarget()
+    public Vector3 GetTargetPosition()
     {
         _planetToTarget = _planetInQueue.Dequeue();
 
         _planetToTarget.Destroyed += CyclePlanets;
 
-        return _planetToTarget;
+        return _planetToTarget.transform.position;
     }
 
     private void GenerateNextPlanet(int quantity)
@@ -50,9 +50,7 @@ public class PlanetSpawner : MonoBehaviour
     {
         float positionX = Random.Range(_minPositionX, _maxPositionX);
 
-        Debug.Log(positionX);
-
-        _nextPosition = new Vector3(positionX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
+        _nextPosition = new Vector3(positionX, _nextPosition.y , _nextPosition.z + _offsetZPosition);
 
         return _nextPosition;
     }
