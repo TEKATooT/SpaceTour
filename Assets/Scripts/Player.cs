@@ -51,19 +51,19 @@ public class Player : MonoBehaviour
     {
         _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
         _transform.Translate(_strafeDirection * _engine.StrafeSpeed * Time.deltaTime);
-
+        
         AcceptTilt();
     }
 
     private void AcceptTilt()
     {
-        if (_strafeDirection.x > 0)
+        if (_strafeDirection.x == 1)
             _transform.Rotate(_leftTilt);
 
-        else if (_strafeDirection.x < 0)
+        else if (_strafeDirection.x == -1)
             _transform.Rotate(_rightTilt);
 
-        else if (_strafeDirection.x == 0)
+        else
             _transform.Rotate(_noTilt);
     }
 

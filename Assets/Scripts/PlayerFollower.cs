@@ -14,6 +14,11 @@ public class PlayerFollower : MonoBehaviour
     }
     private void Update()
     {
+        Follow();
+    }
+
+    private void Follow()
+    {
         _position = _transform.position;
 
         _position.z = _player.transform.position.z + _offset;

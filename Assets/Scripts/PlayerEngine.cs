@@ -49,7 +49,7 @@ public class PlayerEngine : MonoBehaviour
     private void MoveForward()
     {
         _nextPosition = new Vector3(_transform.position.x, Vector3.Distance(_transform.position, _nextPosition), _targetPosition.z);
-        
+
         _transform.position = Vector3.MoveTowards(_transform.position, _nextPosition, _forwardSpeed * Time.deltaTime);
         //_transform.Translate(Vector3.forward * _forwardSpeed * Time.deltaTime);
 
