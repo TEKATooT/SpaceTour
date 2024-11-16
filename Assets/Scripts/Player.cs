@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerEngine))]
 public class Player : MonoBehaviour
@@ -22,8 +21,6 @@ public class Player : MonoBehaviour
 
         _input = new PlayerInput();
 
-        //_input.Player.Move.performed += OnMove;
-
         _transform = transform;
     }
 
@@ -40,13 +37,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         OnStrafeMove();
-
-        if (_transform.position.y <= 0.1f)
-        {
-            Time.timeScale = 0;
-
-            Debug.Log("Game over");
-        }
     }
 
     private void OnStrafeMove()
@@ -59,20 +49,15 @@ public class Player : MonoBehaviour
 
     private void AcceptTilt()
     {
-        if (_strafeDirection.x == 1)
+        if (_strafeDirection.x > 0f)
             _tiltRotation = _leftTilt;
 
-        else if (_strafeDirection.x == -1)
+        else if (_strafeDirection.x < 0f)
             _tiltRotation = _rightTilt;
 
-        else
+        else if (_strafeDirection.y == 0f)
             _tiltRotation = _noTilt;
 
         _transform.Rotate(_tiltRotation);
     }
-
-    //private void OnMove(InputAction.CallbackContext context)
-    //{
-    //    _strafeDirection = context.action.ReadValue<Vector2>();
-    //}
 }
