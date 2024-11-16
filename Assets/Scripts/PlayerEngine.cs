@@ -8,9 +8,11 @@ public class PlayerEngine : MonoBehaviour
     [SerializeField] private float _forwardSpeed = 3f;
     [SerializeField] private float _strafeSpeed = 5f;
     [SerializeField] private float _speedBooster = 1.05f;
+    [SerializeField] private ParticleSystem _particleSystem;
 
     static private float _accelerateSpeedFrequency;
 
+    private ParticleSystem.MainModule _mainParticleSystem;
     private Transform _transform;
     private Vector3 _targetPosition;
     private Vector3 _deadLine;
@@ -30,9 +32,14 @@ public class PlayerEngine : MonoBehaviour
 
     private void Start()
     {
-        _targetPosition = _planetSpawner.GetTargetPosition();
+        _mainParticleSystem = _particleSystem.main;
+
+        if (_accelerateSpeedFrequency == 0)
+            _accelerateSpeedFrequency = 1f;
 
         InvokeRepeating(nameof(AccelerateSpeed), _startAccelerateSpeed, _accelerateSpeedFrequency);
+
+        _targetPosition = _planetSpawner.GetTargetPosition();
     }
 
     private void Update()
@@ -69,5 +76,7 @@ public class PlayerEngine : MonoBehaviour
     {
         _forwardSpeed *= _speedBooster;
         _strafeSpeed *= _speedBooster;
+
+        _mainParticleSystem.simulationSpeed *= _speedBooster;
     }
 }

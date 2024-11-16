@@ -27,6 +27,8 @@ public class Game : MonoBehaviour
 
     public void StartGame()
     {
+
+
         Time.timeScale = _normalTimeScale;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
