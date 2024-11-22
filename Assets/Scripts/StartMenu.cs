@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class StartMenu : MonoBehaviour
 {
@@ -7,9 +8,27 @@ public class StartMenu : MonoBehaviour
     private float _normalDifference = 1;
     private float _slowlyDifference = 1.5f;
 
+    private readonly int _defaultDifference = 2;
+
     private void OnEnable()
     {
-        SelectDifference(_normalDifference);
+        SelectDifferenceDropBar(_defaultDifference);
+    }
+
+    private void Start()
+    {
+        if (YandexGame.EnvironmentData.language == "tr")
+        {
+            SelectLanguageDropBar(2);
+        }
+        else if (YandexGame.EnvironmentData.language == "ru")
+        {
+            SelectLanguageDropBar(1);
+        }
+        else
+        {
+            SelectLanguageDropBar(0);
+        }
     }
 
     public void StartGame()
@@ -22,13 +41,13 @@ public class StartMenu : MonoBehaviour
         switch (index)
         {
             case 0:
-                SelectDifference(_fasterDifference);
+                PlayerEngine.ChangeAccelerateSpeedFrequency(_fasterDifference);
                 break;
             case 1:
-                SelectDifference(_normalDifference);
+                PlayerEngine.ChangeAccelerateSpeedFrequency(_normalDifference);
                 break;
             case 2:
-                SelectDifference(_slowlyDifference);
+                PlayerEngine.ChangeAccelerateSpeedFrequency(_slowlyDifference);
                 break;
             default:
                 break;
@@ -40,27 +59,17 @@ public class StartMenu : MonoBehaviour
         switch (index)
         {
             case 0:
-                SelectLanguage('e');
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll("English");
                 break;
             case 1:
-                SelectLanguage('r');
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll("Russian");
                 break;
             case 2:
-                SelectLanguage('t');
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll("Turkish");
                 break;
             default:
                 break;
         }
-    }
-
-        private void SelectDifference(float frequency)
-    {
-        PlayerEngine.ChangeAccelerateSpeedFrequency(frequency);
-    }
-
-    public void SelectLanguage(char language)
-    {
-
     }
 
     public void ShowScoreBoard()
