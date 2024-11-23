@@ -22,15 +22,12 @@ public class StartMenu : MonoBehaviour
     private float _normalDifference = 1;
     private float _slowlyDifference = 1.5f;
 
-    private readonly int _defaultDifference = 2;
-
-    private void OnEnable()
-    {
-        SelectDifferenceDropBar(_defaultDifference);
-    }
+    private readonly int _defaultDifference = 0;
 
     private void Start()
     {
+        SelectDifferenceDropBar(_defaultDifference);
+
         if (YandexGame.EnvironmentData.language == Turkish)
         {
             SelectLanguageDropBar(Third);
@@ -79,13 +76,13 @@ public class StartMenu : MonoBehaviour
         switch (index)
         {
             case First:
-                PlayerEngine.ChangeAccelerateSpeedFrequency(_fasterDifference);
-                break;
-            case Second:
                 PlayerEngine.ChangeAccelerateSpeedFrequency(_normalDifference);
                 break;
-            case Third:
+            case Second:
                 PlayerEngine.ChangeAccelerateSpeedFrequency(_slowlyDifference);
+                break;
+            case Third:
+                PlayerEngine.ChangeAccelerateSpeedFrequency(_fasterDifference);
                 break;
             default:
                 break;
