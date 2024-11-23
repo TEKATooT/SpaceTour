@@ -4,6 +4,20 @@ using YG;
 
 public class StartMenu : MonoBehaviour
 {
+    static public string correctLanguage;
+
+    private const string EnglishCode = "English";
+    private const string RussionCode = "Russian";
+    private const string TurkishCode = "Turkish";
+    
+    private const string English = "en";
+    private const string Russion = "ru";
+    private const string Turkish = "tr";    
+
+    private const int First = 0;
+    private const int Second = 1;
+    private const int Third = 2;
+
     private float _fasterDifference = 0.5f;
     private float _normalDifference = 1;
     private float _slowlyDifference = 1.5f;
@@ -17,55 +31,61 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
-        if (YandexGame.EnvironmentData.language == "tr")
+        if (YandexGame.EnvironmentData.language == Turkish)
         {
-            SelectLanguageDropBar(2);
+            SelectLanguageDropBar(Third);
+            correctLanguage = Turkish;
         }
-        else if (YandexGame.EnvironmentData.language == "ru")
+        else if (YandexGame.EnvironmentData.language == Russion)
         {
-            SelectLanguageDropBar(1);
+            SelectLanguageDropBar(Second);
+            correctLanguage = Russion;
         }
         else
         {
-            SelectLanguageDropBar(0);
+            SelectLanguageDropBar(First);
+            correctLanguage = English;
         }
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void SelectDifferenceDropBar(int index)
-    {
-        switch (index)
-        {
-            case 0:
-                PlayerEngine.ChangeAccelerateSpeedFrequency(_fasterDifference);
-                break;
-            case 1:
-                PlayerEngine.ChangeAccelerateSpeedFrequency(_normalDifference);
-                break;
-            case 2:
-                PlayerEngine.ChangeAccelerateSpeedFrequency(_slowlyDifference);
-                break;
-            default:
-                break;
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Second);
     }
 
     public void SelectLanguageDropBar(int index)
     {
         switch (index)
         {
-            case 0:
-                Lean.Localization.LeanLocalization.SetCurrentLanguageAll("English");
+            case First:
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(EnglishCode);
+                correctLanguage = English;
                 break;
-            case 1:
-                Lean.Localization.LeanLocalization.SetCurrentLanguageAll("Russian");
+            case Second:
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(RussionCode);
+                correctLanguage = Russion;
                 break;
-            case 2:
-                Lean.Localization.LeanLocalization.SetCurrentLanguageAll("Turkish");
+            case Third:
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(TurkishCode);
+                correctLanguage = Turkish;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SelectDifferenceDropBar(int index)
+    {
+        switch (index)
+        {
+            case First:
+                PlayerEngine.ChangeAccelerateSpeedFrequency(_fasterDifference);
+                break;
+            case Second:
+                PlayerEngine.ChangeAccelerateSpeedFrequency(_normalDifference);
+                break;
+            case Third:
+                PlayerEngine.ChangeAccelerateSpeedFrequency(_slowlyDifference);
                 break;
             default:
                 break;
