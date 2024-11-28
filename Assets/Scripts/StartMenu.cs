@@ -1,6 +1,6 @@
-using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class StartMenu : MonoBehaviour
 {
@@ -9,10 +9,10 @@ public class StartMenu : MonoBehaviour
     private const string EnglishCode = "English";
     private const string RussionCode = "Russian";
     private const string TurkishCode = "Turkish";
-    
+
     private const string English = "en";
     private const string Russion = "ru";
-    private const string Turkish = "tr";    
+    private const string Turkish = "tr";
 
     private const int First = 0;
     private const int Second = 1;
@@ -26,19 +26,19 @@ public class StartMenu : MonoBehaviour
 
     //public void OnCallGameReadyButtonClick()
     //{
-    //    YandexGamesSdk.GameReady();
+    //    YandexGame.GameReadyAPI();
     //}
 
     private void Start()
     {
         SelectDifferenceDropBar(_defaultDifference);
 
-        if (YandexGamesSdk.Environment.i18n.lang == Turkish)
+        if (YandexGame.EnvironmentData.language == Turkish)
         {
             SelectLanguageDropBar(Third);
             correctLanguage = Turkish;
         }
-        else if (YandexGamesSdk.Environment.i18n.lang == Russion)
+        else if (YandexGame.EnvironmentData.language == Russion)
         {
             SelectLanguageDropBar(Second);
             correctLanguage = Russion;

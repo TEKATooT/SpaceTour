@@ -1,19 +1,19 @@
-using Agava.YandexGames;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public sealed class SDKInitializer : MonoBehaviour
 {
-    private void Awake()
-    {
-        YandexGamesSdk.CallbackLogging = true;
-    }
+    //private void Awake()
+    //{
+    //      YandexGame.CallbackLogging = true;
+    //}
 
-    private IEnumerator Start()
-    {
-        yield return YandexGamesSdk.Initialize(OnInitialized);
-    }
+    //private IEnumerator Start()
+    //{
+    //    yield return YandexGame.Initialize(OnInitialized);
+    //}
 
     private void OnInitialized()
     {
