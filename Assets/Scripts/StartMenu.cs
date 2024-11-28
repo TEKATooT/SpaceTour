@@ -24,10 +24,10 @@ public class StartMenu : MonoBehaviour
 
     private readonly int _defaultDifference = 0;
 
-    public void OnCallGameReadyButtonClick()
-    {
-        YandexGamesSdk.GameReady();     // ??
-    }
+    //public void OnCallGameReadyButtonClick()
+    //{
+    //    YandexGamesSdk.GameReady();
+    //}
 
     private void Start()
     {

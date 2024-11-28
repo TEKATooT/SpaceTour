@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2121,7 +2121,7 @@ RectTransform:
   m_GameObject: {fileID: 666849098}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.77625, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 650758380}
@@ -8879,12 +8879,12 @@ MonoBehaviour:
   - Language: Turkish
     Text: "\u0130leriye do\u011Fru hareket etmek i\xE7in gezegenlerden g\xFC\xE7
       almak \xFCzere uzay geminizi sola veya sa\u011Fa hareket ettirmek i\xE7in 'A'
-      ve 'D' (eng) veya Sol\\\\Sa\u011F ok tu\u015Flar\u0131n\u0131 kullan\u0131n!"
+      ve 'D' (eng) veya Sol\\Sa\u011F ok tu\u015Flar\u0131n\u0131 kullan\u0131n!"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043B\u0430\u0432\u0438\u0448\u0438
       \xABA\xBB \u0438 \xABD\xBB (\u0430\u043D\u0433\u043B.) \u0438\u043B\u0438 \u0441\u0442\u0440\u0435\u043B\u043A\u0438
-      \u0432\u043B\u0435\u0432\u043E\\\\\u0432\u043F\u0440\u0430\u0432\u043E, \u0447\u0442\u043E\u0431\u044B
+      \u0432\u043B\u0435\u0432\u043E\\\u0432\u043F\u0440\u0430\u0432\u043E, \u0447\u0442\u043E\u0431\u044B
       \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0441\u0432\u043E\u0439
       \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C
       \u0432\u043B\u0435\u0432\u043E \u0438\u043B\u0438 \u0432\u043F\u0440\u0430\u0432\u043E,
