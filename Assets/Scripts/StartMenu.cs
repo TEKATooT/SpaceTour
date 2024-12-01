@@ -22,12 +22,19 @@ public class StartMenu : MonoBehaviour
     private float _normalDifference = 1;
     private float _slowlyDifference = 1.5f;
 
+    private bool _isDesktop = true;
+
     private readonly int _defaultDifference = 0;
 
-    //public void OnCallGameReadyButtonClick()
-    //{
-    //    YandexGame.GameReadyAPI();
-    //}
+    private void Awake()
+    {
+        _isDesktop = YandexGame.EnvironmentData.isDesktop;
+
+        if (!_isDesktop)
+        {
+            
+        }
+    }
 
     private void Start()
     {

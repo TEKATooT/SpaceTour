@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class Game : MonoBehaviour
 {
@@ -48,6 +49,16 @@ public class Game : MonoBehaviour
     public void AddScore()
     {
         Debug.Log(_playerScore);
+
+        if (YandexGame.auth)
+        {
+            YandexGame.NewLeaderboardScores("Score", _playerScore);
+            //_leaderboardYG.NewScore(_playerScore);
+        }
+        else
+        {
+            YandexGame.AuthDialog();
+        }
     }
 
     private void LoseGame()
