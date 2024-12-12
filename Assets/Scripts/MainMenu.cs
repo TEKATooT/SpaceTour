@@ -1,10 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using YG;
 
-public class StartMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    static public string correctLanguage;
+    [SerializeField] private Scrollbar _volume;
+    [SerializeField] private Toggle _mute;
+
+    static public bool Mute;
+    static public float Volume;
+    static public string CorrectLanguage;
 
     private const string EnglishCode = "English";
     private const string RussionCode = "Russian";
@@ -22,19 +28,7 @@ public class StartMenu : MonoBehaviour
     private float _normalDifference = 1;
     private float _slowlyDifference = 1.5f;
 
-    private bool _isDesktop = true;
-
     private readonly int _defaultDifference = 0;
-
-    private void Awake()
-    {
-        _isDesktop = YandexGame.EnvironmentData.isDesktop;
-
-        if (!_isDesktop)
-        {
-            
-        }
-    }
 
     private void Start()
     {
@@ -43,22 +37,25 @@ public class StartMenu : MonoBehaviour
         if (YandexGame.EnvironmentData.language == Turkish)
         {
             SelectLanguageDropBar(Third);
-            correctLanguage = Turkish;
+            CorrectLanguage = Turkish;
         }
         else if (YandexGame.EnvironmentData.language == Russion)
         {
             SelectLanguageDropBar(Second);
-            correctLanguage = Russion;
+            CorrectLanguage = Russion;
         }
         else
         {
             SelectLanguageDropBar(First);
-            correctLanguage = English;
+            CorrectLanguage = English;
         }
     }
 
     public void StartGame()
     {
+        Volume = _volume.value;
+        Mute = _mute.isOn;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Second);
     }
 
@@ -68,15 +65,15 @@ public class StartMenu : MonoBehaviour
         {
             case First:
                 Lean.Localization.LeanLocalization.SetCurrentLanguageAll(EnglishCode);
-                correctLanguage = English;
+                CorrectLanguage = English;
                 break;
             case Second:
                 Lean.Localization.LeanLocalization.SetCurrentLanguageAll(RussionCode);
-                correctLanguage = Russion;
+                CorrectLanguage = Russion;
                 break;
             case Third:
                 Lean.Localization.LeanLocalization.SetCurrentLanguageAll(TurkishCode);
-                correctLanguage = Turkish;
+                CorrectLanguage = Turkish;
                 break;
             default:
                 break;

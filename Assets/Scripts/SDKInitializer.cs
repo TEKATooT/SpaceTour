@@ -13,8 +13,6 @@ public sealed class SDKInitializer : MonoBehaviour
     {
         YandexGame.GetDataEvent -= OnInitialized;
 
-        //YandexGame.GameReadyAPI();
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

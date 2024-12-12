@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerFollower : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private PlayerMover _player;
     [SerializeField] private float _offset = -10;
 
     private Transform _transform;

@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class PlayerEngine : MonoBehaviour
 {
-    [SerializeField] private PlanetSpawner _planetSpawner;
+    [SerializeField] private PlanetsRespawner _planetSpawner;
 
     [SerializeField] private float _forwardSpeed = 3f;
     [SerializeField] private float _strafeSpeed = 5f;
     [SerializeField] private float _speedBooster = 1.05f;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private ParticleSystem _destroyEffect;
 
     static private float _accelerateSpeedFrequency;
 
@@ -55,6 +56,8 @@ public class PlayerEngine : MonoBehaviour
     public void UpBoost()
     {
         GetBoost?.Invoke();
+
+        _destroyEffect.Play();
 
         _targetPosition = _planetSpawner.GetTargetPosition();
     }

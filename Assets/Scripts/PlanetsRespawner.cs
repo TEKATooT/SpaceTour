@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Pool))]
-public class PlanetSpawner : MonoBehaviour
+public class PlanetsRespawner : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _destroyEffect;
+
     private Pool _pool;
     private Planet _planetToTarget;
 
@@ -30,7 +32,7 @@ public class PlanetSpawner : MonoBehaviour
     {
         _planetToTarget = _planetInQueue.Dequeue();
 
-        _planetToTarget.Destroyed += CyclePlanets;
+        _planetToTarget.Destroyed += Loop;
 
         return _planetToTarget.transform.position;
     }
@@ -55,11 +57,20 @@ public class PlanetSpawner : MonoBehaviour
         return _nextPosition;
     }
 
-    private void CyclePlanets()
+    private void Loop()
     {
-        _planetToTarget.Destroyed -= CyclePlanets;
+        DestroyEffect();
+
+        _planetToTarget.Destroyed -= Loop;
         _pool.Release(_planetToTarget);
 
         GenerateNextPlanet(_oneSpawnQuantuty);
+    }
+
+    private void DestroyEffect()
+    {
+        _destroyEffect.transform.position = _planetToTarget.transform.position;
+
+        _destroyEffect.Play();
     }
 }

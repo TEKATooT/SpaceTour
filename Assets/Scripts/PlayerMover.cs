@@ -1,7 +1,8 @@
 using UnityEngine;
+using YG;
 
 [RequireComponent(typeof(PlayerEngine))]
-public class Player : MonoBehaviour
+public class PlayerMover : MonoBehaviour
 {
     private PlayerEngine _engine;
     private PlayerInput _input;
@@ -14,6 +15,10 @@ public class Player : MonoBehaviour
     private Vector3 _noTilt = new Vector3(0, 0, 0);
 
     private Vector3 _tiltRotation;
+
+
+    private Vector2 _leftMove = new Vector2(-1, 0);
+    private Vector2 _rightMove = new Vector2(1, 0);
 
     private void Awake()
     {
@@ -39,9 +44,23 @@ public class Player : MonoBehaviour
         OnStrafeMove();
     }
 
+    public void OnLeftButtonForMobile()
+    {
+        _strafeDirection = _leftMove;
+    }
+
+    public void OnRightButtonForMobile()
+    {
+        _strafeDirection = _rightMove;
+    }
+
     private void OnStrafeMove()
     {
-        _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
+        if (YandexGame.EnvironmentData.isDesktop)
+        {
+            _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
+        }
+
         _transform.Translate(_strafeDirection * _engine.StrafeSpeed * Time.deltaTime);
 
         AcceptTilt();

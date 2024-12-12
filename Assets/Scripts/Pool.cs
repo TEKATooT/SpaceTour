@@ -43,8 +43,8 @@ public class Pool : MonoBehaviour
         return newPlanet;
     }
 
-    public void Release(Planet newPlanet)
+    public void Release(Planet planet)
     {
-        _planetsPool.Release(newPlanet);
+        _planetsPool.Release(planet);
     }
 }
