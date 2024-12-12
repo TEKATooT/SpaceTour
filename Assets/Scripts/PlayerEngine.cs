@@ -10,6 +10,7 @@ public class PlayerEngine : MonoBehaviour
     [SerializeField] private float _speedBooster = 1.05f;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private ParticleSystem _destroyEffect;
+    [SerializeField] private AudioSource _audioSource;
 
     static private float _accelerateSpeedFrequency;
 
@@ -56,6 +57,8 @@ public class PlayerEngine : MonoBehaviour
     public void UpBoost()
     {
         GetBoost?.Invoke();
+
+        _audioSource.Play();
 
         _destroyEffect.Play();
 

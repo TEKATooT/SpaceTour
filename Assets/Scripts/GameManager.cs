@@ -4,18 +4,21 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
 
-public class Game : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    [SerializeField] private PlayerEngine _player;
+
     [SerializeField] private Scrollbar _volume;
     [SerializeField] private Toggle _mute;
-
-    [SerializeField] private PlayerEngine _player;
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private GameObject _gameOverPanel;
-
     [SerializeField] private GameObject _buttonsForMobile;
 
     [SerializeField] private ScoreScaler _scoreScaler;
+
+    private static int _gameCycle;
+    private static float _value;
+    private static bool _isMute;
 
     private const string EnglishCode = "English";
     private const string RussionCode = "Russian";
@@ -26,6 +29,7 @@ public class Game : MonoBehaviour
     private const string Turkish = "tr";
 
     private int _playerScore = 0;
+    private int _frequencyAdShow = 3;
 
     private readonly float _normalTimeScale = 1f;
     private readonly float _stopTimeScale = 0f;
@@ -33,9 +37,7 @@ public class Game : MonoBehaviour
     private void Awake()
     {
         if (!YandexGame.EnvironmentData.isDesktop)
-        {
             _buttonsForMobile.SetActive(true);
-        }
     }
 
     private void OnEnable()
@@ -46,16 +48,20 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        _volume.value = MainMenu.Volume;
-        _mute.isOn = MainMenu.Mute;
-
+        VolumeControl();
         SelectLanguage();
+        ShowFullCreenAd();
+
+        _gameCycle++;
     }
 
     private void OnDisable()
     {
         _player.LoseBoost -= LoseGame;
         _player.GetBoost -= AddPoint;
+
+        _value = _volume.value;
+        _isMute = _mute.isOn;
     }
 
     public void StartGame()
@@ -110,6 +116,28 @@ public class Game : MonoBehaviour
         else
         {
             Lean.Localization.LeanLocalization.SetCurrentLanguageAll(EnglishCode);
+        }
+    }
+
+    private void VolumeControl()
+    {
+        if (_gameCycle == 0)
+        {
+            _volume.value = MainMenu.Volume;
+            _mute.isOn = MainMenu.Mute;
+        }
+        else
+        {
+            _volume.value = _value;
+            _mute.isOn = _isMute;
+        }
+    }
+
+    private void ShowFullCreenAd()
+    {
+        if (_gameCycle % _frequencyAdShow == 0)
+        {
+            //YandexGame.FullscreenShow();
         }
     }
 }

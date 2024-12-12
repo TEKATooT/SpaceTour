@@ -1520,14 +1520,14 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: Add my result to the leaderboard!
+    Text: Add your result to the leaderboard!
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043C\u043E\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442
+    Text: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442
       \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u043B\u0438\u0434\u0435\u0440\u043E\u0432!"
     Object: {fileID: 0}
   - Language: Turkish
-    Text: Sonucumu skor tablosuna ekle!
+    Text: Sonucunuzu skor tablosuna ekleyin!
     Object: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1672,9 +1672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24eec1d62a6f90747a35561d6acb0f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 2098246709}
   _volume: {fileID: 2074359894}
   _mute: {fileID: 1137007735}
-  _player: {fileID: 2098246709}
   _text: {fileID: 1292797234}
   _gameOverPanel: {fileID: 1346545051}
   _buttonsForMobile: {fileID: 1141494356}
@@ -8841,6 +8841,7 @@ GameObject:
   - component: {fileID: 2098246709}
   - component: {fileID: 2098246717}
   - component: {fileID: 2098246718}
+  - component: {fileID: 2098246719}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8866,6 +8867,7 @@ MonoBehaviour:
   _speedBooster: 1.05
   _particleSystem: {fileID: 1399222971}
   _destroyEffect: {fileID: 94961282}
+  _audioSource: {fileID: 2098246719}
 --- !u!65 &2098246710
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8993,6 +8995,102 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098246708}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &2098246719
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098246708}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 16a06076901347f43ba86da63989f6c8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.162
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: -0.15
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2108911198
 GameObject:
   m_ObjectHideFlags: 0

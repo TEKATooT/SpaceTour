@@ -8,11 +8,27 @@ public class Planet : MonoBehaviour
 
     public event Action Destroyed;
 
+    private float _minRotationSpeed = -500f;
+    private float _maxRotationSpeed = 500f;
+    private float _randomRotationSpeed;
+
+    private float _minAngle = -180f;
+    private float _maxRAngle = 180f;
+    private float _randomAngle;
+
+    private void OnEnable()
+    {
+        MakeRandomPlanetAngles();
+    }
+
     private void Start()
     {
-        int randomModel = UnityEngine.Random.Range(0, _planets.Count());
+        ChooseRandomModel();
+    }
 
-        _planets[randomModel].gameObject.SetActive(true);
+    private void Update()
+    {
+        transform.RotateAround(transform.position, Vector3.up, _randomRotationSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,5 +39,20 @@ public class Planet : MonoBehaviour
         {
             player.UpBoost();
         }
+    }
+
+    private void MakeRandomPlanetAngles()
+    {
+        _randomRotationSpeed = UnityEngine.Random.Range(_minRotationSpeed, _maxRotationSpeed);
+        _randomAngle = UnityEngine.Random.Range(_minAngle, _maxRAngle);
+
+        transform.Rotate(_randomRotationSpeed, transform.rotation.y, transform.rotation.z);
+    }
+
+    private void ChooseRandomModel()
+    {
+        int randomModel = UnityEngine.Random.Range(0, _planets.Count());
+
+        _planets[randomModel].gameObject.SetActive(true);
     }
 }

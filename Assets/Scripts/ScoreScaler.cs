@@ -4,8 +4,8 @@ public class ScoreScaler : MonoBehaviour
 {
     private RectTransform _score;
 
-    private Vector3 _bigSize = new Vector3(2f, 2f, 2f);
-    private Vector3 _lowSize = new Vector3(1f, 1f, 1f);
+    private Vector3 _bigSize = new Vector3(2.5f, 2.5f, 2.5f);
+    private Vector3 _lowSize = new Vector3(0.5f, 0.5f, 0.5f);
 
     private float _timeIncrease;
     private float _delay = 0.25f;
