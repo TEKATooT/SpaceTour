@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
     {
         if (_gameCycle % _frequencyAdShow == 0)
         {
-            //YandexGame.FullscreenShow();
+            YandexGame.FullscreenShow();
         }
     }
 }

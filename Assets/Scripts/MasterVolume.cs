@@ -16,7 +16,11 @@ public class MasterVolume : MonoBehaviour
         if (!_isSaund)
             _mixerGroup.audioMixer.SetFloat("MasterVolume", _nowVolume);
         else
+        {
+            _mixerGroup.audioMixer.GetFloat("MasterVolume", out float volume);
             _mixerGroup.audioMixer.SetFloat("MasterVolume", _minVolume);
+            _nowVolume = volume;
+        }
 
         _isSaund = !_isSaund;
     }
