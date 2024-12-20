@@ -15,10 +15,7 @@ public class PlayerMover : MonoBehaviour
     private Vector3 _noTilt = new Vector3(0, 0, 0);
 
     private Vector3 _tiltRotation;
-
-
-    private Vector2 _leftMove = new Vector2(-1, 0);
-    private Vector2 _rightMove = new Vector2(1, 0);
+    private Vector3 _forwardMove = new Vector2(0, 0);
 
     private void Awake()
     {
@@ -44,17 +41,17 @@ public class PlayerMover : MonoBehaviour
         OnStrafeMove();
     }
 
-    public void OnLeftButtonForMobile()
+    public void StrafeMoveForMobile(int vector)
     {
-        _strafeDirection = _leftMove;
+        _strafeDirection = new Vector2(vector, 0);
     }
 
-    public void OnRightButtonForMobile()
+    public void ForwardMoveForMobile()
     {
-        _strafeDirection = _rightMove;
+        _strafeDirection = _forwardMove;
     }
 
-    private void OnStrafeMove()
+        private void OnStrafeMove()
     {
         if (YandexGame.EnvironmentData.isDesktop)
         {
@@ -66,7 +63,8 @@ public class PlayerMover : MonoBehaviour
         AcceptTilt();
     }
 
-    private void AcceptTilt()
+
+        private void AcceptTilt()
     {
         if (_strafeDirection.x > 0f)
             _tiltRotation = _leftTilt;

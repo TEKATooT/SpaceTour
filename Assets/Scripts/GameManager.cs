@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     {
         VolumeControl();
         SelectLanguage();
-        ShowFullCreenAd();
 
         _gameCycle++;
     }
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
 
         if (YandexGame.auth)
         {
-            YandexGame.NewLeaderboardScores("Score", _playerScore);
+            YandexGame.NewLeaderboardScores("MidleScore", _playerScore);
             //_leaderboardYG.NewScore(_playerScore);
         }
         else
@@ -92,6 +91,8 @@ public class GameManager : MonoBehaviour
 
         _player.gameObject.SetActive(false);
         _gameOverPanel.SetActive(true);
+
+        ShowFullCreenAd();
     }
 
     private void AddPoint()
