@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        YandexGame.GameplayStart();
+
+        Debug.Log(YandexGame.isGamePlaying);
+
         VolumeControl();
         SelectLanguage();
 
@@ -72,12 +77,13 @@ public class GameManager : MonoBehaviour
 
     public void AddScore()
     {
-        Debug.Log(_playerScore);
-
         if (YandexGame.auth)
         {
             YandexGame.NewLeaderboardScores("MidleScore", _playerScore);
             //_leaderboardYG.NewScore(_playerScore);
+
+            Time.timeScale = _normalTimeScale;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
         else
         {
@@ -87,12 +93,15 @@ public class GameManager : MonoBehaviour
 
     private void LoseGame()
     {
-        Time.timeScale = _stopTimeScale;
-
         _player.gameObject.SetActive(false);
         _gameOverPanel.SetActive(true);
 
-        ShowFullCreenAd();
+        ShowFullSreenAd();
+
+        //if (!ShowFullSreenAd())
+        //{
+        //    Time.timeScale = _stopTimeScale;
+        //}
     }
 
     private void AddPoint()
@@ -134,11 +143,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ShowFullCreenAd()
+    private bool ShowFullSreenAd()
     {
+        bool isShow = false;
+
         if (_gameCycle % _frequencyAdShow == 0)
         {
+            isShow = true;
+
             YandexGame.FullscreenShow();
         }
+
+        return isShow;
     }
 }
