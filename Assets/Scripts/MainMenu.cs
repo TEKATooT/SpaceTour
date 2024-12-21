@@ -100,7 +100,7 @@ public class MainMenu : MonoBehaviour
 
     public void ShowScoreBoard()
     {
-        Debug.Log("SHOW");
+
     }
 
     public void ExitGame()
