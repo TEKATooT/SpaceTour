@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     {
         if (YandexGame.auth)
         {
-            YandexGame.NewLeaderboardScores("MidleScore", _playerScore);
+            YandexGame.NewLeaderboardScores("MidleScoree", _playerScore);
             //_leaderboardYG.NewScore(_playerScore);
 
             Time.timeScale = _normalTimeScale;
