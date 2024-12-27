@@ -43,7 +43,7 @@ MonoBehaviour:
   leaderboardEnable: 1
   saveScoreAnonymousPlayers: 0
   leaderboardSimulation:
-  - technoName: advanced
+  - technoName: MidleScoree
     entries: 'Test LeaderBoard
 
       Name: advanced
