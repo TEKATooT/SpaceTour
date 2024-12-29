@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,19 +20,16 @@ public class GameManager : MonoBehaviour
     private static float _value;
     private static bool _isMute;
 
-    private const string EnglishCode = "English";
-    private const string RussionCode = "Russian";
-    private const string TurkishCode = "Turkish";
-
-    private const string English = "en";
-    private const string Russion = "ru";
-    private const string Turkish = "tr";
-
     private int _playerScore = 0;
     private int _frequencyAdShow = 3;
 
     private readonly float _normalTimeScale = 1f;
     private readonly float _stopTimeScale = 0f;
+
+    private float _midleDifference = 1;
+    private float _lowDifference = 1.5f;
+    private float _hightDifference = 0.5f;
+    private float _correntDifference;
 
     private void Awake()
     {
@@ -51,10 +47,9 @@ public class GameManager : MonoBehaviour
     {
         YandexGame.GameplayStart();
 
-        Debug.Log(YandexGame.isGamePlaying);
-
         VolumeControl();
         SelectLanguage();
+        SelectGameDifficulty();
 
         _gameCycle++;
     }
@@ -68,7 +63,7 @@ public class GameManager : MonoBehaviour
         _isMute = _mute.isOn;
     }
 
-    public void StartGame()
+    public void RestartGameButton()
     {
         Time.timeScale = _normalTimeScale;
 
@@ -79,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         if (YandexGame.auth)
         {
-            YandexGame.NewLeaderboardScores("MidleScoree", _playerScore);
+            YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _playerScore);
             //_leaderboardYG.NewScore(_playerScore);
 
             Time.timeScale = _normalTimeScale;
@@ -98,10 +93,7 @@ public class GameManager : MonoBehaviour
 
         ShowFullSreenAd();
 
-        //if (!ShowFullSreenAd())
-        //{
-        //    Time.timeScale = _stopTimeScale;
-        //}
+        Time.timeScale = _stopTimeScale;
     }
 
     private void AddPoint()
@@ -115,18 +107,19 @@ public class GameManager : MonoBehaviour
 
     private void SelectLanguage()
     {
-        if (MainMenu.CorrectLanguage == Russion)
-        {
-            Lean.Localization.LeanLocalization.SetCurrentLanguageAll(RussionCode);
-        }
-        else if (MainMenu.CorrectLanguage == Turkish)
-        {
-            Lean.Localization.LeanLocalization.SetCurrentLanguageAll(TurkishCode);
-        }
+        Lean.Localization.LeanLocalization.SetCurrentLanguageAll(MainMenu.CorrectLanguage.ToString());
+    }
+
+    private void SelectGameDifficulty()
+    {
+        if (MainMenu.CorrectDifference == MainMenu.Difference.High)
+            _correntDifference = _hightDifference;
+        else if (MainMenu.CorrectDifference == MainMenu.Difference.Low)
+            _correntDifference = _lowDifference;
         else
-        {
-            Lean.Localization.LeanLocalization.SetCurrentLanguageAll(EnglishCode);
-        }
+            _correntDifference = _midleDifference;
+
+        _player.ChangeAccelerateSpeedFrequency(_correntDifference);
     }
 
     private void VolumeControl()
@@ -143,17 +136,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private bool ShowFullSreenAd()
+    private void ShowFullSreenAd()
     {
-        bool isShow = false;
-
         if (_gameCycle % _frequencyAdShow == 0)
         {
-            isShow = true;
-
             YandexGame.FullscreenShow();
         }
-
-        return isShow;
     }
 }

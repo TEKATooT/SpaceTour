@@ -12,17 +12,18 @@ public class PlayerEngine : MonoBehaviour
     [SerializeField] private ParticleSystem _destroyEffect;
     [SerializeField] private AudioSource _audioSource;
 
-    static private float _accelerateSpeedFrequency;
+    public event Action GetBoost;
+    public event Action LoseBoost;
 
     private ParticleSystem.MainModule _mainParticleSystem;
     private Transform _transform;
     private Vector3 _targetPosition;
     private Vector3 _deadLine;
 
-    public event Action GetBoost;
-    public event Action LoseBoost;
-
+    private float _accelerateSpeedFrequency;
+    private float _defaultDifference = 1;
     private float _deadHight = 0.5f;
+
     private readonly float _startAccelerateSpeed = 1f;
 
     public float StrafeSpeed => _strafeSpeed;
@@ -37,7 +38,7 @@ public class PlayerEngine : MonoBehaviour
         _mainParticleSystem = _particleSystem.main;
 
         if (_accelerateSpeedFrequency == 0)
-            _accelerateSpeedFrequency = 1f;
+            _accelerateSpeedFrequency = _defaultDifference;
 
         InvokeRepeating(nameof(AccelerateSpeed), _startAccelerateSpeed, _accelerateSpeedFrequency);
 
@@ -49,7 +50,7 @@ public class PlayerEngine : MonoBehaviour
         MoveForward();
     }
 
-    static public void ChangeAccelerateSpeedFrequency(float frequency)
+    public void ChangeAccelerateSpeedFrequency(float frequency)
     {
         _accelerateSpeedFrequency = frequency;
     }

@@ -8,46 +8,73 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Scrollbar _volume;
     [SerializeField] private Toggle _mute;
 
+    [SerializeField] private LeaderboardYG _leaderboardYG;
+
     static public bool Mute;
     static public float Volume;
-    static public string CorrectLanguage;
+    static public Language CorrectLanguage;
+    static public Difference CorrectDifference;
 
-    private const string EnglishCode = "English";
-    private const string RussionCode = "Russian";
-    private const string TurkishCode = "Turkish";
-
-    private const string English = "en";
-    private const string Russion = "ru";
-    private const string Turkish = "tr";
+    private const string EnglishYaCode = "en";
+    private const string RussianYaCode = "ru";
+    private const string TurkishYaCode = "tr";
 
     private const int First = 0;
     private const int Second = 1;
     private const int Third = 2;
 
-    private float _fasterDifference = 0.5f;
-    private float _normalDifference = 1;
-    private float _slowlyDifference = 1.5f;
-
     private readonly int _defaultDifference = 0;
+
+    public enum Language
+    {
+        English, Russian, Turkish
+    }
+
+    public enum Difference
+    {
+        Low, Midle, High
+    }
+
+    private void OnEnable()
+    {
+        YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
+    }
 
     private void Start()
     {
         SelectDifferenceDropBar(_defaultDifference);
 
-        if (YandexGame.EnvironmentData.language == Turkish)
+        if (YandexGame.EnvironmentData.language == TurkishYaCode)
         {
-            SelectLanguageDropBar(Third);
-            CorrectLanguage = Turkish;
+            SelectLanguageDropBar(Third);               // ?
+            CorrectLanguage = Language.Turkish;
         }
-        else if (YandexGame.EnvironmentData.language == Russion)
+        else if (YandexGame.EnvironmentData.language == RussianYaCode)
         {
             SelectLanguageDropBar(Second);
-            CorrectLanguage = Russion;
+            CorrectLanguage = Language.Russian;
         }
         else
         {
             SelectLanguageDropBar(First);
-            CorrectLanguage = English;
+            CorrectLanguage = Language.English;
+        }
+    }
+
+    private void OnDisable()
+    {
+        YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
+    }
+
+    private void OnVisibilityWindowGame(bool isVisible)
+    {
+        if (isVisible)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
         }
     }
 
@@ -64,16 +91,16 @@ public class MainMenu : MonoBehaviour
         switch (index)
         {
             case First:
-                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(EnglishCode);
-                CorrectLanguage = English;
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(Language.English.ToString());
+                CorrectLanguage = Language.English;
                 break;
             case Second:
-                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(RussionCode);
-                CorrectLanguage = Russion;
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(Language.Russian.ToString());
+                CorrectLanguage = Language.Russian;
                 break;
             case Third:
-                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(TurkishCode);
-                CorrectLanguage = Turkish;
+                Lean.Localization.LeanLocalization.SetCurrentLanguageAll(Language.Turkish.ToString());
+                CorrectLanguage = Language.Turkish;
                 break;
             default:
                 break;
@@ -85,17 +112,22 @@ public class MainMenu : MonoBehaviour
         switch (index)
         {
             case First:
-                PlayerEngine.ChangeAccelerateSpeedFrequency(_normalDifference);
+                _leaderboardYG.SetNameLB(Difference.Midle.ToString());
+                CorrectDifference = Difference.Midle;
                 break;
             case Second:
-                PlayerEngine.ChangeAccelerateSpeedFrequency(_slowlyDifference);
+                _leaderboardYG.SetNameLB(Difference.Low.ToString());
+                CorrectDifference = Difference.Low;
                 break;
             case Third:
-                PlayerEngine.ChangeAccelerateSpeedFrequency(_fasterDifference);
+                _leaderboardYG.SetNameLB(Difference.High.ToString());
+                CorrectDifference = Difference.High;
                 break;
             default:
                 break;
         }
+
+        _leaderboardYG.UpdateLB();
     }
 
     public void ShowScoreBoard()
