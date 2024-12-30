@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour
     private float _hightDifference = 0.5f;
     private float _correntDifference;
 
-    private bool _isLive;
-
     private void Awake()
     {
         if (!YandexGame.EnvironmentData.isDesktop)
@@ -50,8 +48,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         YandexGame.GameplayStart();
-
-        _isLive = true;
 
         VolumeControl();
         SelectLanguage();
@@ -75,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         ShowFullSreenAd();
 
-        Time.timeScale = _normalTimeScale;
+        ResumeGame();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -105,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     private void OnVisibilityWindowGame(bool isVisible)
     {
-        if (isVisible && _isLive)
+        if (isVisible)
         {
             ResumeGame();
         }
@@ -119,10 +115,6 @@ public class GameManager : MonoBehaviour
     {
         _player.gameObject.SetActive(false);
         _gameOverPanel.SetActive(true);
-
-        _isLive = false;
-
-        StopGame();
     }
 
     private void StopGame()

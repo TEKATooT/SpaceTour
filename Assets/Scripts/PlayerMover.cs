@@ -51,7 +51,7 @@ public class PlayerMover : MonoBehaviour
         _strafeDirection = _forwardMove;
     }
 
-        private void OnStrafeMove()
+    private void OnStrafeMove()
     {
         if (YandexGame.EnvironmentData.isDesktop)
         {
@@ -63,8 +63,7 @@ public class PlayerMover : MonoBehaviour
         AcceptTilt();
     }
 
-
-        private void AcceptTilt()
+    private void AcceptTilt()
     {
         if (_strafeDirection.x > 0f)
             _tiltRotation = _leftTilt;
