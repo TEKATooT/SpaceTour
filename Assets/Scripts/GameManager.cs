@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadMainMenuButton()
     {
+        ResumeGame();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
@@ -105,8 +107,7 @@ public class GameManager : MonoBehaviour
     {
         if (isVisible && _isLive)
         {
-            AudioListener.pause = false;
-            Time.timeScale = _normalTimeScale;
+            ResumeGame();
         }
         else
         {
@@ -128,6 +129,12 @@ public class GameManager : MonoBehaviour
     {
         AudioListener.pause = true;
         Time.timeScale = _stopTimeScale;
+    }
+
+    private void ResumeGame()
+    {
+        AudioListener.pause = false;
+        Time.timeScale = _normalTimeScale;
     }
 
     private void AddPoint()
