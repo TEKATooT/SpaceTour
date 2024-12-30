@@ -70,10 +70,12 @@ public class MainMenu : MonoBehaviour
     {
         if (isVisible)
         {
+            AudioListener.pause = false;
             Time.timeScale = 1;
         }
         else
         {
+            AudioListener.pause = true;
             Time.timeScale = 0;
         }
     }

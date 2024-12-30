@@ -972,13 +972,13 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Turkish
-    Text: "H\u0131zl\u0131 mod"
+    Text: "\xDC\xE7\xFCnc\xFC ka\xE7\u0131\u015F"
     Object: {fileID: 0}
   - Language: English
-    Text: Faster mode
+    Text: Third cosmic
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u0442\u0435\u043C\u043F"
+    Text: "\u0422\u0440\u0435\u0442\u044C\u044F \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0430\u044F"
     Object: {fileID: 0}
 --- !u!1 &366878661
 GameObject:
@@ -1176,13 +1176,13 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: Normal mode
+    Text: Second cosmic
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u0442\u0435\u043C\u043F"
+    Text: "\u0412\u0442\u043E\u0440\u0430\u044F \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0430\u044F"
     Object: {fileID: 0}
   - Language: Turkish
-    Text: Normal mod
+    Text: "\u0130kinci ka\xE7\u0131\u015F"
     Object: {fileID: 0}
 --- !u!1 &423521352
 GameObject:
@@ -1532,8 +1532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: -0.5}
-  m_SizeDelta: {x: -35, y: -13}
+  m_AnchoredPosition: {x: -3.25, y: -1.25}
+  m_SizeDelta: {x: -13.5, y: -12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &495404392
 CanvasRenderer:
@@ -1576,7 +1576,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: English language
+  m_Text: Russian language
 --- !u!1 &510063428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,8 +1722,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: -0.5}
-  m_SizeDelta: {x: -35, y: -13}
+  m_AnchoredPosition: {x: -3.25, y: -1.25}
+  m_SizeDelta: {x: -13.500003, y: -12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &571048868
 CanvasRenderer:
@@ -1766,7 +1766,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Normal mode
+  m_Text: Second cosmic
 --- !u!1 &584637689
 GameObject:
   m_ObjectHideFlags: 0
@@ -9654,7 +9654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 0}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1551561615
@@ -9890,7 +9890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 0}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1799239704
@@ -10177,11 +10177,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Normal mode
+    - m_Text: Second cosmic
       m_Image: {fileID: 0}
-    - m_Text: Slowly mode
+    - m_Text: First cosmic
       m_Image: {fileID: 0}
-    - m_Text: Faster mode
+    - m_Text: Third cosmic
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10376,13 +10376,13 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: Slowly mode
+    Text: First cosmic
     Object: {fileID: 0}
   - Language: Turkish
-    Text: "Yava\u015F mod"
+    Text: "\u0130lk ka\xE7\u0131\u015F"
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u041C\u0435\u0434\u043B\u0435\u043D\u043D\u044B\u0439 \u0442\u0435\u043C\u043F"
+    Text: "\u041F\u0435\u0440\u0432\u0430\u044F \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0430\u044F"
     Object: {fileID: 0}
 --- !u!1 &1848412657
 GameObject:
@@ -10535,7 +10535,7 @@ MonoBehaviour:
   m_CaptionImage: {fileID: 0}
   m_ItemText: {fileID: 203975048}
   m_ItemImage: {fileID: 0}
-  m_Value: 0
+  m_Value: 1
   m_Options:
     m_Options:
     - m_Text: English language

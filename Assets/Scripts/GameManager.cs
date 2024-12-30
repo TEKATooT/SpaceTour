@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     private float _hightDifference = 0.5f;
     private float _correntDifference;
 
+    private bool _isLive;
+
     private void Awake()
     {
         if (!YandexGame.EnvironmentData.isDesktop)
@@ -39,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
+
         _player.LoseBoost += LoseGame;
         _player.GetBoost += AddPoint;
     }
@@ -46,6 +50,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         YandexGame.GameplayStart();
+
+        _isLive = true;
 
         VolumeControl();
         SelectLanguage();
@@ -56,6 +62,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
+        YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
+
         _player.LoseBoost -= LoseGame;
         _player.GetBoost -= AddPoint;
 
@@ -65,12 +73,19 @@ public class GameManager : MonoBehaviour
 
     public void RestartGameButton()
     {
+        ShowFullSreenAd();
+
         Time.timeScale = _normalTimeScale;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void AddScore()
+    public void LoadMainMenuButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void AddScoreButton()
     {
         if (YandexGame.auth)
         {
@@ -86,13 +101,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnVisibilityWindowGame(bool isVisible)
+    {
+        if (isVisible && _isLive)
+        {
+            AudioListener.pause = false;
+            Time.timeScale = _normalTimeScale;
+        }
+        else
+        {
+            StopGame();
+        }
+    }
+
     private void LoseGame()
     {
         _player.gameObject.SetActive(false);
         _gameOverPanel.SetActive(true);
 
-        ShowFullSreenAd();
+        _isLive = false;
 
+        StopGame();
+    }
+
+    private void StopGame()
+    {
+        AudioListener.pause = true;
         Time.timeScale = _stopTimeScale;
     }
 
