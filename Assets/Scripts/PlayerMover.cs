@@ -2,6 +2,7 @@ using UnityEngine;
 using YG;
 
 [RequireComponent(typeof(PlayerEngine))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMover : MonoBehaviour
 {
     private PlayerEngine _engine;
@@ -16,6 +17,9 @@ public class PlayerMover : MonoBehaviour
 
     private Vector3 _tiltRotation;
     private Vector3 _forwardMove = new Vector2(0, 0);
+    private Animator _animator;
+
+    private float _timeLimitAnimation = 2;
 
     private void Awake()
     {
@@ -24,11 +28,15 @@ public class PlayerMover : MonoBehaviour
         _input = new PlayerInput();
 
         _transform = transform;
+
+        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
         _input.Enable();
+
+        Invoke(nameof(AnimatiorOff), _timeLimitAnimation);
     }
 
     private void OnDisable()
@@ -75,5 +83,10 @@ public class PlayerMover : MonoBehaviour
             _tiltRotation = _noTilt;
 
         _transform.Rotate(_tiltRotation);
+    }
+
+    private void AnimatiorOff()
+    {
+        _animator.enabled = false;
     }
 }
