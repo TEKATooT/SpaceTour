@@ -9,6 +9,7 @@ public class PlayerEngine : MonoBehaviour
     [SerializeField] private float _strafeSpeed = 5f;
     [SerializeField] private float _speedBooster = 1.05f;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private ParticleSystem _destroyPlanetEffect;
     [SerializeField] private ParticleSystem _destroyEffect;
     [SerializeField] private AudioSource _audioSource;
 
@@ -61,7 +62,7 @@ public class PlayerEngine : MonoBehaviour
 
         _audioSource.Play();
 
-        _destroyEffect.Play();
+        _destroyPlanetEffect.Play();
 
         _targetPosition = _planetSpawner.GetTargetPosition();
     }
@@ -76,7 +77,12 @@ public class PlayerEngine : MonoBehaviour
         _transform.LookAt(_deadLine);
 
         if (_transform.position.y <= _deadHight)
+        {
+            _destroyEffect.gameObject.SetActive(true);
+            _destroyEffect.transform.parent = null;
+
             LoseBoost?.Invoke();
+        }
     }
 
     private void AccelerateSpeed()
