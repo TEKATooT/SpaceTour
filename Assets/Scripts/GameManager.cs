@@ -20,11 +20,13 @@ public class GameManager : MonoBehaviour
     private static float _value;
     private static bool _isMute;
 
-    private int _playerScore = 0;
-    private int _frequencyAdShow = 3;
-
     private readonly float _normalTimeScale = 1f;
     private readonly float _stopTimeScale = 0f;
+
+    private const int One = 1;
+
+    private int _playerScore = 0;
+    private int _frequencyAdShow = 3;
 
     private float _midleDifference = 1;
     private float _lowDifference = 1.5f;
@@ -40,14 +42,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
-
         _player.LoseBoost += LoseGame;
         _player.GetBoost += AddPoint;
     }
 
     private void Start()
     {
-        YandexGame.GameplayStart();
+        YandexGame.GameplayStart();     //         Debug.Log(YandexGame.isGamePlaying);
 
         VolumeControl();
         SelectLanguage();
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
     {
         ResumeGame();
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
     }
 
     public void AddScoreButton()
@@ -88,10 +89,9 @@ public class GameManager : MonoBehaviour
         if (YandexGame.auth)
         {
             YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _playerScore);
-            //_leaderboardYG.NewScore(_playerScore);
 
             Time.timeScale = _normalTimeScale;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
         }
         else
         {
@@ -102,13 +102,9 @@ public class GameManager : MonoBehaviour
     private void OnVisibilityWindowGame(bool isVisible)
     {
         if (isVisible)
-        {
             ResumeGame();
-        }
         else
-        {
             StopGame();
-        }
     }
 
     private void LoseGame()
@@ -160,7 +156,7 @@ public class GameManager : MonoBehaviour
         if (_gameCycle == 0)
         {
             _volume.value = MainMenu.Volume;
-            _mute.isOn = MainMenu.Mute;
+            _mute.isOn = MainMenu.IsMute;
         }
         else
         {
@@ -172,8 +168,6 @@ public class GameManager : MonoBehaviour
     private void ShowFullSreenAd()
     {
         if (_gameCycle % _frequencyAdShow == 0)
-        {
             YandexGame.FullscreenShow();
-        }
     }
 }

@@ -7,13 +7,15 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Scrollbar _volume;
     [SerializeField] private Toggle _mute;
-
+    
     [SerializeField] private LeaderboardYG _leaderboardYG;
 
-    static public bool Mute;
+    static public bool IsMute;
     static public float Volume;
     static public Language CorrectLanguage;
     static public Difference CorrectDifference;
+
+    private readonly int _defaultDifference = 0;
 
     private const string EnglishYaCode = "en";
     private const string RussianYaCode = "ru";
@@ -22,8 +24,6 @@ public class MainMenu : MonoBehaviour
     private const int First = 0;
     private const int Second = 1;
     private const int Third = 2;
-
-    private readonly int _defaultDifference = 0;
 
     public enum Language
     {
@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
 
         if (YandexGame.EnvironmentData.language == TurkishYaCode)
         {
-            SelectLanguageDropBar(Third);               // ?
+            SelectLanguageDropBar(Third);
             CorrectLanguage = Language.Turkish;
         }
         else if (YandexGame.EnvironmentData.language == RussianYaCode)
@@ -80,10 +80,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void StartGameButton()
     {
         Volume = _volume.value;
-        Mute = _mute.isOn;
+        IsMute = _mute.isOn;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Second);
     }
@@ -132,12 +132,7 @@ public class MainMenu : MonoBehaviour
         _leaderboardYG.UpdateLB();
     }
 
-    public void ShowScoreBoard()
-    {
-
-    }
-
-    public void ExitGame()
+    public void ExitGameButton()
     {
         Application.Quit();
     }

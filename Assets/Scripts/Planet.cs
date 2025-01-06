@@ -6,8 +6,6 @@ public class Planet : MonoBehaviour
 {
     [SerializeField] private ModelsPlanets[] _planets;
 
-    public event Action Destroyed;
-
     private float _minRotationSpeed = -500f;
     private float _maxRotationSpeed = 500f;
     private float _randomRotationSpeed;
@@ -15,6 +13,8 @@ public class Planet : MonoBehaviour
     private float _minAngle = -180f;
     private float _maxRAngle = 180f;
     private float _randomAngle;
+
+    public event Action Destroyed;
 
     private void OnEnable()
     {
@@ -36,9 +36,7 @@ public class Planet : MonoBehaviour
         Destroyed?.Invoke();
 
         if (other.TryGetComponent(out PlayerEngine player))
-        {
             player.UpBoost();
-        }
     }
 
     private void MakeRandomPlanetAngles()

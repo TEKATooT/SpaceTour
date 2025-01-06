@@ -6,6 +6,8 @@ public class PlanetsRespawner : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _destroyEffect;
 
+    private readonly int _oneSpawnQuantuty = 1;
+
     private Pool _pool;
     private Planet _planetToTarget;
 
@@ -18,8 +20,6 @@ public class PlanetsRespawner : MonoBehaviour
     private int _minPositionX = -5;
     private int _maxPositionX = 5;
     private int _startSpawnQuantuty = 5;
-
-    private readonly int _oneSpawnQuantuty = 1;
 
     private void Awake()
     {

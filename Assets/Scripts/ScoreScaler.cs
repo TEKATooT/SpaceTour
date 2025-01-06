@@ -28,12 +28,8 @@ public class ScoreScaler : MonoBehaviour
     private void Change()
     {
         if (_timeIncrease >= Time.time)
-        {
             _score.localScale = Vector3.Lerp(_score.localScale, _bigSize, Time.deltaTime);
-        }
         else
-        {
             _score.localScale = Vector3.Lerp(_score.localScale, _lowSize, Time.deltaTime);
-        }
     }
 }

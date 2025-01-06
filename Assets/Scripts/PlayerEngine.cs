@@ -13,8 +13,7 @@ public class PlayerEngine : MonoBehaviour
     [SerializeField] private ParticleSystem _destroyEffect;
     [SerializeField] private AudioSource _audioSource;
 
-    public event Action GetBoost;
-    public event Action LoseBoost;
+    private readonly float _startAccelerateSpeed = 1f;
 
     private ParticleSystem.MainModule _mainParticleSystem;
     private Transform _transform;
@@ -25,7 +24,8 @@ public class PlayerEngine : MonoBehaviour
     private float _defaultDifference = 1;
     private float _deadHight = 0.5f;
 
-    private readonly float _startAccelerateSpeed = 1f;
+    public event Action GetBoost;
+    public event Action LoseBoost;
 
     public float StrafeSpeed => _strafeSpeed;
 
