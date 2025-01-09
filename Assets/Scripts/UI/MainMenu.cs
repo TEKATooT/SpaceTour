@@ -48,6 +48,7 @@ public class MainMenu : MonoBehaviour
     {
         SelectDifferenceDropBar(First);
         ApplyYandexLanguage();
+
         VolumeCorrect();
 
         _isFirstStart = false;
@@ -99,7 +100,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-        public void SelectLanguageDropBar(int index)
+    public void SelectLanguageDropBar(int index)
     {
         switch (index)
         {

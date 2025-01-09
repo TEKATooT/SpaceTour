@@ -1,28 +1,26 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using YG;
 
 public class GameHandler : MonoBehaviour
 {
-    [SerializeField] private ScoreCounter _scoreCounter;
-
-    private static int _gameCycle;
-
-    private const int One = 1;
+    [SerializeField] private PlayerEngine _player;
+    [SerializeField] private GameObject _gameOverPanel;
 
     private readonly float _normalTime = 1f;
     private readonly float _stopTime = 0f;
 
-    private int _frequencyAdShow = 3;
-
     private void OnEnable()
     {
         YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
+
+        _player.LoseBoost += LoseGame;
     }
 
     private void OnDisable()
     {
         YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
+
+        _player.LoseBoost -= LoseGame;
     }
 
     private void OnVisibilityWindowGame(bool isVisible)
@@ -33,37 +31,10 @@ public class GameHandler : MonoBehaviour
             StopGame();
     }
 
-    public void RestartGameButton()
+    private void ResumeGame()
     {
-        _gameCycle++;
-
-        ShowFullSreenAd();
-
-        ResumeGame();
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void LoadMainMenuButton()
-    {
-        ResumeGame();
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
-    }
-
-    public void AddScoreButton()
-    {
-        if (YandexGame.auth)
-        {
-            YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
-
-            //Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
-        }
-        else
-        {
-            YandexGame.AuthDialog();
-        }
+        AudioListener.pause = false;
+        Time.timeScale = _normalTime;
     }
 
     private void StopGame()
@@ -72,15 +43,9 @@ public class GameHandler : MonoBehaviour
         Time.timeScale = _stopTime;
     }
 
-    private void ResumeGame()
+    private void LoseGame()
     {
-        AudioListener.pause = false;
-        Time.timeScale = _normalTime;
-    }
-
-    private void ShowFullSreenAd()
-    {
-        if (_gameCycle % _frequencyAdShow == 0)
-            YandexGame.FullscreenShow();
+        _player.gameObject.SetActive(false);
+        _gameOverPanel.SetActive(true);
     }
 }

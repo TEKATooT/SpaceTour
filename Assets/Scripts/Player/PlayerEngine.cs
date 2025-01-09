@@ -22,7 +22,7 @@ public class PlayerEngine : MonoBehaviour
 
     private float _accelerateSpeedFrequency;
     private float _defaultDifference = 1;
-    private float _deadHight = 0.5f;
+    private float _deadHight = 0.45f;
 
     public event Action GetBoost;
     public event Action LoseBoost;
@@ -72,7 +72,6 @@ public class PlayerEngine : MonoBehaviour
         _deadLine = new Vector3(_transform.position.x, Vector3.Distance(_transform.position, _deadLine), _targetPosition.z);
 
         _transform.position = Vector3.MoveTowards(_transform.position, _deadLine, _forwardSpeed * Time.deltaTime);
-        //_transform.Translate(Vector3.forward * _forwardSpeed * Time.deltaTime);
 
         _transform.LookAt(_deadLine);
 

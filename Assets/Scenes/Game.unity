@@ -446,6 +446,8 @@ GameObject:
   - component: {fileID: 207945958}
   - component: {fileID: 207945957}
   - component: {fileID: 207945959}
+  - component: {fileID: 207945960}
+  - component: {fileID: 207945961}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -569,7 +571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfde330af2450148baa602a6919c343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreCounter: {fileID: 207945959}
+  _player: {fileID: 2098246709}
+  _gameOverPanel: {fileID: 1346545051}
 --- !u!114 &207945959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,8 +587,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2098246709}
   _textPlayerScore: {fileID: 1292797234}
-  _gameOverPanel: {fileID: 1346545051}
   _scoreScaler: {fileID: 1292797236}
+--- !u!114 &207945960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207945952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dadd78416218414095f6c3fefadf589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &207945961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207945952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fcd5cd91d4a18a46b71ed9677096f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreCounter: {fileID: 207945959}
+  _advertisementsViewer: {fileID: 207945960}
 --- !u!1 &254085163
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,8 +891,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207945958}
-        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+      - m_Target: {fileID: 207945961}
+        m_TargetAssemblyTypeName: LossMenu, Assembly-CSharp
         m_MethodName: LoadMainMenuButton
         m_Mode: 1
         m_Arguments:
@@ -3152,8 +3180,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207945958}
-        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+      - m_Target: {fileID: 207945961}
+        m_TargetAssemblyTypeName: LossMenu, Assembly-CSharp
         m_MethodName: RestartGameButton
         m_Mode: 1
         m_Arguments:
@@ -9290,8 +9318,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207945958}
-        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+      - m_Target: {fileID: 207945961}
+        m_TargetAssemblyTypeName: LossMenu, Assembly-CSharp
         m_MethodName: AddScoreButton
         m_Mode: 1
         m_Arguments:

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerFollower : MonoBehaviour
+public class CameraFollows : MonoBehaviour
 {
     [SerializeField] private PlayerMover _player;
     [SerializeField] private float _offset = -10;
