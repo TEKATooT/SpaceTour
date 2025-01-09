@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Scrollbar _volume;
     [SerializeField] private Toggle _mute;
-    
+
     [SerializeField] private LeaderboardYG _leaderboardYG;
 
     static public bool IsMute;
@@ -15,7 +16,7 @@ public class MainMenu : MonoBehaviour
     static public Language CorrectLanguage;
     static public Difference CorrectDifference;
 
-    private readonly int _defaultDifference = 0;
+    static private bool _isFirstStart = true;
 
     private const string EnglishYaCode = "en";
     private const string RussianYaCode = "ru";
@@ -24,6 +25,9 @@ public class MainMenu : MonoBehaviour
     private const int First = 0;
     private const int Second = 1;
     private const int Third = 2;
+
+    private readonly float _normalTime = 1f;
+    private readonly float _stopTime = 0f;
 
     public enum Language
     {
@@ -42,8 +46,42 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        SelectDifferenceDropBar(_defaultDifference);
+        SelectDifferenceDropBar(First);
+        ApplyYandexLanguage();
+        VolumeCorrect();
 
+        _isFirstStart = false;
+    }
+
+    private void OnDisable()
+    {
+        YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
+    }
+
+    private void OnVisibilityWindowGame(bool isVisible)
+    {
+        if (isVisible)
+        {
+            AudioListener.pause = false;
+            Time.timeScale = _normalTime;
+        }
+        else
+        {
+            AudioListener.pause = true;
+            Time.timeScale = _stopTime;
+        }
+    }
+
+    public void StartGameButton()
+    {
+        Volume = _volume.value;
+        IsMute = _mute.isOn;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Second);
+    }
+
+    public void ApplyYandexLanguage()
+    {
         if (YandexGame.EnvironmentData.language == TurkishYaCode)
         {
             SelectLanguageDropBar(Third);
@@ -61,34 +99,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
-    }
-
-    private void OnVisibilityWindowGame(bool isVisible)
-    {
-        if (isVisible)
-        {
-            AudioListener.pause = false;
-            Time.timeScale = 1;
-        }
-        else
-        {
-            AudioListener.pause = true;
-            Time.timeScale = 0;
-        }
-    }
-
-    public void StartGameButton()
-    {
-        Volume = _volume.value;
-        IsMute = _mute.isOn;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Second);
-    }
-
-    public void SelectLanguageDropBar(int index)
+        public void SelectLanguageDropBar(int index)
     {
         switch (index)
         {
@@ -132,8 +143,12 @@ public class MainMenu : MonoBehaviour
         _leaderboardYG.UpdateLB();
     }
 
-    public void ExitGameButton()
+    private void VolumeCorrect()
     {
-        Application.Quit();
+        if (!_isFirstStart)
+        {
+            _volume.value = Volume;
+            _mute.isOn = IsMute;
+        }
     }
 }
