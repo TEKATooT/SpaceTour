@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +7,9 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Scrollbar _volume;
     [SerializeField] private Toggle _mute;
+
+    [SerializeField] private Dropdown _selectLanguageDropBar;
+    [SerializeField] private Dropdown _selectDifferenceDropBar;
 
     [SerializeField] private LeaderboardYG _leaderboardYG;
 
@@ -46,12 +48,19 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        SelectDifferenceDropBar(First);
-        ApplyYandexLanguage();
+        if (!_isFirstStart)
+        {
+            VolumeCorrect();
+            SelectLanguageDropBar((int)CorrectLanguage);
+            SelectDifferenceDropBar((int)CorrectDifference);
+        }
+        else
+        {
+            ApplyYandexLanguage();
+            SelectDifferenceDropBar(Second);
 
-        VolumeCorrect();
-
-        _isFirstStart = false;
+            _isFirstStart = false;
+        }
     }
 
     private void OnDisable()
@@ -86,17 +95,14 @@ public class MainMenu : MonoBehaviour
         if (YandexGame.EnvironmentData.language == TurkishYaCode)
         {
             SelectLanguageDropBar(Third);
-            CorrectLanguage = Language.Turkish;
         }
         else if (YandexGame.EnvironmentData.language == RussianYaCode)
         {
             SelectLanguageDropBar(Second);
-            CorrectLanguage = Language.Russian;
         }
         else
         {
             SelectLanguageDropBar(First);
-            CorrectLanguage = Language.English;
         }
     }
 
@@ -107,14 +113,17 @@ public class MainMenu : MonoBehaviour
             case First:
                 Lean.Localization.LeanLocalization.SetCurrentLanguageAll(Language.English.ToString());
                 CorrectLanguage = Language.English;
+                _selectLanguageDropBar.value = First;
                 break;
             case Second:
                 Lean.Localization.LeanLocalization.SetCurrentLanguageAll(Language.Russian.ToString());
                 CorrectLanguage = Language.Russian;
+                _selectLanguageDropBar.value = Second;
                 break;
             case Third:
                 Lean.Localization.LeanLocalization.SetCurrentLanguageAll(Language.Turkish.ToString());
                 CorrectLanguage = Language.Turkish;
+                _selectLanguageDropBar.value = Third;
                 break;
             default:
                 break;
@@ -126,16 +135,19 @@ public class MainMenu : MonoBehaviour
         switch (index)
         {
             case First:
-                _leaderboardYG.SetNameLB(Difference.Midle.ToString());
-                CorrectDifference = Difference.Midle;
-                break;
-            case Second:
                 _leaderboardYG.SetNameLB(Difference.Low.ToString());
                 CorrectDifference = Difference.Low;
+                _selectDifferenceDropBar.value = First;
+                break;
+            case Second:
+                _leaderboardYG.SetNameLB(Difference.Midle.ToString());
+                CorrectDifference = Difference.Midle;
+                _selectDifferenceDropBar.value = Second;
                 break;
             case Third:
                 _leaderboardYG.SetNameLB(Difference.High.ToString());
                 CorrectDifference = Difference.High;
+                _selectDifferenceDropBar.value = Third;
                 break;
             default:
                 break;
@@ -146,10 +158,7 @@ public class MainMenu : MonoBehaviour
 
     private void VolumeCorrect()
     {
-        if (!_isFirstStart)
-        {
-            _volume.value = Volume;
-            _mute.isOn = IsMute;
-        }
+        _volume.value = Volume;
+        _mute.isOn = IsMute;
     }
 }
