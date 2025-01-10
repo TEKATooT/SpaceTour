@@ -43,10 +43,16 @@ public class LossMenu : MonoBehaviour
     {
         bool hasData = YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int value);
 
-        if (value < _scoreCounter.PlayerScore || hasData == false)
+        if (hasData == false)
         {
             YandexGame.savesData.ScoreSave.Add(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
 
+            return true;
+        }
+
+        if (value < _scoreCounter.PlayerScore)
+        {
+            YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
             return true;
         }
         else
