@@ -24,7 +24,12 @@ public class LossMenu : MonoBehaviour
     {
         if (YandexGame.auth)
         {
-            YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
+            if (CheckBestResult())
+            {
+                YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
+
+                YandexGame.SaveProgress();
+            }
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
         }
@@ -32,5 +37,19 @@ public class LossMenu : MonoBehaviour
         {
             YandexGame.AuthDialog();
         }
+    }
+
+    private bool CheckBestResult()
+    {
+        bool hasData = YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int value);
+
+        if (value < _scoreCounter.PlayerScore || hasData == false)
+        {
+            YandexGame.savesData.ScoreSave.Add(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
+
+            return true;
+        }
+        else
+            return false;
     }
 }
