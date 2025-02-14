@@ -1,76 +1,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Pool))]
-public class PlanetsRespawner : MonoBehaviour
+namespace Planets
 {
-    [SerializeField] private ParticleSystem _destroyEffect;
-
-    private readonly int _oneSpawnQuantuty = 1;
-
-    private Pool _pool;
-    private Planet _planetToTarget;
-
-    private Queue<Planet> _planetInQueue = new Queue<Planet>();
-
-    private Vector3 _nextPosition;
-
-    private float _offsetZPosition = 5f;
-
-    private int _minPositionX = -5;
-    private int _maxPositionX = 5;
-    private int _startSpawnQuantuty = 5;
-
-    private void Awake()
+    [RequireComponent(typeof(Pool))]
+    public class PlanetsRespawner : MonoBehaviour
     {
-        _pool = GetComponent<Pool>();
+        [SerializeField] private ParticleSystem _destroyEffect;
 
-        GenerateNextPlanet(_startSpawnQuantuty);
-    }
+        private readonly int _oneSpawnQuantuty = 1;
 
-    public Vector3 GetTargetPosition()
-    {
-        _planetToTarget = _planetInQueue.Dequeue();
+        private Pool _pool;
+        private Planet _planetToTarget;
 
-        _planetToTarget.Destroyed += Loop;
+        private Queue<Planet> _planetInQueue = new Queue<Planet>();
 
-        return _planetToTarget.transform.position;
-    }
+        private Vector3 _nextPosition;
 
-    private void GenerateNextPlanet(int quantity)
-    {
-        for (int i = 0; i < quantity; i++)
+        private float _offsetZPosition = 5f;
+
+        private int _minPositionX = -5;
+        private int _maxPositionX = 5;
+        private int _startSpawnQuantuty = 5;
+
+        private void Awake()
         {
-            Planet planet = _pool.GetPlanet();
-            planet.transform.position = GetPosition();
+            _pool = GetComponent<Pool>();
 
-            _planetInQueue.Enqueue(planet);
+            GenerateNextPlanet(_startSpawnQuantuty);
         }
-    }
 
-    private Vector3 GetPosition()
-    {
-        float positionX = Random.Range(_minPositionX, _maxPositionX);
+        public Vector3 GetTargetPosition()
+        {
+            _planetToTarget = _planetInQueue.Dequeue();
 
-        _nextPosition = new Vector3(positionX, _nextPosition.y , _nextPosition.z + _offsetZPosition);
+            _planetToTarget.Destroyed += Loop;
 
-        return _nextPosition;
-    }
+            return _planetToTarget.transform.position;
+        }
 
-    private void Loop()
-    {
-        DestroyEffect();
+        private void GenerateNextPlanet(int quantity)
+        {
+            for (int i = 0; i < quantity; i++)
+            {
+                Planet planet = _pool.GetPlanet();
+                planet.transform.position = GetPosition();
 
-        _planetToTarget.Destroyed -= Loop;
-        _pool.Release(_planetToTarget);
+                _planetInQueue.Enqueue(planet);
+            }
+        }
 
-        GenerateNextPlanet(_oneSpawnQuantuty);
-    }
+        private Vector3 GetPosition()
+        {
+            float positionX = Random.Range(_minPositionX, _maxPositionX);
 
-    private void DestroyEffect()
-    {
-        _destroyEffect.transform.position = _planetToTarget.transform.position;
+            _nextPosition = new Vector3(positionX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
 
-        _destroyEffect.Play();
+            return _nextPosition;
+        }
+
+        private void Loop()
+        {
+            DestroyEffect();
+
+            _planetToTarget.Destroyed -= Loop;
+            _pool.Release(_planetToTarget);
+
+            GenerateNextPlanet(_oneSpawnQuantuty);
+        }
+
+        private void DestroyEffect()
+        {
+            _destroyEffect.transform.position = _planetToTarget.transform.position;
+
+            _destroyEffect.Play();
+        }
     }
 }

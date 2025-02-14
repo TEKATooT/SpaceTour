@@ -1,61 +1,65 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
+using Scripts;
 
-public class LossMenu : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private ScoreCounter _scoreCounter;
-    [SerializeField] private AdvertisementsViewer _advertisementsViewer;
-
-    private const int One = 1;
-    public void RestartGameButton()
+    public class LossMenu : MonoBehaviour
     {
-        _advertisementsViewer.ShowFullSreenAd();
+        [SerializeField] private ScoreCounter _scoreCounter;
+        [SerializeField] private AdvertisementsViewer _advertisementsViewer;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void LoadMainMenuButton()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
-    }
-
-    public void AddScoreButton()
-    {
-        if (YandexGame.auth)
+        private const int One = 1;
+        public void RestartGameButton()
         {
-            if (CheckBestResult())
-            {
-                YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
+            _advertisementsViewer.ShowFullSreenAd();
 
-                YandexGame.SaveProgress();
-            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
+        public void LoadMainMenuButton()
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
         }
-        else
+
+        public void AddScoreButton()
         {
-            YandexGame.AuthDialog();
+            if (YandexGame.auth)
+            {
+                if (CheckBestResult())
+                {
+                    YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
+
+                    YandexGame.SaveProgress();
+                }
+
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
+            }
+            else
+            {
+                YandexGame.AuthDialog();
+            }
         }
-    }
 
-    private bool CheckBestResult()
-    {
-        bool hasData = YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int value);
-
-        if (hasData == false)
+        private bool CheckBestResult()
         {
-            YandexGame.savesData.ScoreSave.Add(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
+            bool hasData = YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int value);
 
-            return true;
-        }
+            if (hasData == false)
+            {
+                YandexGame.savesData.ScoreSave.Add(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
 
-        if (value < _scoreCounter.PlayerScore)
-        {
-            YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
-            return true;
+                return true;
+            }
+
+            if (_scoreCounter.PlayerScore > value)
+            {
+                YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
+                return true;
+            }
+            else
+                return false;
         }
-        else
-            return false;
     }
 }

@@ -2,19 +2,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
 
-public sealed class SDKInitializer : MonoBehaviour
+namespace Scripts
 {
-    private void Awake()
+    public sealed class SDKInitializer : MonoBehaviour
     {
-          YandexGame.GetDataEvent += OnInitialized;
-    }
+        private void Awake()
+        {
+            YandexGame.GetDataEvent += OnInitialized;
+        }
 
-    private void OnInitialized()
-    {
-        YandexGame.GetDataEvent -= OnInitialized;
+        private void OnInitialized()
+        {
+            YandexGame.GetDataEvent -= OnInitialized;
 
-        YandexGame.GameplayStart();
+            YandexGame.GameplayStart();
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }

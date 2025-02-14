@@ -1,51 +1,61 @@
 using UnityEngine;
 using YG;
+using Player;
 
-public class GameHandler : MonoBehaviour
+namespace Scripts
 {
-    [SerializeField] private PlayerEngine _player;
-    [SerializeField] private GameObject _gameOverPanel;
-
-    private readonly float _normalTime = 1f;
-    private readonly float _stopTime = 0f;
-
-    private void OnEnable()
+    public class GameHandler : MonoBehaviour
     {
-        YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
+        [SerializeField] private PlayerEngine _player;
+        [SerializeField] private GameObject _gameOverPanel;
 
-        _player.LoseBoost += LoseGame;
-    }
+        private readonly float _normalTime = 1f;
+        private readonly float _stopTime = 0f;
 
-    private void OnDisable()
-    {
-        YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
+        private int _timeBeforeStoppingGame = 3;
 
-        _player.LoseBoost -= LoseGame;
-    }
+        private void OnEnable()
+        {
+            YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
 
-    private void OnVisibilityWindowGame(bool isVisible)
-    {
-        if (isVisible)
+            _player.LoseBoost += LoseGame;
+        }
+
+        private void OnDisable()
+        {
+            YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
+
+            _player.LoseBoost -= LoseGame;
+
             ResumeGame();
-        else
-            StopGame();
-    }
+        }
 
-    private void ResumeGame()
-    {
-        AudioListener.pause = false;
-        Time.timeScale = _normalTime;
-    }
+        private void OnVisibilityWindowGame(bool isVisible)
+        {
+            if (isVisible)
+                ResumeGame();
+            else
+                StopGame();
+        }
 
-    private void StopGame()
-    {
-        AudioListener.pause = true;
-        Time.timeScale = _stopTime;
-    }
+        private void ResumeGame()
+        {
+            AudioListener.pause = false;
+            Time.timeScale = _normalTime;
+        }
 
-    private void LoseGame()
-    {
-        _player.gameObject.SetActive(false);
-        _gameOverPanel.SetActive(true);
+        private void StopGame()
+        {
+            AudioListener.pause = true;
+            Time.timeScale = _stopTime;
+        }
+
+        private void LoseGame()
+        {
+            _player.gameObject.SetActive(false);
+            _gameOverPanel.SetActive(true);
+
+            Invoke(nameof(StopGame), _timeBeforeStoppingGame);
+        }
     }
 }

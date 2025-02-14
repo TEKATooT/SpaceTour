@@ -1,94 +1,98 @@
 using System;
 using UnityEngine;
+using Planets;
 
-public class PlayerEngine : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private PlanetsRespawner _planetSpawner;
-
-    [SerializeField] private float _forwardSpeed = 3f;
-    [SerializeField] private float _strafeSpeed = 5f;
-    [SerializeField] private float _speedBooster = 1.05f;
-    [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private ParticleSystem _destroyPlanetEffect;
-    [SerializeField] private ParticleSystem _destroyEffect;
-    [SerializeField] private AudioSource _audioSource;
-
-    private readonly float _startAccelerateSpeed = 1f;
-
-    private ParticleSystem.MainModule _mainParticleSystem;
-    private Transform _transform;
-    private Vector3 _targetPosition;
-    private Vector3 _deadLine;
-
-    private float _accelerateSpeedFrequency;
-    private float _defaultDifference = 1;
-    private float _deadHight = 0.45f;
-
-    public event Action GetBoost;
-    public event Action LoseBoost;
-
-    public float StrafeSpeed => _strafeSpeed;
-
-    private void Awake()
+    public class PlayerEngine : MonoBehaviour
     {
-        _transform = transform;
-    }
+        [SerializeField] private PlanetsRespawner _planetSpawner;
 
-    private void Start()
-    {
-        _mainParticleSystem = _particleSystem.main;
+        [SerializeField] private float _forwardSpeed = 3f;
+        [SerializeField] private float _strafeSpeed = 5f;
+        [SerializeField] private float _speedBooster = 1.05f;
+        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private ParticleSystem _destroyPlanetEffect;
+        [SerializeField] private ParticleSystem _destroyEffect;
+        [SerializeField] private AudioSource _audioSource;
 
-        if (_accelerateSpeedFrequency == 0)
-            _accelerateSpeedFrequency = _defaultDifference;
+        private readonly float _startAccelerateSpeed = 1f;
 
-        InvokeRepeating(nameof(AccelerateSpeed), _startAccelerateSpeed, _accelerateSpeedFrequency);
+        private ParticleSystem.MainModule _mainParticleSystem;
+        private Transform _transform;
+        private Vector3 _targetPosition;
+        private Vector3 _deadLine;
 
-        _targetPosition = _planetSpawner.GetTargetPosition();
-    }
+        private float _accelerateSpeedFrequency;
+        private float _defaultDifference = 1;
+        private float _deadHight = 0.45f;
 
-    private void Update()
-    {
-        MoveForward();
-    }
+        public event Action GetBoost;
+        public event Action LoseBoost;
 
-    public void ChangeAccelerateSpeedFrequency(float frequency)
-    {
-        _accelerateSpeedFrequency = frequency;
-    }
+        public float StrafeSpeed => _strafeSpeed;
 
-    public void UpBoost()
-    {
-        GetBoost?.Invoke();
-
-        _audioSource.Play();
-
-        _destroyPlanetEffect.Play();
-
-        _targetPosition = _planetSpawner.GetTargetPosition();
-    }
-
-    private void MoveForward()
-    {
-        _deadLine = new Vector3(_transform.position.x, Vector3.Distance(_transform.position, _deadLine), _targetPosition.z);
-
-        _transform.position = Vector3.MoveTowards(_transform.position, _deadLine, _forwardSpeed * Time.deltaTime);
-
-        _transform.LookAt(_deadLine);
-
-        if (_transform.position.y <= _deadHight)
+        private void Awake()
         {
-            _destroyEffect.gameObject.SetActive(true);
-            _destroyEffect.transform.parent = null;
-
-            LoseBoost?.Invoke();
+            _transform = transform;
         }
-    }
 
-    private void AccelerateSpeed()
-    {
-        _forwardSpeed *= _speedBooster;
-        _strafeSpeed *= _speedBooster;
+        private void Start()
+        {
+            _mainParticleSystem = _particleSystem.main;
 
-        _mainParticleSystem.simulationSpeed *= _speedBooster;
+            if (_accelerateSpeedFrequency == 0)
+                _accelerateSpeedFrequency = _defaultDifference;
+
+            InvokeRepeating(nameof(AccelerateSpeed), _startAccelerateSpeed, _accelerateSpeedFrequency);
+
+            _targetPosition = _planetSpawner.GetTargetPosition();
+        }
+
+        private void Update()
+        {
+            MoveForward();
+        }
+
+        public void ChangeAccelerateSpeedFrequency(float frequency)
+        {
+            _accelerateSpeedFrequency = frequency;
+        }
+
+        public void UpBoost()
+        {
+            GetBoost?.Invoke();
+
+            _audioSource.Play();
+
+            _destroyPlanetEffect.Play();
+
+            _targetPosition = _planetSpawner.GetTargetPosition();
+        }
+
+        private void MoveForward()
+        {
+            _deadLine = new Vector3(_transform.position.x, Vector3.Distance(_transform.position, _deadLine), _targetPosition.z);
+
+            _transform.position = Vector3.MoveTowards(_transform.position, _deadLine, _forwardSpeed * Time.deltaTime);
+
+            _transform.LookAt(_deadLine);
+
+            if (_transform.position.y <= _deadHight)
+            {
+                _destroyEffect.gameObject.SetActive(true);
+                _destroyEffect.transform.parent = null;
+
+                LoseBoost?.Invoke();
+            }
+        }
+
+        private void AccelerateSpeed()
+        {
+            _forwardSpeed *= _speedBooster;
+            _strafeSpeed *= _speedBooster;
+
+            _mainParticleSystem.simulationSpeed *= _speedBooster;
+        }
     }
 }

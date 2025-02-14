@@ -1,92 +1,95 @@
 using UnityEngine;
 using YG;
 
-[RequireComponent(typeof(PlayerEngine))]
-[RequireComponent(typeof(Animator))]
-public class PlayerMover : MonoBehaviour
+namespace Player
 {
-    private PlayerEngine _engine;
-    private PlayerInput _input;
-    private Transform _transform;
-
-    private Vector2 _strafeDirection;
-
-    private Vector3 _leftTilt = new Vector3(0, 0, -35);
-    private Vector3 _rightTilt = new Vector3(0, 0, 35);
-    private Vector3 _noTilt = new Vector3(0, 0, 0);
-
-    private Vector3 _tiltRotation;
-    private Vector3 _forwardMove = new Vector2(0, 0);
-    private Animator _animator;
-
-    private float _timeLimitAnimation = 2;
-
-    private void Awake()
+    [RequireComponent(typeof(PlayerEngine))]
+    [RequireComponent(typeof(Animator))]
+    public class PlayerMover : MonoBehaviour
     {
-        _engine = GetComponent<PlayerEngine>();
+        private PlayerEngine _engine;
+        private PlayerInput _input;
+        private Transform _transform;
 
-        _input = new PlayerInput();
+        private Vector2 _strafeDirection;
 
-        _transform = transform;
+        private Vector3 _leftTilt = new Vector3(0, 0, -35);
+        private Vector3 _rightTilt = new Vector3(0, 0, 35);
+        private Vector3 _noTilt = new Vector3(0, 0, 0);
 
-        _animator = GetComponent<Animator>();
-    }
+        private Vector3 _tiltRotation;
+        private Vector3 _forwardMove = new Vector2(0, 0);
+        private Animator _animator;
 
-    private void OnEnable()
-    {
-        _input.Enable();
+        private float _timeLimitAnimation = 2;
 
-        Invoke(nameof(AnimatiorOff), _timeLimitAnimation);
-    }
-
-    private void OnDisable()
-    {
-        _input.Disable();
-    }
-
-    private void Update()
-    {
-        OnStrafeMove();
-    }
-
-    public void StrafeMoveForMobile(int vector)
-    {
-        _strafeDirection = new Vector2(vector, 0);
-    }
-
-    public void ForwardMoveForMobile()
-    {
-        _strafeDirection = _forwardMove;
-    }
-
-    private void OnStrafeMove()
-    {
-        if (YandexGame.EnvironmentData.isDesktop)
+        private void Awake()
         {
-            _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
+            _engine = GetComponent<PlayerEngine>();
+
+            _input = new PlayerInput();
+
+            _transform = transform;
+
+            _animator = GetComponent<Animator>();
         }
 
-        _transform.Translate(_strafeDirection * _engine.StrafeSpeed * Time.deltaTime);
+        private void OnEnable()
+        {
+            _input.Enable();
 
-        AcceptTilt();
-    }
+            Invoke(nameof(AnimatiorOff), _timeLimitAnimation);
+        }
 
-    private void AcceptTilt()
-    {
-        if (_strafeDirection.x > 0f)
-            _tiltRotation = _leftTilt;
+        private void OnDisable()
+        {
+            _input.Disable();
+        }
 
-        else if (_strafeDirection.x < 0f)
-            _tiltRotation = _rightTilt;
+        private void Update()
+        {
+            OnStrafeMove();
+        }
 
-        else if (_strafeDirection.y == 0f)
-            _tiltRotation = _noTilt;
+        public void StrafeMoveForMobile(int vector)
+        {
+            _strafeDirection = new Vector2(vector, 0);
+        }
 
-        _transform.Rotate(_tiltRotation);
-    }
+        public void ForwardMoveForMobile()
+        {
+            _strafeDirection = _forwardMove;
+        }
 
-    private void AnimatiorOff()
-    {
-        _animator.enabled = false;
+        private void OnStrafeMove()
+        {
+            if (YandexGame.EnvironmentData.isDesktop)
+            {
+                _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
+            }
+
+            _transform.Translate(_strafeDirection * _engine.StrafeSpeed * Time.deltaTime);
+
+            AcceptTilt();
+        }
+
+        private void AcceptTilt()
+        {
+            if (_strafeDirection.x > 0f)
+                _tiltRotation = _leftTilt;
+
+            else if (_strafeDirection.x < 0f)
+                _tiltRotation = _rightTilt;
+
+            else if (_strafeDirection.y == 0f)
+                _tiltRotation = _noTilt;
+
+            _transform.Rotate(_tiltRotation);
+        }
+
+        private void AnimatiorOff()
+        {
+            _animator.enabled = false;
+        }
     }
 }

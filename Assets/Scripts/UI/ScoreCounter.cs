@@ -1,32 +1,36 @@
 using TMPro;
 using UnityEngine;
 using YG;
+using Player;
 
-public class ScoreCounter : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private PlayerEngine _player;
-    [SerializeField] private TextMeshProUGUI _textPlayerScore;
-    [SerializeField] private ScoreScaler _scoreScaler;
-
-    private int _playerScore = 0;
-    public int PlayerScore => _playerScore;
-
-    private void OnEnable()
+    public class ScoreCounter : MonoBehaviour
     {
-        _player.GetBoost += AddPoint;
-    }
+        [SerializeField] private PlayerEngine _player;
+        [SerializeField] private TextMeshProUGUI _textPlayerScore;
+        [SerializeField] private ScoreScaler _scoreScaler;
 
-    private void OnDisable()
-    {
-        _player.GetBoost -= AddPoint;
-    }
+        private int _playerScore = 0;
+        public int PlayerScore => _playerScore;
 
-    private void AddPoint()
-    {
-        _playerScore++;
+        private void OnEnable()
+        {
+            _player.GetBoost += AddPoint;
+        }
 
-        _scoreScaler.Boosted();
+        private void OnDisable()
+        {
+            _player.GetBoost -= AddPoint;
+        }
 
-        _textPlayerScore.text = _playerScore.ToString();
+        private void AddPoint()
+        {
+            _playerScore++;
+
+            _scoreScaler.Boosted();
+
+            _textPlayerScore.text = _playerScore.ToString();
+        }
     }
 }

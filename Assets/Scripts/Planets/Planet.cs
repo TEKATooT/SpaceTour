@@ -1,56 +1,60 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using Player;
 
-public class Planet : MonoBehaviour
+namespace Planets
 {
-    [SerializeField] private ModelsPlanets[] _planets;
-
-    private float _minRotationSpeed = -500f;
-    private float _maxRotationSpeed = 500f;
-    private float _randomRotationSpeed;
-
-    private float _minAngle = -180f;
-    private float _maxRAngle = 180f;
-    private float _randomAngle;
-
-    public event Action Destroyed;
-
-    private void OnEnable()
+    public class Planet : MonoBehaviour
     {
-        MakeRandomPlanetAngles();
-    }
+        [SerializeField] private ModelsPlanets[] _planets;
 
-    private void Start()
-    {
-        ChooseRandomModel();
-    }
+        private float _minRotationSpeed = -500f;
+        private float _maxRotationSpeed = 500f;
+        private float _randomRotationSpeed;
 
-    private void Update()
-    {
-        transform.RotateAround(transform.position, Vector3.up, _randomRotationSpeed * Time.deltaTime);
-    }
+        private float _minAngle = -180f;
+        private float _maxRAngle = 180f;
+        private float _randomAngle;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroyed?.Invoke();
+        public event Action Destroyed;
 
-        if (other.TryGetComponent(out PlayerEngine player))
-            player.UpBoost();
-    }
+        private void OnEnable()
+        {
+            MakeRandomPlanetAngles();
+        }
 
-    private void MakeRandomPlanetAngles()
-    {
-        _randomRotationSpeed = UnityEngine.Random.Range(_minRotationSpeed, _maxRotationSpeed);
-        _randomAngle = UnityEngine.Random.Range(_minAngle, _maxRAngle);
+        private void Start()
+        {
+            ChooseRandomModel();
+        }
 
-        transform.Rotate(_randomRotationSpeed, transform.rotation.y, transform.rotation.z);
-    }
+        private void Update()
+        {
+            transform.RotateAround(transform.position, Vector3.up, _randomRotationSpeed * Time.deltaTime);
+        }
 
-    private void ChooseRandomModel()
-    {
-        int randomModel = UnityEngine.Random.Range(0, _planets.Count());
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroyed?.Invoke();
 
-        _planets[randomModel].gameObject.SetActive(true);
+            if (other.TryGetComponent(out PlayerEngine player))
+                player.UpBoost();
+        }
+
+        private void MakeRandomPlanetAngles()
+        {
+            _randomRotationSpeed = UnityEngine.Random.Range(_minRotationSpeed, _maxRotationSpeed);
+            _randomAngle = UnityEngine.Random.Range(_minAngle, _maxRAngle);
+
+            transform.Rotate(_randomRotationSpeed, transform.rotation.y, transform.rotation.z);
+        }
+
+        private void ChooseRandomModel()
+        {
+            int randomModel = UnityEngine.Random.Range(0, _planets.Count());
+
+            _planets[randomModel].gameObject.SetActive(true);
+        }
     }
 }

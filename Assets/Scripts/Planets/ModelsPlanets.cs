@@ -1,4 +1,7 @@
 using UnityEngine;
 
-public class ModelsPlanets : MonoBehaviour
-{}
+namespace Planets
+{
+    public class ModelsPlanets : MonoBehaviour
+    { }
+}

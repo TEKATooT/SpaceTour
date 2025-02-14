@@ -1,17 +1,20 @@
 using UnityEngine;
 using YG;
 
-public class AdvertisementsViewer : MonoBehaviour
+namespace Scripts
 {
-    private static int _gameCycle;
-
-    private int _frequencyAdShow = 3;
-
-    public void ShowFullSreenAd()
+    public class AdvertisementsViewer : MonoBehaviour
     {
-        _gameCycle++;
+        private static int _gameCycle;
 
-        if (_gameCycle % _frequencyAdShow == 0)
-            YandexGame.FullscreenShow();
+        private int _frequencyAdShow = 3;
+
+        public void ShowFullSreenAd()
+        {
+            _gameCycle++;
+
+            if (_gameCycle % _frequencyAdShow == 0)
+                YandexGame.FullscreenShow();
+        }
     }
 }
