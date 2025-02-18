@@ -9,6 +9,8 @@ namespace Planets
     {
         [SerializeField] private ModelsPlanets[] _planets;
 
+        private Renderer _renderer;
+
         private float _minRotationSpeed = -500f;
         private float _maxRotationSpeed = 500f;
         private float _randomRotationSpeed;
@@ -27,6 +29,8 @@ namespace Planets
         private void Start()
         {
             ChooseRandomModel();
+
+            _renderer.GetComponent<Renderer>();
         }
 
         private void Update()

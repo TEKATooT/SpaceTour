@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 53369893}
   - component: {fileID: 53369895}
   m_Layer: 5
-  m_Name: PlayAgain(Text)
+  m_Name: NewRecord(Text)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play again or add u highscore in leaders scoreboard?
+  m_text: "New record! \nAdd in leaderboards?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
+  m_fontSize: 23
   m_fontSizeBase: 17.93
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf51be86e70d7941bd40914206e4ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationName: Quastion
-  FallbackText: Play again or add u highscore in scoreboard?!
+  translationName: Record
+  FallbackText: New record! Add in leaders scoreboard?
 --- !u!4 &94961280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 428660, guid: 56c3274d2f9ec214ab584a80b5ce2d6d, type: 3}
@@ -447,7 +447,6 @@ GameObject:
   - component: {fileID: 207945957}
   - component: {fileID: 207945959}
   - component: {fileID: 207945960}
-  - component: {fileID: 207945961}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -600,20 +599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dadd78416218414095f6c3fefadf589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &207945961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207945952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fcd5cd91d4a18a46b71ed9677096f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scoreCounter: {fileID: 207945959}
-  _advertisementsViewer: {fileID: 207945960}
 --- !u!1 &254085163
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,8 +876,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207945961}
-        m_TargetAssemblyTypeName: LossMenu, Assembly-CSharp
+      - m_Target: {fileID: 1346545055}
+        m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
         m_MethodName: LoadMainMenuButton
         m_Mode: 1
         m_Arguments:
@@ -3029,6 +3014,7 @@ GameObject:
   - component: {fileID: 1346545052}
   - component: {fileID: 1346545054}
   - component: {fileID: 1346545053}
+  - component: {fileID: 1346545055}
   m_Layer: 5
   m_Name: Panel(GameOver)
   m_TagString: Untagged
@@ -3097,6 +3083,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346545051}
   m_CullTransparentMesh: 1
+--- !u!114 &1346545055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346545051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fcd5cd91d4a18a46b71ed9677096f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreCounter: {fileID: 207945959}
+  _advertisementsViewer: {fileID: 207945960}
+  _newRecordText: {fileID: 53369891}
 --- !u!1 &1376153485
 GameObject:
   m_ObjectHideFlags: 0
@@ -3180,8 +3181,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207945961}
-        m_TargetAssemblyTypeName: LossMenu, Assembly-CSharp
+      - m_Target: {fileID: 1346545055}
+        m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
         m_MethodName: RestartGameButton
         m_Mode: 1
         m_Arguments:
@@ -8605,7 +8606,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1527055450098318974, guid: 971ef8207f535194faf411d40b27fb77, type: 3}
   m_PrefabInstance: {fileID: 1812908369}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1917149272
+--- !u!1 &1891211796
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8613,22 +8614,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1917149273}
-  - component: {fileID: 1917149274}
+  - component: {fileID: 1891211797}
+  - component: {fileID: 1891211798}
   m_Layer: 0
-  m_Name: Quastion
+  m_Name: Record
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1917149273
+--- !u!4 &1891211797
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917149272}
+  m_GameObject: {fileID: 1891211796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -8637,13 +8638,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1992921242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1917149274
+--- !u!114 &1891211798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917149272}
+  m_GameObject: {fileID: 1891211796}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
@@ -8652,17 +8653,16 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u0421\u044B\u0433\u0440\u0430\u0442\u044C \u0435\u0449\u0435 \u0440\u0430\u0437
-      \u0438\u043B\u0438 \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0432\u043E\u0439
-      \u0440\u0435\u043A\u043E\u0440\u0434 \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0443
-      \u043B\u0438\u0434\u0435\u0440\u043E\u0432?"
-    Object: {fileID: 0}
-  - Language: English
-    Text: Play again or add u highscore in leaders scoreboard?
+    Text: "\u041D\u043E\u0432\u044B\u0439 \u0440\u0435\u043A\u043E\u0440\u0434! \n\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C
+      \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u043B\u0438\u0434\u0435\u0440\u043E\u0432?"
     Object: {fileID: 0}
   - Language: Turkish
-    Text: "Tekrar oynamak m\u0131 yoksa lider skor tablosuna y\xFCksek puanlar eklemek
-      mi istiyorsunuz?"
+    Text: 'Yeni bir rekor!
+
+      Skor tablosuna ekle?'
+    Object: {fileID: 0}
+  - Language: English
+    Text: "New record! \nAdd in leaders boards?"
     Object: {fileID: 0}
 --- !u!1 &1992921241
 GameObject:
@@ -8699,8 +8699,8 @@ Transform:
   - {fileID: 1812908370}
   - {fileID: 618738817}
   - {fileID: 947180726}
-  - {fileID: 1917149273}
   - {fileID: 460083443}
+  - {fileID: 1891211797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1992921243
@@ -9318,8 +9318,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207945961}
-        m_TargetAssemblyTypeName: LossMenu, Assembly-CSharp
+      - m_Target: {fileID: 1346545055}
+        m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
         m_MethodName: AddScoreButton
         m_Mode: 1
         m_Arguments:

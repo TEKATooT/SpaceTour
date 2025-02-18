@@ -9,8 +9,16 @@ namespace UI
     {
         [SerializeField] private ScoreCounter _scoreCounter;
         [SerializeField] private AdvertisementsViewer _advertisementsViewer;
+        [SerializeField] private GameObject _newRecordText;
 
         private const int One = 1;
+
+        private void OnEnable()
+        {
+            if (CheckBestResult())
+                _newRecordText.SetActive(true);
+        }
+
         public void RestartGameButton()
         {
             _advertisementsViewer.ShowFullSreenAd();
