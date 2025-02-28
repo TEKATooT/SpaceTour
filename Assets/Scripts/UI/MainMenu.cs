@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,8 +11,8 @@ namespace UI
         [SerializeField] private Scrollbar _volume;
         [SerializeField] private Toggle _mute;
 
-        [SerializeField] private Dropdown _selectLanguageDropBar;
-        [SerializeField] private Dropdown _selectDifferenceDropBar;
+        [SerializeField] private TMP_Dropdown _selectLanguageDropBar;
+        [SerializeField] private TMP_Dropdown _selectDifferenceDropBar;
 
         [SerializeField] private LeaderboardYG _leaderboardYG;
 
