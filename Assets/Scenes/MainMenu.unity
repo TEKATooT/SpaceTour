@@ -7783,7 +7783,7 @@ GameObject:
   - component: {fileID: 1020851144}
   - component: {fileID: 1020851146}
   - component: {fileID: 1020851148}
-  - component: {fileID: 1020851147}
+  - component: {fileID: 1020851149}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -7818,20 +7818,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020851143}
   m_CullTransparentMesh: 1
---- !u!114 &1020851147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020851143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  translationName: Mute
-  FallbackFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
 --- !u!114 &1020851148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7921,6 +7907,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1020851149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020851143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf51be86e70d7941bd40914206e4ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Mute
+  FallbackText: Mute
 --- !u!1 &1022618102
 GameObject:
   m_ObjectHideFlags: 0
