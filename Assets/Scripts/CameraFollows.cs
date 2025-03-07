@@ -6,7 +6,7 @@ namespace Scripts
     public class CameraFollows : MonoBehaviour
     {
         [SerializeField] private PlayerMover _player;
-        [SerializeField] private float _offset = -10;
+        [SerializeField] private float _zOffset = -10;
 
         private Transform _transform;
         private Vector3 _position;
@@ -24,7 +24,7 @@ namespace Scripts
         {
             _position = _transform.position;
 
-            _position.z = _player.transform.position.z + _offset;
+            _position.z = _player.transform.position.z + _zOffset;
 
             _transform.position = _position;
         }
