@@ -9,14 +9,14 @@ namespace UI
     {
         [SerializeField] private ScoreCounter _scoreCounter;
         [SerializeField] private AdvertisementsViewer _advertisementsViewer;
-        [SerializeField] private GameObject _newRecordText;
+        [SerializeField] private GameObject _newRecord;
 
         private const int One = 1;
 
         private void OnEnable()
         {
             if (CheckBestResult())
-                _newRecordText.SetActive(true);
+                _newRecord.SetActive(true);
         }
 
         public void RestartGameButton()
@@ -35,12 +35,9 @@ namespace UI
         {
             if (YandexGame.auth)
             {
-                if (CheckBestResult())
-                {
-                    YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
+                YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
 
-                    YandexGame.SaveProgress();
-                }
+                YandexGame.SaveProgress();
 
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
             }
@@ -52,18 +49,18 @@ namespace UI
 
         private bool CheckBestResult()
         {
-            bool hasData = YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int value);
+            bool hasData = YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int lastSaveScore);
 
-            if (hasData == false)
+            if (hasData == false && _scoreCounter.PlayerScore >= One)
             {
                 YandexGame.savesData.ScoreSave.Add(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
 
                 return true;
             }
-
-            if (_scoreCounter.PlayerScore > value)
+            else if (hasData && _scoreCounter.PlayerScore > lastSaveScore)
             {
                 YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
+
                 return true;
             }
             else
