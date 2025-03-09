@@ -37,6 +37,7 @@ namespace UI
             {
                 YandexGame.NewLeaderboardScores(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
 
+                YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
                 YandexGame.SaveProgress();
 
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
@@ -49,20 +50,10 @@ namespace UI
 
         private bool CheckBestResult()
         {
-            bool hasData = YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int lastSaveScore);
+            YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int score);
 
-            if (hasData == false && _scoreCounter.PlayerScore >= One)
-            {
-                YandexGame.savesData.ScoreSave.Add(MainMenu.CorrectDifference.ToString(), _scoreCounter.PlayerScore);
-
+            if (_scoreCounter.PlayerScore > score)
                 return true;
-            }
-            else if (hasData && _scoreCounter.PlayerScore > lastSaveScore)
-            {
-                YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
-
-                return true;
-            }
             else
                 return false;
         }

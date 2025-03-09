@@ -7,9 +7,9 @@ namespace Planets
 {
     public class Planet : MonoBehaviour
     {
-        [SerializeField] private ModelsPlanets[] _planets;
+        [SerializeField] private ModelPlanet[] _planets;
 
-        //private Renderer _renderer;
+        private ModelPlanet _planet;
 
         private float _minRotationSpeed = -500f;
         private float _maxRotationSpeed = 500f;
@@ -24,13 +24,13 @@ namespace Planets
         private void OnEnable()
         {
             MakeRandomPlanetAngles();
+
+            ChooseRandomModel();
         }
 
-        private void Start()
+        private void OnDisable()
         {
-            ChooseRandomModel();
-
-           //_renderer.GetComponent<Renderer>();
+            _planet.gameObject.SetActive(false);
         }
 
         private void Update()
@@ -59,6 +59,8 @@ namespace Planets
             int randomModel = UnityEngine.Random.Range(0, _planets.Count());
 
             _planets[randomModel].gameObject.SetActive(true);
+
+            _planet = _planets[randomModel];
         }
     }
 }
