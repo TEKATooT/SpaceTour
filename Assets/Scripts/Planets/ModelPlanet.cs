@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace Planets
@@ -5,7 +6,10 @@ namespace Planets
     public class ModelPlanet : MonoBehaviour
     {
         private Material[] _defaultsMaterials;
-        private Material[] _materialsToChange;
+
+        private float _speedToVisible = 1;
+        private readonly float _visible = 1.1f;
+        private readonly float _invisible = 0;
 
         private void Awake()
         {
@@ -14,7 +18,14 @@ namespace Planets
 
         private void OnEnable()
         {
-           
+            foreach (var material in _defaultsMaterials)
+            {
+                Color newColor = material.color;
+
+                newColor.a = _invisible;
+
+                material.color = newColor;
+            }
         }
 
         private void Start()
@@ -22,7 +33,7 @@ namespace Planets
 
         }
 
-        private void FixUpdate()
+        private void Update()
         {
             Appear();
         }
@@ -31,10 +42,15 @@ namespace Planets
         {
             foreach (var material in _defaultsMaterials)
             {
+                Color newColor = material.color;
+                float _alfa = material.color.a;
 
+                float newAlfa = Mathf.Lerp(_alfa, _visible, _speedToVisible * Time.deltaTime);
+
+                newColor.a = newAlfa;
+
+                material.color = newColor;
             }
-
-            //_renderer.material.Lerp(_renderer.material, _endMaterial, 1 * Time.deltaTime);
         }
     }
 }
