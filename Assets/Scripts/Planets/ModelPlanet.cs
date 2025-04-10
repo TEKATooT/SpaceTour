@@ -18,6 +18,16 @@ namespace Planets
 
         private void OnEnable()
         {
+                ApplyStartStatus();
+        }
+
+        private void Update()
+        {
+                Appear();
+        }
+
+        private void ApplyStartStatus()
+        {
             foreach (var material in _defaultsMaterials)
             {
                 Color newColor = material.color;
@@ -26,16 +36,6 @@ namespace Planets
 
                 material.color = newColor;
             }
-        }
-
-        private void Start()
-        {
-
-        }
-
-        private void Update()
-        {
-            Appear();
         }
 
         private void Appear()
