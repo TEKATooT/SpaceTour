@@ -16,15 +16,7 @@ namespace UI
 
         private void OnEnable()
         {
-            if (CheckBestResult() && YandexGame.auth)
-            {
-                _newRecord.SetActive(true);
-                AddNewRecord();
-            }
-            else if (!YandexGame.auth)
-            {
-                _authDialog.SetActive(true);
-            }
+            CheckYandexGameAuthorization();
         }
 
         public void RestartGameButton()
@@ -41,7 +33,21 @@ namespace UI
 
         public void AddScoreButton()
         {
-                YandexGame.AuthDialog();
+            YandexGame.AuthDialog();
+        }
+
+        private void CheckYandexGameAuthorization()
+        {
+            if (CheckBestResult() && YandexGame.auth)
+            {
+                _newRecord.SetActive(true);
+                AddNewRecord();
+            }
+            else if (!YandexGame.auth)
+            {
+                _authDialog.SetActive(true);
+                AddNewRecord();
+            }
         }
 
         private bool CheckBestResult()
