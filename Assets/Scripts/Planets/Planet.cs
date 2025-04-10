@@ -61,8 +61,6 @@ namespace Planets
             _planets[randomModel].gameObject.SetActive(true);
 
             _planet = _planets[randomModel];
-
-            gameObject.transform.localScale = _planet.transform.localScale;
         }
     }
 }

@@ -46,6 +46,7 @@ namespace UI
             else if (!YandexGame.auth)
             {
                 _authDialog.SetActive(true);
+
                 AddNewRecord();
             }
         }
@@ -66,8 +67,6 @@ namespace UI
 
             YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
             YandexGame.SaveProgress();
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
         }
     }
 }

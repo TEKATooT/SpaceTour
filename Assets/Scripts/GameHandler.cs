@@ -9,10 +9,11 @@ namespace Scripts
         [SerializeField] private PlayerEngine _player;
         [SerializeField] private GameObject _gameOverPanel;
 
+        private int _timeBeforeStoppingGame = 3;
+        private bool _isLoseGame = false;
+
         private readonly float _normalTime = 1f;
         private readonly float _stopTime = 0f;
-
-        private int _timeBeforeStoppingGame = 3;
 
         private void OnEnable()
         {
@@ -32,7 +33,7 @@ namespace Scripts
 
         private void OnVisibilityWindowGame(bool isVisible)
         {
-            if (isVisible)
+            if (isVisible && _isLoseGame == false)
                 ResumeGame();
             else
                 StopGame();
@@ -52,6 +53,7 @@ namespace Scripts
 
         private void LoseGame()
         {
+            _isLoseGame = true;
             _player.gameObject.SetActive(false);
             _gameOverPanel.SetActive(true);
 

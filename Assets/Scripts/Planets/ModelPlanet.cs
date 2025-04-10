@@ -6,8 +6,8 @@ namespace Planets
     public class ModelPlanet : MonoBehaviour
     {
         private Material[] _defaultsMaterials;
-
         private float _speedToVisible = 1;
+
         private readonly float _visible = 1.1f;
         private readonly float _invisible = 0;
 

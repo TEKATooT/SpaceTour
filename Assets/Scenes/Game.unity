@@ -181,9 +181,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'A new record!
+  m_text: 'A new record
 
-    He''s been added to the leaderboard!
+    added to the leaderboard!
 
     Congratulations!'
   m_isRightToLeft: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: Record
-  FallbackText: A new record! He's been added to the leaderboard! Congratulations!
+  FallbackText: A new record added to the leaderboard! Congratulations!
 --- !u!4 &94961280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 428660, guid: 56c3274d2f9ec214ab584a80b5ce2d6d, type: 3}
@@ -8688,18 +8688,17 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u041D\u043E\u0432\u0430\u044F \u0440\u0435\u043A\u043E\u0440\u0434! \n\u041E\u043D
-      \u0431\u044B\u043B \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432
-      \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u043B\u0438\u0434\u0435\u0440\u043E\u0432!
+    Text: "\u041D\u043E\u0432\u0430\u044F \u0440\u0435\u043A\u043E\u0440\u0434\n\u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D
+      \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u043B\u0438\u0434\u0435\u0440\u043E\u0432!
       \n\u041F\u043E\u0437\u0434\u0440\u0430\u0432\u043B\u044F\u044E!"
     Object: {fileID: 0}
   - Language: Turkish
-    Text: "Yeni kay\u0131t! \nLiderler Tablosu'na eklendi! \nTebrikler!"
+    Text: "Yeni Kay\u0131t\\nLiderler Tablosuna eklendi! \\nTebrikler!"
     Object: {fileID: 0}
   - Language: English
-    Text: 'A new record!
+    Text: 'A new record
 
-      He''s been added to the leaderboard!
+      added to the leaderboard!
 
       Congratulations!'
     Object: {fileID: 0}
