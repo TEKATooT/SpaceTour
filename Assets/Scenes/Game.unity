@@ -8142,6 +8142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1527263876}
   - component: {fileID: 1527263879}
+  - component: {fileID: 1527263881}
   - component: {fileID: 1527263878}
   - component: {fileID: 1527263877}
   - component: {fileID: 1527263880}
@@ -8299,6 +8300,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1527263881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527263875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3c4995f0b112542b75fe83572d07e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1527263878}
 --- !u!1 &1617560268
 GameObject:
   m_ObjectHideFlags: 0
@@ -8387,6 +8401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1677100038}
   - component: {fileID: 1677100041}
+  - component: {fileID: 1677100043}
   - component: {fileID: 1677100040}
   - component: {fileID: 1677100039}
   - component: {fileID: 1677100042}
@@ -8544,6 +8559,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1677100043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677100037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3c4995f0b112542b75fe83572d07e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1677100040}
 --- !u!1001 &1812908369
 PrefabInstance:
   m_ObjectHideFlags: 0
