@@ -17,7 +17,7 @@ namespace UI
         private readonly float _one = 1f;
         private readonly float _zero = 0f;
 
-        private void OnEnable()
+        private void Start()
         {
             _defaultSize = _button.rectTransform.localScale;
 
