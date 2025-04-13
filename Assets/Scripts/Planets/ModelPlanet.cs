@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace Planets
@@ -16,14 +15,14 @@ namespace Planets
             _defaultsMaterials = GetComponent<Renderer>().materials;
         }
 
-        private void OnEnable()
+        private void Start()
         {
-                ApplyStartStatus();
+            ApplyStartStatus();
         }
 
         private void Update()
         {
-                Appear();
+            Appear();
         }
 
         private void ApplyStartStatus()

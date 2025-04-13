@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,57 +7,46 @@ namespace UI
     public class MobileButtonResize : MonoBehaviour
     {
         [SerializeField] private Image _button;
-        private Vector3 _defaultSize;
-        private Vector3 _maxSize;
-        private float _doubleMultiplication = 2f;
 
-        private float _durationTime = 6f;
-        private bool _isTimeGrow = true;
-        private float _timer = 0f;
+        private Vector3 _defaultSize = new Vector3(1f, 1f, 1f);
+        private Vector3 _maxSize = new Vector3(2f, 2f, 2f);
+        private Vector3 _step = new Vector3(0.05f, 0.05f, 0.05f);
+        private WaitForSeconds _waitForSeconds = new WaitForSeconds(0.03f);
 
-        private readonly float _one = 1f;
-        private readonly float _zero = 0f;
-
-        private void Start()
+        private void OnEnable()
         {
-            _defaultSize = _button.rectTransform.localScale;
-
-            _maxSize = new Vector3(_defaultSize.x, _defaultSize.y, _defaultSize.z) * _doubleMultiplication;
+            StartCoroutine(ChangeSize());
         }
 
-        private void Update()
+        private IEnumerator ChangeSize()
         {
-            if (_durationTime >= Time.time)
-                ChangeSize();
-        }
+            bool isTimeGrow = true;
+            int changesQuantity = 0;
 
-        private void ChangeSize()
-        {
-            if (_isTimeGrow)
+            while (changesQuantity <= 2)
             {
-                _button.rectTransform.localScale = Vector3.Lerp(_button.rectTransform.localScale, _maxSize, Time.deltaTime);
-
-                _timer += Time.deltaTime;
-
-                if (_timer > _one)
+                if (isTimeGrow)
                 {
-                    _isTimeGrow = false;
+                    transform.localScale += _step;
 
-                    _timer = _zero;
+                    if (transform.localScale.x >= _maxSize.x)
+                        isTimeGrow = false;
                 }
-            }
-            else if (_isTimeGrow == false)
-            {
-                _button.rectTransform.localScale = Vector3.Lerp(_button.rectTransform.localScale, _defaultSize, Time.deltaTime);
-
-                _timer += Time.deltaTime;
-
-                if (_timer > _one)
+                else if (!isTimeGrow)
                 {
-                    _isTimeGrow = true;
+                    transform.localScale -= _step;
 
-                    _timer = _zero;
+                    if (transform.localScale.x <= _defaultSize.x)
+                    {
+                        isTimeGrow = true;
+                        changesQuantity++;
+                    }
                 }
+
+                if (changesQuantity >= 2)
+                    StopCoroutine(ChangeSize());
+
+                yield return _waitForSeconds;
             }
         }
     }

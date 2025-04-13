@@ -8,8 +8,6 @@ namespace Planets
     {
         [SerializeField] private ParticleSystem _destroyEffect;
 
-        private readonly int _oneSpawnQuantuty = 1;
-
         private Pool _pool;
         private Planet _planetToTarget;
 
@@ -23,11 +21,17 @@ namespace Planets
         private int _maxPositionX = 5;
         private int _startSpawnQuantuty = 5;
 
+        private readonly int _oneSpawnQuantuty = 1;
+
+        public int StartSpawnQuantuty => _startSpawnQuantuty;
+
         private void Awake()
         {
             _pool = GetComponent<Pool>();
 
             GenerateNextPlanet(_startSpawnQuantuty);
+
+            _startSpawnQuantuty -= _startSpawnQuantuty;
         }
 
         public Vector3 GetTargetPosition()

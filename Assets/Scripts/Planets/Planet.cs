@@ -11,6 +11,8 @@ namespace Planets
 
         private ModelPlanet _planet;
 
+        private bool _isStartedPlanet = true;
+
         private float _minRotationSpeed = -500f;
         private float _maxRotationSpeed = 500f;
         private float _randomRotationSpeed;
@@ -61,6 +63,17 @@ namespace Planets
             _planets[randomModel].gameObject.SetActive(true);
 
             _planet = _planets[randomModel];
+
+            AppearEffectOff();
+        }
+
+        private void AppearEffectOff()
+        {
+            if (_isStartedPlanet && _planet.TryGetComponent(out ModelPlanet modelScript))
+            {
+                modelScript.enabled = false;
+                _isStartedPlanet = false;
+            }
         }
     }
 }
