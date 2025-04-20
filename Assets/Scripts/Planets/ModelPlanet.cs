@@ -9,7 +9,7 @@ namespace Planets
 
         private readonly float _visible = 1.1f;
         private readonly float _invisible = 0;
-        private readonly float _firstSecond = 1;
+        private readonly float _firstSecond = 1f;
 
         private void Awake()
         {
@@ -18,7 +18,7 @@ namespace Planets
 
         private void Start()
         {
-            if (Time.time >= _firstSecond)
+            if (Time.timeSinceLevelLoad >= _firstSecond)
             {
                 ApplyStartStatus();
             }

@@ -23,15 +23,11 @@ namespace Planets
 
         private readonly int _oneSpawnQuantuty = 1;
 
-        public int StartSpawnQuantuty => _startSpawnQuantuty;
-
         private void Awake()
         {
             _pool = GetComponent<Pool>();
 
             GenerateNextPlanet(_startSpawnQuantuty);
-
-            _startSpawnQuantuty -= _startSpawnQuantuty;
         }
 
         public Vector3 GetTargetPosition()
