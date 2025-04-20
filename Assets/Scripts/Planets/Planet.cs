@@ -20,8 +20,14 @@ namespace Planets
         private float _randomAngle;
 
         private bool _isFirstPlanet = true;
+        private Vector3 _defaultSize;
 
         public event Action Destroyed;
+
+        private void Awake()
+        {
+            _defaultSize = transform.localScale;
+        }
 
         private void OnEnable()
         {
@@ -33,6 +39,8 @@ namespace Planets
         private void OnDisable()
         {
             _planet.gameObject.SetActive(false);
+
+            transform.localScale = _defaultSize;
         }
 
         private void Update()
@@ -65,7 +73,7 @@ namespace Planets
             _planet = _planets[randomModel];
 
             ApplyInvisibleStatus();
-            //ApplyPlanetSize(randomModel);
+            ApplyPlanetSize(randomModel);
         }
 
         private void ApplyInvisibleStatus()
@@ -76,12 +84,17 @@ namespace Planets
                 _isFirstPlanet = false;
         }
 
-        private void ApplyPlanetSize(float randomSize)
+        private void ApplyPlanetSize(int randomSize)
         {
-            if (randomSize == 0)
-                randomSize = 1;
+            int defaultSize = 1;
 
-            transform.localScale *= 1 + randomSize / 10;
+            float correctRatio = 1.4f;
+            float divisor = 10f;
+
+            if (randomSize <= defaultSize)
+                ++randomSize;
+
+                transform.localScale *= correctRatio + randomSize/divisor;
         }
     }
 }

@@ -13,9 +13,14 @@ namespace UI
         private Vector3 _step = new Vector3(0.05f, 0.05f, 0.05f);
         private WaitForSeconds _waitForSeconds = new WaitForSeconds(0.03f);
 
+        private float _learningTime = 30f;
+
         private void OnEnable()
         {
-            StartCoroutine(ChangeSize());
+            if (Time.time < _learningTime)
+            {
+                StartCoroutine(ChangeSize());
+            }
         }
 
         private IEnumerator ChangeSize()

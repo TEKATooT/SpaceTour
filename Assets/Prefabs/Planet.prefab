@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: 10}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 300991607193972709}
@@ -42,9 +42,9 @@ Transform:
   - {fileID: 860564827188517819}
   - {fileID: 6731130264796851442}
   - {fileID: 6419867092490643148}
-  - {fileID: 291635147696242422}
-  - {fileID: 3963842772981875546}
   - {fileID: 8515160407083766815}
+  - {fileID: 3963842772981875546}
+  - {fileID: 291635147696242422}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2222758217020445401
@@ -110,18 +110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planets:
-  - {fileID: 2509022626436072726}
-  - {fileID: 6452477538294675881}
-  - {fileID: 4425478808382070682}
-  - {fileID: 5919149186874001606}
   - {fileID: 3330731270964595582}
-  - {fileID: 4178978037679241531}
-  - {fileID: 6766395783573473747}
   - {fileID: 8190801100139915455}
-  - {fileID: 1908981312255609117}
-  - {fileID: 2351585307406865014}
-  - {fileID: 6805267322946144724}
+  - {fileID: 5919149186874001606}
+  - {fileID: 4425478808382070682}
   - {fileID: 8485826160543967309}
+  - {fileID: 2509022626436072726}
+  - {fileID: 6766395783573473747}
+  - {fileID: 4178978037679241531}
+  - {fileID: 6805267322946144724}
+  - {fileID: 1908981312255609117}
+  - {fileID: 6452477538294675881}
+  - {fileID: 2351585307406865014}
 --- !u!135 &1311554274281900171
 SphereCollider:
   m_ObjectHideFlags: 0
