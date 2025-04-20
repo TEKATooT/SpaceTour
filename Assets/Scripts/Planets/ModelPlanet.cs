@@ -20,7 +20,7 @@ namespace Planets
         {
             if (Time.timeSinceLevelLoad >= _firstSecond)
             {
-                ApplyStartStatus();
+                ApplyInvisibleStatus();
             }
         }
 
@@ -29,7 +29,7 @@ namespace Planets
             Appear();
         }
 
-        private void ApplyStartStatus()
+        public void ApplyInvisibleStatus()
         {
             foreach (var material in _defaultsMaterials)
             {

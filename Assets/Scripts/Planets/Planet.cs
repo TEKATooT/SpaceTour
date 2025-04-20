@@ -19,6 +19,8 @@ namespace Planets
         private float _maxRAngle = 180f;
         private float _randomAngle;
 
+        private bool _isFirstPlanet = true;
+
         public event Action Destroyed;
 
         private void OnEnable()
@@ -61,6 +63,25 @@ namespace Planets
             _planets[randomModel].gameObject.SetActive(true);
 
             _planet = _planets[randomModel];
+
+            ApplyInvisibleStatus();
+            //ApplyPlanetSize(randomModel);
+        }
+
+        private void ApplyInvisibleStatus()
+        {
+            if (!_isFirstPlanet)
+                _planet.ApplyInvisibleStatus();
+            else
+                _isFirstPlanet = false;
+        }
+
+        private void ApplyPlanetSize(float randomSize)
+        {
+            if (randomSize == 0)
+                randomSize = 1;
+
+            transform.localScale *= 1 + randomSize / 10;
         }
     }
 }
