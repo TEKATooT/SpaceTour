@@ -88,7 +88,7 @@ namespace Planets
         {
             int defaultSize = 1;
 
-            float correctRatio = 1.4f;
+            float correctRatio = 1.3f;
             float divisor = 10f;
 
             if (randomSize <= defaultSize)
