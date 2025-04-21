@@ -34,6 +34,8 @@ namespace UI
         public void AddScoreButton()
         {
             YandexGame.AuthDialog();
+
+            CheckYandexGameAuthorization();
         }
 
         private void CheckYandexGameAuthorization()
@@ -42,12 +44,12 @@ namespace UI
             {
                 _newRecord.SetActive(true);
                 AddNewRecord();
+
+                _authDialog.SetActive(false);
             }
-            else if (!YandexGame.auth)
+            else if (CheckBestResult() && !YandexGame.auth)
             {
                 _authDialog.SetActive(true);
-
-                AddNewRecord();
             }
         }
 
@@ -55,7 +57,7 @@ namespace UI
         {
             YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int score);
 
-            if (_scoreCounter.PlayerScore > score)
+            if (_scoreCounter.PlayerScore > score && _scoreCounter.PlayerScore >= One)
                 return true;
             else
                 return false;

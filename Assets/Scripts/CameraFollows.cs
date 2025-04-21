@@ -1,5 +1,6 @@
 using UnityEngine;
 using Player;
+using YG;
 
 namespace Scripts
 {
@@ -13,7 +14,7 @@ namespace Scripts
 
         private Camera _camera;
         private float _defaultView = 90;
-        private float _zoomViewForLandScape = 60;
+        private float _zoomViewForLandScape = 55;
 
         private void Start()
         {
@@ -21,16 +22,14 @@ namespace Scripts
 
             if (gameObject.TryGetComponent(out Camera camera))
                 _camera = camera;
+
+            if (YandexGame.EnvironmentData.isMobile)
+                CorrectionVision();
         }
 
         private void Update()
         {
             Follow();
-        }
-
-        private void FixedUpdate()
-        {
-            CorrectVision();
         }
 
         private void Follow()
@@ -42,7 +41,7 @@ namespace Scripts
             _transform.position = _position;
         }
 
-        private void CorrectVision()
+        private void CorrectionVision()
         {
             if (Screen.orientation != ScreenOrientation.Portrait)
                 _camera.fieldOfView = _zoomViewForLandScape;
