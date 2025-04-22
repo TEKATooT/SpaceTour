@@ -35,6 +35,8 @@ namespace UI
         {
             YandexGame.AuthDialog();
 
+            _authDialog.SetActive(false);
+
             CheckYandexGameAuthorization();
         }
 
@@ -44,8 +46,6 @@ namespace UI
             {
                 _newRecord.SetActive(true);
                 AddNewRecord();
-
-                _authDialog.SetActive(false);
             }
             else if (CheckBestResult() && !YandexGame.auth)
             {
