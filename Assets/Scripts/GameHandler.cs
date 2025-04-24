@@ -39,7 +39,7 @@ namespace Scripts
                 StopGame();
         }
 
-        private void ResumeGame()
+        public void ResumeGame()
         {
             AudioListener.pause = false;
             Time.timeScale = _normalTime;

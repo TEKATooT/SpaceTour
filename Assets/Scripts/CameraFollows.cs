@@ -7,7 +7,7 @@ namespace Scripts
     public class CameraFollows : MonoBehaviour
     {
         [SerializeField] private PlayerMover _player;
-        [SerializeField] private float _zOffset = -10;
+        [SerializeField] private float _zOffset = -9f;
 
         private Transform _transform;
         private Vector3 _position;

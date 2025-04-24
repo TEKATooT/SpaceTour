@@ -12,6 +12,8 @@ namespace UI
         [SerializeField] private GameObject _newRecord;
         [SerializeField] private GameObject _authDialog;
 
+        private GameHandler _gameHandler;
+
         private const int One = 1;
 
         private void OnEnable()
@@ -35,19 +37,22 @@ namespace UI
         {
             YandexGame.AuthDialog();
 
-            _authDialog.SetActive(false);
+            if (YandexGame.auth)
+            {
+                _authDialog.SetActive(false);
 
-            CheckYandexGameAuthorization();
+                CheckYandexGameAuthorization();
+            }
         }
 
         private void CheckYandexGameAuthorization()
         {
-            if (CheckBestResult() && YandexGame.auth)
+            if (YandexGame.auth && CheckBestResult())
             {
                 _newRecord.SetActive(true);
                 AddNewRecord();
             }
-            else if (CheckBestResult() && !YandexGame.auth)
+            else if (!YandexGame.auth && CheckBestResult())
             {
                 _authDialog.SetActive(true);
             }
