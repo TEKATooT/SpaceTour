@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
 using Scripts;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace UI
 {
@@ -33,6 +35,8 @@ namespace UI
 
         public void AddScoreButton()
         {
+            Debug.Log($"SAVES {JsonConvert.SerializeObject(YandexGame.savesData, Formatting.Indented)}");
+
             YandexGame.AuthDialog();
 
             CheckYandexGameAuthorization();
@@ -55,12 +59,11 @@ namespace UI
 
         private bool CheckBestResult()
         {
+            Debug.Log($"SAVES {JsonConvert.SerializeObject(YandexGame.savesData, Formatting.Indented)}");
+            
             YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int score);
 
-            if (_scoreCounter.PlayerScore > score && _scoreCounter.PlayerScore >= One)
-                return true;
-            else
-                return false;
+            return _scoreCounter.PlayerScore > score;
         }
 
         private void AddNewRecord()
