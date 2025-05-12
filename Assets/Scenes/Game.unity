@@ -8132,13 +8132,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399222970}
   serializedVersion: 2
-  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 50}
+  m_LocalRotation: {x: 0.9848078, y: 0, z: 0, w: 0.17364825}
+  m_LocalPosition: {x: 0, y: 10, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 963194228}
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 160, y: 0, z: 0}
 --- !u!1 &1527263875
 GameObject:
   m_ObjectHideFlags: 0
@@ -9358,7 +9358,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1346545055}
         m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
-        m_MethodName: AddScoreButton
+        m_MethodName: AuthDialogButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

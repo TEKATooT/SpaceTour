@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
 using Scripts;
-using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
 namespace UI
@@ -13,6 +12,8 @@ namespace UI
         [SerializeField] private AdvertisementsViewer _advertisementsViewer;
         [SerializeField] private GameObject _newRecord;
         [SerializeField] private GameObject _authDialog;
+
+        private float _waitSecondsForLoadCloud = 1;
 
         private const int One = 1;
 
@@ -33,13 +34,18 @@ namespace UI
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
         }
 
-        public void AddScoreButton()
+        public void AuthDialogButton()
         {
             Debug.Log($"SAVES {JsonConvert.SerializeObject(YandexGame.savesData, Formatting.Indented)}");
 
             YandexGame.AuthDialog();
 
-            CheckYandexGameAuthorization();
+            if (YandexGame.auth)
+            {
+                YandexGame.LoadCloud();
+
+               Invoke(nameof(CheckYandexGameAuthorization), _waitSecondsForLoadCloud);
+            }
         }
 
         private void CheckYandexGameAuthorization()
