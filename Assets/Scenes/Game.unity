@@ -1393,7 +1393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Login to add record in leaderboard!
+  m_text: Authorization and Add record!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -1420,7 +1420,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.35
+  m_fontSize: 19.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1483,7 +1483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: AddMyResult
-  FallbackText: Login to add your record to the leaderboard!
+  FallbackText: Authorization and Add record!
 --- !u!1001 &680271504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2015,16 +2015,14 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: Login to add record in leaderboard!
+    Text: Authorization and Add record!
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0412\u043E\u0439\u0442\u0438, \u0447\u0442\u043E\u0431\u044B \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C
-      \u0440\u0435\u043A\u043E\u0440\u0434 \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0443
-      \u0440\u0435\u043A\u043E\u0440\u0434\u043E\u0432!"
+    Text: "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0443\u0439\u0441\u044F \u0438
+      \u0434\u043E\u0431\u0430\u0432\u044C \u0440\u0435\u043A\u043E\u0440\u0434!"
     Object: {fileID: 0}
   - Language: Turkish
-    Text: "Kay\u0131t\u0131n\u0131z\u0131 Lider Taht\u0131na eklemek i\xE7in giri\u015F
-      yap\u0131n!"
+    Text: "Giri\u015F yap ve rekoru ekle!"
     Object: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
@@ -3964,7 +3962,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -9358,7 +9356,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1346545055}
         m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
-        m_MethodName: AuthDialogButton
+        m_MethodName: AuthorizationDialogButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

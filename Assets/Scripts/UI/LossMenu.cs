@@ -13,13 +13,16 @@ namespace UI
         [SerializeField] private GameObject _newRecord;
         [SerializeField] private GameObject _authDialog;
 
-        private float _waitSecondsForLoadCloud = 1;
-
         private const int One = 1;
 
         private void OnEnable()
         {
-            CheckYandexGameAuthorization();
+            CheckAuthorization();
+        }
+
+        private void OnDisable()
+        {
+            YandexGame.GetDataEvent -= YandexGame.LoadCloud;
         }
 
         public void RestartGameButton()
@@ -34,25 +37,26 @@ namespace UI
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
         }
 
-        public void AuthDialogButton()
+        public void AuthorizationDialogButton()
         {
-            Debug.Log($"SAVES {JsonConvert.SerializeObject(YandexGame.savesData, Formatting.Indented)}");
-
-            YandexGame.AuthDialog();
-
-            if (YandexGame.auth)
+            if (!YandexGame.auth)
             {
-                YandexGame.LoadCloud();
+                YandexGame.AuthDialog();
 
-               Invoke(nameof(CheckYandexGameAuthorization), _waitSecondsForLoadCloud);
+                YandexGame.GetDataEvent += YandexGame.LoadCloud;
+            }
+            else
+            {
+                CheckAuthorization();
+
+                _authDialog.SetActive(false);
             }
         }
 
-        private void CheckYandexGameAuthorization()
+        private void CheckAuthorization()
         {
             if (YandexGame.auth && CheckBestResult())
             {
-                _authDialog.SetActive(false);
                 _newRecord.SetActive(true);
 
                 AddNewRecord();
@@ -65,8 +69,6 @@ namespace UI
 
         private bool CheckBestResult()
         {
-            Debug.Log($"SAVES {JsonConvert.SerializeObject(YandexGame.savesData, Formatting.Indented)}");
-            
             YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int score);
 
             return _scoreCounter.PlayerScore > score;
