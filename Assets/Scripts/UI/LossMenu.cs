@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
 using Scripts;
-using Newtonsoft.Json;
 
 namespace UI
 {
@@ -12,6 +11,7 @@ namespace UI
         [SerializeField] private AdvertisementsViewer _advertisementsViewer;
         [SerializeField] private GameObject _newRecord;
         [SerializeField] private GameObject _authDialog;
+        [SerializeField] private GameObject _addRecord;
 
         private const int One = 1;
 
@@ -22,7 +22,7 @@ namespace UI
 
         private void OnDisable()
         {
-            YandexGame.GetDataEvent -= YandexGame.LoadCloud;
+            YandexGame.GetDataEvent -= OnAuthorization;
         }
 
         public void RestartGameButton()
@@ -39,18 +39,25 @@ namespace UI
 
         public void AuthorizationDialogButton()
         {
-            if (!YandexGame.auth)
-            {
-                YandexGame.AuthDialog();
+            YandexGame.AuthDialog();
 
-                YandexGame.GetDataEvent += YandexGame.LoadCloud;
-            }
-            else
-            {
-                CheckAuthorization();
+            YandexGame.GetDataEvent += OnAuthorization;
+        }
 
-                _authDialog.SetActive(false);
-            }
+        public void AddRecordButton()
+        {
+            CheckAuthorization();
+
+            _addRecord.SetActive(false);
+        }
+
+        private void OnAuthorization()
+        {
+            YandexGame.LoadCloud();
+
+            _authDialog.SetActive(false);
+
+            _addRecord.SetActive(true);
         }
 
         private void CheckAuthorization()

@@ -19,9 +19,7 @@ namespace Planets
         private void Start()
         {
             if (Time.timeSinceLevelLoad >= _firstSecond)
-            {
                 ApplyInvisibleStatus();
-            }
         }
 
         private void Update()

@@ -15,7 +15,7 @@ namespace Planets
 
         private Vector3 _nextPosition;
 
-        private float _offsetZPosition = 5f;
+        private float _offsetZPosition = 4f;
 
         private int _minPositionX = -5;
         private int _maxPositionX = 5;

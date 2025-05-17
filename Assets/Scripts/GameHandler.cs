@@ -1,6 +1,7 @@
 using UnityEngine;
 using YG;
 using Player;
+using System.Collections;
 
 namespace Scripts
 {
@@ -9,7 +10,7 @@ namespace Scripts
         [SerializeField] private PlayerEngine _player;
         [SerializeField] private GameObject _gameOverPanel;
 
-        private int _timeBeforeStoppingGame = 3;
+        private int _timeBeforeStoppingGame = 1;
         private bool _isLoseGame = false;
 
         private readonly float _normalTime = 1f;
@@ -57,7 +58,12 @@ namespace Scripts
             _player.gameObject.SetActive(false);
             _gameOverPanel.SetActive(true);
 
-            Invoke(nameof(StopGame), _timeBeforeStoppingGame);
+            Invoke(nameof(StopTime), _timeBeforeStoppingGame);
+        }
+
+        private void StopTime()
+        {
+            Time.timeScale = _stopTime;
         }
     }
 }
