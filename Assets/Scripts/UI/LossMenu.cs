@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
 using Scripts;
+using System.Threading.Tasks;
+using System.Collections;
 
 namespace UI
 {
@@ -11,13 +13,15 @@ namespace UI
         [SerializeField] private AdvertisementsViewer _advertisementsViewer;
         [SerializeField] private GameObject _newRecord;
         [SerializeField] private GameObject _authDialog;
-        [SerializeField] private GameObject _addRecord;
+        [SerializeField] private GameObject _notNewRecord;
+
+        private WaitForSecondsRealtime _delayForLoadCloud = new WaitForSecondsRealtime(2f);
 
         private const int One = 1;
 
         private void OnEnable()
         {
-            CheckAuthorization();
+            CheckBestResult();
         }
 
         private void OnDisable()
@@ -44,37 +48,42 @@ namespace UI
             YandexGame.GetDataEvent += OnAuthorization;
         }
 
-        public void AddRecordButton()
-        {
-            CheckAuthorization();
-
-            _addRecord.SetActive(false);
-        }
-
         private void OnAuthorization()
         {
             YandexGame.LoadCloud();
 
             _authDialog.SetActive(false);
 
-            _addRecord.SetActive(true);
+            StartCoroutine(nameof(WaitLoadCloud));
         }
 
-        private void CheckAuthorization()
+        private IEnumerator WaitLoadCloud()
         {
-            if (YandexGame.auth && CheckBestResult())
+            yield return _delayForLoadCloud;
+
+            if (!CheckBestResult())
+                _notNewRecord.SetActive(true);
+        }
+
+        private bool CheckBestResult()
+        {
+            if (YandexGame.auth && CheckCloudRecord())
             {
                 _newRecord.SetActive(true);
 
                 AddNewRecord();
+
+                return true;
             }
             else if (!YandexGame.auth && _scoreCounter.PlayerScore >= One)
             {
                 _authDialog.SetActive(true);
             }
+
+            return false;
         }
 
-        private bool CheckBestResult()
+        private bool CheckCloudRecord()
         {
             YandexGame.savesData.ScoreSave.TryGetValue(MainMenu.CorrectDifference.ToString(), out int score);
 

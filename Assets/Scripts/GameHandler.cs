@@ -1,7 +1,6 @@
 using UnityEngine;
 using YG;
 using Player;
-using System.Collections;
 
 namespace Scripts
 {
