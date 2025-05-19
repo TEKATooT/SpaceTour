@@ -19,14 +19,14 @@ namespace Scripts
         {
             YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
 
-            _player.LoseBoost += LoseGame;
+            _player.LoseBoosted += LoseGame;
         }
 
         private void OnDisable()
         {
             YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
 
-            _player.LoseBoost -= LoseGame;
+            _player.LoseBoosted -= LoseGame;
 
             ResumeGame();
         }

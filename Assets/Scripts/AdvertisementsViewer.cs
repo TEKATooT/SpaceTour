@@ -5,15 +5,15 @@ namespace Scripts
 {
     public class AdvertisementsViewer : MonoBehaviour
     {
-        private static int _gameCycle;
+        private static int s_gameCycle;
 
         private int _frequencyAdShow = 3;
 
         public void ShowFullSreenAd()
         {
-            _gameCycle++;
+            s_gameCycle++;
 
-            if (_gameCycle % _frequencyAdShow == 0)
+            if (s_gameCycle % _frequencyAdShow == 0)
                 YandexGame.FullscreenShow();
         }
     }

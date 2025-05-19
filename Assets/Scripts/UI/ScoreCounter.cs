@@ -16,12 +16,12 @@ namespace UI
 
         private void OnEnable()
         {
-            _player.GetBoost += AddPoint;
+            _player.GetBoosted += AddPoint;
         }
 
         private void OnDisable()
         {
-            _player.GetBoost -= AddPoint;
+            _player.GetBoosted -= AddPoint;
         }
 
         private void AddPoint()

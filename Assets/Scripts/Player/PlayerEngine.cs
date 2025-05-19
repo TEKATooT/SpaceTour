@@ -27,8 +27,8 @@ namespace Player
         private float _defaultDifference = 1;
         private float _deadHight = 0.45f;
 
-        public event Action GetBoost;
-        public event Action LoseBoost;
+        public event Action GetBoosted;
+        public event Action LoseBoosted;
 
         public float StrafeSpeed => _strafeSpeed;
 
@@ -61,7 +61,7 @@ namespace Player
 
         public void UpBoost()
         {
-            GetBoost?.Invoke();
+            GetBoosted?.Invoke();
 
             _audioSource.Play();
 
@@ -83,7 +83,7 @@ namespace Player
                 _destroyEffect.gameObject.SetActive(true);
                 _destroyEffect.transform.parent = null;
 
-                LoseBoost?.Invoke();
+                LoseBoosted?.Invoke();
             }
         }
 
