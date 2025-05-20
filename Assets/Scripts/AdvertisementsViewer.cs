@@ -5,16 +5,27 @@ namespace Scripts
 {
     public class AdvertisementsViewer : MonoBehaviour
     {
-        private static int s_gameCycle;
+        private static long s_timeShowAd;
+        private static bool s_isFirsStart = true;
 
-        private int _frequencyAdShow = 3;
+        private long _adDelay = 61000;
 
-        public void ShowFullSreenAd()
+        private void Start()
         {
-            s_gameCycle++;
+            TryShowFullSreenAd();
+        }
 
-            if (s_gameCycle % _frequencyAdShow == 0)
+        public void TryShowFullSreenAd()
+        {
+            if (s_timeShowAd < YandexGame.ServerTime() && !s_isFirsStart)
+            {
                 YandexGame.FullscreenShow();
+
+                s_timeShowAd = YandexGame.ServerTime() + _adDelay;
+            }
+
+            if (s_isFirsStart)
+                s_isFirsStart = false;
         }
     }
 }

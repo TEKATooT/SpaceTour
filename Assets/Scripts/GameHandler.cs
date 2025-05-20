@@ -11,6 +11,7 @@ namespace Scripts
 
         private int _timeBeforeStoppingGame = 1;
         private bool _isLoseGame = false;
+        private bool _isAdOpen = false;
 
         private readonly float _normalTime = 1f;
         private readonly float _stopTime = 0f;
@@ -18,6 +19,8 @@ namespace Scripts
         private void OnEnable()
         {
             YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
+            YandexGame.OpenFullAdEvent += FullAdOpened;
+            YandexGame.CloseFullAdEvent += ResumeGame;
 
             _player.LoseBoosted += LoseGame;
         }
@@ -25,6 +28,8 @@ namespace Scripts
         private void OnDisable()
         {
             YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
+            YandexGame.OpenFullAdEvent -= FullAdOpened;
+            YandexGame.CloseFullAdEvent -= FullAdClosed;
 
             _player.LoseBoosted -= LoseGame;
 
@@ -33,8 +38,10 @@ namespace Scripts
 
         private void OnVisibilityWindowGame(bool isVisible)
         {
-            if (isVisible && _isLoseGame == false)
+            if (isVisible && !_isAdOpen && !_isLoseGame)
                 ResumeGame();
+            else if (isVisible && !_isAdOpen)
+                AudioListener.pause = false;
             else
                 StopGame();
         }
@@ -43,6 +50,20 @@ namespace Scripts
         {
             AudioListener.pause = false;
             Time.timeScale = _normalTime;
+        }
+
+        private void FullAdOpened()
+        {
+            _isAdOpen = true;
+
+            StopGame();
+        }
+        
+        private void FullAdClosed()
+        {
+            _isAdOpen = false;
+
+            ResumeGame();
         }
 
         private void StopGame()

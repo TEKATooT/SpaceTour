@@ -576,6 +576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2098246709}
   _gameOverPanel: {fileID: 1346545051}
+  _advertisementsViewer: {fileID: 207945960}
 --- !u!114 &207945959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3251,7 +3252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreCounter: {fileID: 207945959}
-  _advertisementsViewer: {fileID: 207945960}
   _newRecord: {fileID: 53369891}
   _authDialog: {fileID: 2108911198}
   _notNewRecord: {fileID: 1255096884}

@@ -21,6 +21,8 @@ namespace Planets
         private int _maxPositionX = 5;
         private int _startSpawnQuantuty = 5;
 
+        private float _lastPositon = 10;
+
         private readonly int _oneSpawnQuantuty = 1;
 
         private void Awake()
@@ -54,9 +56,24 @@ namespace Planets
         {
             float positionX = Random.Range(_minPositionX, _maxPositionX);
 
+            if (_lastPositon == positionX)
+                positionX = RerollPosition(_lastPositon);
+
             _nextPosition = new Vector3(positionX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
 
+            _lastPositon = positionX;
+
             return _nextPosition;
+        }
+
+        private float RerollPosition(float lastPositon)
+        {
+            float newPosition = Random.Range(_minPositionX, _maxPositionX);
+
+            while (lastPositon == newPosition)
+                newPosition = Random.Range(_minPositionX, _maxPositionX);
+
+            return newPosition;
         }
 
         private void Loop()

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
 using Scripts;
-using System.Threading.Tasks;
 using System.Collections;
 
 namespace UI
@@ -10,7 +9,6 @@ namespace UI
     public class LossMenu : MonoBehaviour
     {
         [SerializeField] private ScoreCounter _scoreCounter;
-        [SerializeField] private AdvertisementsViewer _advertisementsViewer;
         [SerializeField] private GameObject _newRecord;
         [SerializeField] private GameObject _authDialog;
         [SerializeField] private GameObject _notNewRecord;
@@ -31,8 +29,6 @@ namespace UI
 
         public void RestartGameButton()
         {
-            _advertisementsViewer.ShowFullSreenAd();
-
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
