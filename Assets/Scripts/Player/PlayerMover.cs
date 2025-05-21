@@ -50,26 +50,9 @@ namespace Player
             OnStrafeMove();
         }
 
-        public void StrafeMoveForMobile(int vector)
+        private void AnimatiorOff()
         {
-            _strafeDirection = new Vector2(vector, 0);
-        }
-
-        public void ForwardMoveForMobile()
-        {
-            _strafeDirection = _forwardMove;
-        }
-
-        private void OnStrafeMove()
-        {
-            if (YandexGame.EnvironmentData.isDesktop)
-            {
-                _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
-            }
-
-            _transform.Translate(_strafeDirection * _engine.StrafeSpeed * Time.deltaTime);
-
-            AcceptTilt();
+            _animator.enabled = false;
         }
 
         private void AcceptTilt()
@@ -86,9 +69,24 @@ namespace Player
             _transform.Rotate(_tiltRotation);
         }
 
-        private void AnimatiorOff()
+        private void OnStrafeMove()
         {
-            _animator.enabled = false;
+            if (YandexGame.EnvironmentData.isDesktop)
+                _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
+
+            _transform.Translate(_strafeDirection * _engine.StrafeSpeed * Time.deltaTime);
+
+            AcceptTilt();
+        }
+
+        public void OnStrafeMoveMobileButton(int vector)
+        {
+            _strafeDirection = new Vector2(vector, 0);
+        }
+
+        public void OnStrafeStopMobileButton()
+        {
+            _strafeDirection = _forwardMove;
         }
     }
 }

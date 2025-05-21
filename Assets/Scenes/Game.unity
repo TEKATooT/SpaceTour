@@ -576,7 +576,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2098246709}
   _gameOverPanel: {fileID: 1346545051}
-  _advertisementsViewer: {fileID: 207945960}
 --- !u!114 &207945959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,7 +810,7 @@ GameObject:
   - component: {fileID: 379297902}
   - component: {fileID: 379297901}
   m_Layer: 5
-  m_Name: MainMenu
+  m_Name: MainMenu(Button)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,7 +882,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1346545055}
         m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
-        m_MethodName: LoadMainMenuButton
+        m_MethodName: OnLoadMainMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2704,8 +2703,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 540734432}
-        m_TargetAssemblyTypeName: MasterVolume, Assembly-CSharp
-        m_MethodName: ToggleVolume
+        m_TargetAssemblyTypeName: UI.MasterVolume, Assembly-CSharp
+        m_MethodName: OnVolumeToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3268,7 +3267,7 @@ GameObject:
   - component: {fileID: 1376153488}
   - component: {fileID: 1376153487}
   m_Layer: 5
-  m_Name: RestartGame
+  m_Name: RestartGame(Button)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3340,7 +3339,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1346545055}
         m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
-        m_MethodName: RestartGameButton
+        m_MethodName: OnRestartGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8430,8 +8429,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2098246717}
-          m_TargetAssemblyTypeName: PlayerMover, Assembly-CSharp
-          m_MethodName: StrafeMoveForMobile
+          m_TargetAssemblyTypeName: Player.PlayerMover, Assembly-CSharp
+          m_MethodName: OnStrafeMoveMobileButton
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8446,8 +8445,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2098246717}
-          m_TargetAssemblyTypeName: PlayerMover, Assembly-CSharp
-          m_MethodName: ForwardMoveForMobile
+          m_TargetAssemblyTypeName: Player.PlayerMover, Assembly-CSharp
+          m_MethodName: OnStrafeStopMobileButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8689,8 +8688,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2098246717}
-          m_TargetAssemblyTypeName: PlayerMover, Assembly-CSharp
-          m_MethodName: StrafeMoveForMobile
+          m_TargetAssemblyTypeName: Player.PlayerMover, Assembly-CSharp
+          m_MethodName: OnStrafeMoveMobileButton
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8705,8 +8704,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2098246717}
-          m_TargetAssemblyTypeName: PlayerMover, Assembly-CSharp
-          m_MethodName: ForwardMoveForMobile
+          m_TargetAssemblyTypeName: Player.PlayerMover, Assembly-CSharp
+          m_MethodName: OnStrafeStopMobileButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9067,8 +9066,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 540734432}
-        m_TargetAssemblyTypeName: MasterVolume, Assembly-CSharp
-        m_MethodName: VolumeChanges
+        m_TargetAssemblyTypeName: UI.MasterVolume, Assembly-CSharp
+        m_MethodName: OnVolumeChanges
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9228,13 +9227,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planetSpawner: {fileID: 963194230}
-  _forwardSpeed: 3
-  _strafeSpeed: 5
-  _speedBooster: 1.05
   _particleSystem: {fileID: 1399222971}
   _destroyPlanetEffect: {fileID: 94961282}
   _destroyEffect: {fileID: 686617048}
   _audioSource: {fileID: 2098246719}
+  _forwardSpeed: 3
+  _strafeSpeed: 5
+  _speedBooster: 1.05
 --- !u!65 &2098246710
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9565,7 +9564,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1346545055}
         m_TargetAssemblyTypeName: UI.LossMenu, Assembly-CSharp
-        m_MethodName: AuthorizationDialogButton
+        m_MethodName: OnAuthorizationDialogButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

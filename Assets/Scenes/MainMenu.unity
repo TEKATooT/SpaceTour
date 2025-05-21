@@ -1205,8 +1205,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1146120114}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: StartGameButton
+        m_TargetAssemblyTypeName: UI.MainMenu, Assembly-CSharp
+        m_MethodName: OnStartGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7835,8 +7835,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1178251121}
-        m_TargetAssemblyTypeName: MasterVolume, Assembly-CSharp
-        m_MethodName: ToggleVolume
+        m_TargetAssemblyTypeName: UI.MasterVolume, Assembly-CSharp
+        m_MethodName: OnVolumeToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8359,7 +8359,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1146120114}
         m_TargetAssemblyTypeName: UI.MainMenu, Assembly-CSharp
-        m_MethodName: SelectDifferenceDropBar
+        m_MethodName: OnSelectDifferenceDropBar
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8716,7 +8716,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1146120114}
         m_TargetAssemblyTypeName: UI.MainMenu, Assembly-CSharp
-        m_MethodName: SelectLanguageDropBar
+        m_MethodName: OnSelectLanguageDropBar
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8867,8 +8867,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1178251121}
-        m_TargetAssemblyTypeName: MasterVolume, Assembly-CSharp
-        m_MethodName: VolumeChanges
+        m_TargetAssemblyTypeName: UI.MasterVolume, Assembly-CSharp
+        m_MethodName: OnVolumeChanges
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -26,40 +26,6 @@ namespace UI
             YandexGame.GetDataEvent -= OnAuthorization;
         }
 
-        public void RestartGameButton()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        public void LoadMainMenuButton()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
-        }
-
-        public void AuthorizationDialogButton()
-        {
-            YandexGame.AuthDialog();
-
-            YandexGame.GetDataEvent += OnAuthorization;
-        }
-
-        private void OnAuthorization()
-        {
-            YandexGame.LoadCloud();
-
-            _authDialog.SetActive(false);
-
-            StartCoroutine(nameof(WaitLoadCloud));
-        }
-
-        private IEnumerator WaitLoadCloud()
-        {
-            yield return _delayForLoadCloud;
-
-            if (!CheckBestResult())
-                _notNewRecord.SetActive(true);
-        }
-
         private bool CheckBestResult()
         {
             if (YandexGame.auth && CheckCloudRecord())
@@ -91,6 +57,40 @@ namespace UI
 
             YandexGame.savesData.ScoreSave[MainMenu.CorrectDifference.ToString()] = _scoreCounter.PlayerScore;
             YandexGame.SaveProgress();
+        }
+
+        private IEnumerator WaitLoadCloud()
+        {
+            yield return _delayForLoadCloud;
+
+            if (!CheckBestResult())
+                _notNewRecord.SetActive(true);
+        }
+
+        private void OnAuthorization()
+        {
+            YandexGame.LoadCloud();
+
+            _authDialog.SetActive(false);
+
+            StartCoroutine(nameof(WaitLoadCloud));
+        }
+
+        public void OnRestartGameButton()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void OnLoadMainMenuButton()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - One);
+        }
+
+        public void OnAuthorizationDialogButton()
+        {
+            YandexGame.AuthDialog();
+
+            YandexGame.GetDataEvent += OnAuthorization;
         }
     }
 }

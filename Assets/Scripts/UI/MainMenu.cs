@@ -54,13 +54,13 @@ namespace UI
             if (!s_isFirstStart)
             {
                 VolumeCorrect();
-                SelectLanguageDropBar((int)CorrectLanguage);
-                SelectDifferenceDropBar((int)CorrectDifference);
+                OnSelectLanguageDropBar((int)CorrectLanguage);
+                OnSelectDifferenceDropBar((int)CorrectDifference);
             }
             else
             {
                 ApplyYandexLanguage();
-                SelectDifferenceDropBar(Second);
+                OnSelectDifferenceDropBar(Second);
 
                 s_isFirstStart = false;
             }
@@ -71,15 +71,37 @@ namespace UI
             YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
         }
 
-        public void StartGameButton()
+        private void VolumeCorrect()
         {
-            Volume = _volume.value;
-            IsMute = _mute.isOn;
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Second);
+            _volume.value = Volume;
+            _mute.isOn = IsMute;
         }
 
-        public void SelectLanguageDropBar(int index)
+        private void ApplyYandexLanguage()
+        {
+            if (YandexGame.EnvironmentData.language == TurkishYaCode)
+                OnSelectLanguageDropBar(Third);
+            else if (YandexGame.EnvironmentData.language == RussianYaCode)
+                OnSelectLanguageDropBar(Second);
+            else
+                OnSelectLanguageDropBar(First);
+        }
+
+        private void SetLanguage(Language language, int index)
+        {
+            Lean.Localization.LeanLocalization.SetCurrentLanguageAll(language.ToString());
+            CorrectLanguage = language;
+            _selectLanguageDropBar.value = index;
+        }
+
+        private void SetDifference(Difference difference, int index)
+        {
+            _leaderboardYG.SetNameLB(difference.ToString());
+            CorrectDifference = difference;
+            _selectDifferenceDropBar.value = index;
+        }
+
+        public void OnSelectLanguageDropBar(int index)
         {
             switch (index)
             {
@@ -97,7 +119,7 @@ namespace UI
             }
         }
 
-        public void SelectDifferenceDropBar(int index)
+        public void OnSelectDifferenceDropBar(int index)
         {
             switch (index)
             {
@@ -117,34 +139,12 @@ namespace UI
             _leaderboardYG.UpdateLB();
         }
 
-        private void SetLanguage(Language language, int index)
+        public void OnStartGameButton()
         {
-            Lean.Localization.LeanLocalization.SetCurrentLanguageAll(language.ToString());
-            CorrectLanguage = language;
-            _selectLanguageDropBar.value = index;
-        }
+            Volume = _volume.value;
+            IsMute = _mute.isOn;
 
-        private void SetDifference(Difference difference, int index)
-        {
-            _leaderboardYG.SetNameLB(difference.ToString());
-            CorrectDifference = difference;
-            _selectDifferenceDropBar.value = index;
-        }
-
-        private void ApplyYandexLanguage()
-        {
-            if (YandexGame.EnvironmentData.language == TurkishYaCode)
-                SelectLanguageDropBar(Third);
-            else if (YandexGame.EnvironmentData.language == RussianYaCode)
-                SelectLanguageDropBar(Second);
-            else
-                SelectLanguageDropBar(First);
-        }
-
-        private void VolumeCorrect()
-        {
-            _volume.value = Volume;
-            _mute.isOn = IsMute;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Second);
         }
 
         private void OnVisibilityWindowGame(bool isVisible)

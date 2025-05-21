@@ -5,6 +5,8 @@ namespace UI
 {
     public class MasterVolume : MonoBehaviour
     {
+        private const string MaestroVolume = "MasterVolume";
+
         private readonly float _minVolume = -80;
         private readonly float _maxVolume = 0;
 
@@ -15,18 +17,9 @@ namespace UI
 
         private bool _isSaund = true;
 
-        public void ToggleVolume()
+        public void PlaySaund(AudioSource audioSource)
         {
-            if (!_isSaund)
-                _mixerGroup.audioMixer.SetFloat("MasterVolume", _nowVolume);
-            else
-            {
-                _mixerGroup.audioMixer.GetFloat("MasterVolume", out float volume);
-                _mixerGroup.audioMixer.SetFloat("MasterVolume", _minVolume);
-                _nowVolume = volume;
-            }
-
-            _isSaund = !_isSaund;
+            audioSource.PlayOneShot(audioSource.clip);
         }
 
         public void SetSoundType(string soundType)
@@ -34,22 +27,33 @@ namespace UI
             _soundType = soundType;
         }
 
-        public void VolumeChanges(float volume)
+        public void OnVolumeChanges(float volume)
         {
             float nowVolume = _nowVolume;
 
             if (!_isSaund)
-                _mixerGroup.audioMixer.SetFloat("MasterVolume", _minVolume);
+                _mixerGroup.audioMixer.SetFloat(MaestroVolume, _minVolume);
             else
                 _mixerGroup.audioMixer.SetFloat(_soundType, nowVolume = Mathf.Lerp(_minVolume, _maxVolume, volume));
 
-            if (_soundType == "MasterVolume")
+            if (_soundType == MaestroVolume)
                 _nowVolume = nowVolume;
         }
 
-        public void PlaySaund(AudioSource audioSource)
+        public void OnVolumeToggle()
         {
-            audioSource.PlayOneShot(audioSource.clip);
+            if (!_isSaund)
+            {
+                _mixerGroup.audioMixer.SetFloat(MaestroVolume, _nowVolume);
+            }
+            else
+            {
+                _mixerGroup.audioMixer.GetFloat(MaestroVolume, out float volume);
+                _mixerGroup.audioMixer.SetFloat(MaestroVolume, _minVolume);
+                _nowVolume = volume;
+            }
+
+            _isSaund = !_isSaund;
         }
     }
 }
