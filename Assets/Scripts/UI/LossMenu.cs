@@ -1,21 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
-using Scripts;
 using System.Collections;
 
 namespace UI
 {
     public class LossMenu : MonoBehaviour
     {
+        private const int One = 1;
+
         [SerializeField] private ScoreCounter _scoreCounter;
         [SerializeField] private GameObject _newRecord;
         [SerializeField] private GameObject _authDialog;
         [SerializeField] private GameObject _notNewRecord;
 
         private WaitForSecondsRealtime _delayForLoadCloud = new WaitForSecondsRealtime(2f);
-
-        private const int One = 1;
 
         private void OnEnable()
         {

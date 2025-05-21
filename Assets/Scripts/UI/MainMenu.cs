@@ -8,14 +8,6 @@ namespace UI
 {
     public class MainMenu : MonoBehaviour
     {
-        [SerializeField] private Scrollbar _volume;
-        [SerializeField] private Toggle _mute;
-
-        [SerializeField] private TMP_Dropdown _selectLanguageDropBar;
-        [SerializeField] private TMP_Dropdown _selectDifferenceDropBar;
-
-        [SerializeField] private LeaderboardYG _leaderboardYG;
-
         static public bool IsMute;
         static public float Volume;
         static public Language CorrectLanguage;
@@ -33,6 +25,14 @@ namespace UI
 
         private readonly float _normalTime = 1f;
         private readonly float _stopTime = 0f;
+
+        [SerializeField] private Scrollbar _volume;
+        [SerializeField] private Toggle _mute;
+
+        [SerializeField] private TMP_Dropdown _selectLanguageDropBar;
+        [SerializeField] private TMP_Dropdown _selectDifferenceDropBar;
+
+        [SerializeField] private LeaderboardYG _leaderboardYG;
 
         public enum Language
         {

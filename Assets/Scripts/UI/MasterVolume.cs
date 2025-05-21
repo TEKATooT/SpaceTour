@@ -5,13 +5,15 @@ namespace UI
 {
     public class MasterVolume : MonoBehaviour
     {
+        private readonly float _minVolume = -80;
+        private readonly float _maxVolume = 0;
+
         [SerializeField] private AudioMixerGroup _mixerGroup;
 
-        private string _soundType;
-        private bool _isSaund = true;
-        private float _minVolume = -80;
-        private float _maxVolume = 0;
         private float _nowVolume;
+        private string _soundType;
+
+        private bool _isSaund = true;
 
         public void ToggleVolume()
         {

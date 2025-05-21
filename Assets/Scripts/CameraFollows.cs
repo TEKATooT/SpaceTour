@@ -6,15 +6,15 @@ namespace Scripts
 {
     public class CameraFollows : MonoBehaviour
     {
+        private readonly float _defaultView = 90;
+        private readonly float _zoomViewForLandScape = 55;
+
         [SerializeField] private PlayerMover _player;
         [SerializeField] private float _zOffset = -9f;
 
         private Transform _transform;
         private Vector3 _position;
-
         private Camera _camera;
-        private float _defaultView = 90;
-        private float _zoomViewForLandScape = 55;
 
         private void Start()
         {

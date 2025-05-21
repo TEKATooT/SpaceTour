@@ -9,6 +9,7 @@ namespace Planets
         [SerializeField] private Planet _planet;
 
         private ObjectPool<Planet> _planetsPool;
+
         private int _minSize = 50;
         private int _maxSize = 51;
 

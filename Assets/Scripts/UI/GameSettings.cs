@@ -7,14 +7,15 @@ namespace UI
 {
     public class GameSettings : MonoBehaviour
     {
+        private readonly float _midleDifference = 1;
+        private readonly float _lowDifference = 1.5f;
+        private readonly float _hightDifference = 0.5f;
+
         [SerializeField] private Scrollbar _volume;
         [SerializeField] private Toggle _mute;
         [SerializeField] private GameObject _buttonsForMobile;
         [SerializeField] private PlayerEngine _player;
 
-        private readonly float _midleDifference = 1;
-        private readonly float _lowDifference = 1.5f;
-        private readonly float _hightDifference = 0.5f;
         private float _correntDifference;
 
         private void OnEnable()

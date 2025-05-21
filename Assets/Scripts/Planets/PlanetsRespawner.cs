@@ -6,6 +6,12 @@ namespace Planets
     [RequireComponent(typeof(Pool))]
     public class PlanetsRespawner : MonoBehaviour
     {
+        private readonly int _minPositionX = -5;
+        private readonly int _maxPositionX = 5;
+        private readonly int _startSpawnQuantuty = 5;
+        private readonly int _oneSpawnQuantuty = 1;
+        private readonly float _offsetZPosition = 4f;
+
         [SerializeField] private ParticleSystem _destroyEffect;
 
         private Pool _pool;
@@ -15,15 +21,7 @@ namespace Planets
 
         private Vector3 _nextPosition;
 
-        private float _offsetZPosition = 4f;
-
-        private int _minPositionX = -5;
-        private int _maxPositionX = 5;
-        private int _startSpawnQuantuty = 5;
-
         private float _lastPositon = 10;
-
-        private readonly int _oneSpawnQuantuty = 1;
 
         private void Awake()
         {

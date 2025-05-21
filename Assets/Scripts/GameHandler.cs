@@ -6,21 +6,21 @@ namespace Scripts
 {
     public class GameHandler : MonoBehaviour
     {
+        private readonly float _normalTime = 1f;
+        private readonly float _stopTime = 0f;
+        private readonly int _timeBeforeStoppingGame = 1;
+
         [SerializeField] private PlayerEngine _player;
         [SerializeField] private GameObject _gameOverPanel;
 
-        private int _timeBeforeStoppingGame = 1;
         private bool _isLoseGame = false;
         private bool _isAdOpen = false;
-
-        private readonly float _normalTime = 1f;
-        private readonly float _stopTime = 0f;
 
         private void OnEnable()
         {
             YandexGame.onVisibilityWindowGame += OnVisibilityWindowGame;
-            YandexGame.OpenFullAdEvent += FullAdOpened;
-            YandexGame.CloseFullAdEvent += ResumeGame;
+            YandexGame.OpenFullAdEvent += OnAdOpen;
+            YandexGame.CloseFullAdEvent += OnAdClose;
 
             _player.LoseBoosted += LoseGame;
         }
@@ -28,42 +28,18 @@ namespace Scripts
         private void OnDisable()
         {
             YandexGame.onVisibilityWindowGame -= OnVisibilityWindowGame;
-            YandexGame.OpenFullAdEvent -= FullAdOpened;
-            YandexGame.CloseFullAdEvent -= FullAdClosed;
+            YandexGame.OpenFullAdEvent -= OnAdOpen;
+            YandexGame.CloseFullAdEvent -= OnAdClose;
 
             _player.LoseBoosted -= LoseGame;
 
             ResumeGame();
         }
 
-        private void OnVisibilityWindowGame(bool isVisible)
-        {
-            if (isVisible && !_isAdOpen && !_isLoseGame)
-                ResumeGame();
-            else if (isVisible && !_isAdOpen)
-                AudioListener.pause = false;
-            else
-                StopGame();
-        }
-
         private void ResumeGame()
         {
             AudioListener.pause = false;
             Time.timeScale = _normalTime;
-        }
-
-        private void FullAdOpened()
-        {
-            _isAdOpen = true;
-
-            StopGame();
-        }
-        
-        private void FullAdClosed()
-        {
-            _isAdOpen = false;
-
-            ResumeGame();
         }
 
         private void StopGame()
@@ -84,6 +60,30 @@ namespace Scripts
         private void StopTime()
         {
             Time.timeScale = _stopTime;
+        }
+
+        private void OnVisibilityWindowGame(bool isVisible)
+        {
+            if (isVisible && !_isAdOpen && !_isLoseGame)
+                ResumeGame();
+            else if (isVisible && !_isAdOpen)
+                AudioListener.pause = false;
+            else
+                StopGame();
+        }
+
+        private void OnAdOpen()
+        {
+            _isAdOpen = true;
+
+            StopGame();
+        }
+        
+        private void OnAdClose()
+        {
+            _isAdOpen = false;
+
+            ResumeGame();
         }
     }
 }

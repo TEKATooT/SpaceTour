@@ -12,6 +12,7 @@ namespace UI
         [SerializeField] private ScoreScaler _scoreScaler;
 
         private int _playerScore = 0;
+
         public int PlayerScore => _playerScore;
 
         private void OnEnable()

@@ -7,21 +7,20 @@ namespace Player
     [RequireComponent(typeof(Animator))]
     public class PlayerMover : MonoBehaviour
     {
+        private readonly float _timeLimitAnimation = 2;
+
         private PlayerEngine _engine;
         private PlayerInput _input;
         private Transform _transform;
+        private Animator _animator;
 
-        private Vector2 _strafeDirection;
-
+        private Vector3 _forwardMove = new Vector2(0, 0);
         private Vector3 _leftTilt = new Vector3(0, 0, -35);
         private Vector3 _rightTilt = new Vector3(0, 0, 35);
         private Vector3 _noTilt = new Vector3(0, 0, 0);
 
+        private Vector2 _strafeDirection;
         private Vector3 _tiltRotation;
-        private Vector3 _forwardMove = new Vector2(0, 0);
-        private Animator _animator;
-
-        private float _timeLimitAnimation = 2;
 
         private void Awake()
         {

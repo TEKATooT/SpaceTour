@@ -7,20 +7,21 @@ namespace Planets
 {
     public class Planet : MonoBehaviour
     {
+        private readonly float _minRotationSpeed = -500f;
+        private readonly float _maxRotationSpeed = 500f;
+        private readonly float _minAngle = -180f;
+        private readonly float _maxRAngle = 180f;
+
         [SerializeField] private ModelPlanet[] _planets;
 
         private ModelPlanet _planet;
 
-        private float _minRotationSpeed = -500f;
-        private float _maxRotationSpeed = 500f;
+        private float _randomAngle;
         private float _randomRotationSpeed;
 
-        private float _minAngle = -180f;
-        private float _maxRAngle = 180f;
-        private float _randomAngle;
+        private Vector3 _defaultSize;
 
         private bool _isFirstPlanet = true;
-        private Vector3 _defaultSize;
 
         public event Action Destroyed;
 

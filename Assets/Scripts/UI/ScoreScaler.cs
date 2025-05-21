@@ -4,13 +4,13 @@ namespace UI
 {
     public class ScoreScaler : MonoBehaviour
     {
-        private RectTransform _score;
+        private readonly float _delay = 0.25f;
 
         private Vector3 _bigSize = new Vector3(2.5f, 2.5f, 2.5f);
         private Vector3 _lowSize = new Vector3(0.5f, 0.5f, 0.5f);
-
+        
+        private RectTransform _score;
         private float _timeIncrease;
-        private float _delay = 0.25f;
 
         private void Start()
         {

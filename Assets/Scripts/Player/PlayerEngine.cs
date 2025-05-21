@@ -6,17 +6,19 @@ namespace Player
 {
     public class PlayerEngine : MonoBehaviour
     {
-        [SerializeField] private PlanetsRespawner _planetSpawner;
+        private readonly float _startAccelerateSpeed = 1f;
+        private readonly float _defaultDifference = 1;
+        private readonly float _deadHight = 0.45f;
 
-        [SerializeField] private float _forwardSpeed = 3f;
-        [SerializeField] private float _strafeSpeed = 5f;
-        [SerializeField] private float _speedBooster = 1.05f;
+        [SerializeField] private PlanetsRespawner _planetSpawner;
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private ParticleSystem _destroyPlanetEffect;
         [SerializeField] private ParticleSystem _destroyEffect;
         [SerializeField] private AudioSource _audioSource;
 
-        private readonly float _startAccelerateSpeed = 1f;
+        [SerializeField] private float _forwardSpeed = 3f;
+        [SerializeField] private float _strafeSpeed = 5f;
+        [SerializeField] private float _speedBooster = 1.05f;
 
         private ParticleSystem.MainModule _mainParticleSystem;
         private Transform _transform;
@@ -24,8 +26,6 @@ namespace Player
         private Vector3 _deadLine;
 
         private float _accelerateSpeedFrequency;
-        private float _defaultDifference = 1;
-        private float _deadHight = 0.45f;
 
         public event Action GetBoosted;
         public event Action LoseBoosted;
