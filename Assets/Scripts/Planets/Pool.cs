@@ -13,8 +13,6 @@ namespace Planets
         private int _minSize = 50;
         private int _maxSize = 51;
 
-        public event Action PlanetCreated;
-
         private void Awake()
         {
             _planetsPool = CreatePool(_planet);
@@ -35,8 +33,6 @@ namespace Planets
         public Planet GetPlanet()
         {
             Planet newPlanet = _planetsPool.Get();
-
-            PlanetCreated?.Invoke();
 
             return newPlanet;
         }

@@ -17,11 +17,6 @@ namespace UI
 
         private bool _isSaund = true;
 
-        public void PlaySaund(AudioSource audioSource)
-        {
-            audioSource.PlayOneShot(audioSource.clip);
-        }
-
         public void SetSoundType(string soundType)
         {
             _soundType = soundType;

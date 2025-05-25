@@ -16,12 +16,9 @@ namespace Planets
         private ModelPlanet[] _planets;
 
         private ModelPlanet _planet;
-
-        private float _randomAngle;
-        private float _randomRotationSpeed;
-
         private Vector3 _defaultSize;
 
+        private float _randomRotationSpeed;
         private bool _isFirstPlanet = true;
 
         public event Action Destroyed;
@@ -62,8 +59,10 @@ namespace Planets
 
         private void MakeRandomPlanetAngles()
         {
+            float randomAngle;
+
             _randomRotationSpeed = UnityEngine.Random.Range(_minRotationSpeed, _maxRotationSpeed);
-            _randomAngle = UnityEngine.Random.Range(_minAngle, _maxRAngle);
+            randomAngle = UnityEngine.Random.Range(_minAngle, _maxRAngle);
 
             transform.Rotate(_randomRotationSpeed, transform.rotation.y, transform.rotation.z);
         }
