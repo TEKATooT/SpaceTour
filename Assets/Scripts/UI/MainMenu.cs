@@ -1,27 +1,26 @@
-using TMPro;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using YG;
-
 namespace UI
 {
+    using TMPro;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
+    using YG;
+
     public class MainMenu : MonoBehaviour
     {
+        private const int First = 0;
+        private const int Second = 1;
+        private const int Third = 2;
+
+        private const string RussianYaCode = "ru";
+        private const string TurkishYaCode = "tr";
+
         static public bool IsMute;
         static public float Volume;
         static public Language CorrectLanguage;
         static public Difference CorrectDifference;
 
         static private bool s_isFirstStart = true;
-
-        private const string EnglishYaCode = "en";
-        private const string RussianYaCode = "ru";
-        private const string TurkishYaCode = "tr";
-
-        private const int First = 0;
-        private const int Second = 1;
-        private const int Third = 2;
 
         private readonly float _normalTime = 1f;
         private readonly float _stopTime = 0f;
@@ -36,12 +35,16 @@ namespace UI
 
         public enum Language
         {
-            English, Russian, Turkish
+            English,
+            Russian,
+            Turkish
         }
 
         public enum Difference
         {
-            Low, Midle, High
+            Low,
+            Midle,
+            High
         }
 
         private void OnEnable()

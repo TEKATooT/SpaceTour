@@ -1,9 +1,9 @@
-using System;
-using UnityEngine;
-using Planets;
-
 namespace Player
 {
+    using Planets;
+    using System;
+    using UnityEngine;
+
     public class PlayerEngine : MonoBehaviour
     {
         private readonly float _startAccelerateSpeed = 1f;
@@ -28,6 +28,7 @@ namespace Player
         private float _accelerateSpeedFrequency;
 
         public event Action GetBoosted;
+
         public event Action LoseBoosted;
 
         public float StrafeSpeed => _strafeSpeed;

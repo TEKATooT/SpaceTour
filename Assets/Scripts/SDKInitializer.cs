@@ -1,9 +1,9 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using YG;
-
 namespace Scripts
 {
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using YG;
+
     public sealed class SDKInitializer : MonoBehaviour
     {
         private void Awake()

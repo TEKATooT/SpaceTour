@@ -1,8 +1,8 @@
-using UnityEngine;
-using UnityEngine.Audio;
-
 namespace UI
 {
+    using UnityEngine;
+    using UnityEngine.Audio;
+
     public class MasterVolume : MonoBehaviour
     {
         private const string MaestroVolume = "MasterVolume";

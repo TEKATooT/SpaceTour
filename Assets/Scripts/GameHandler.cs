@@ -1,17 +1,19 @@
-using UnityEngine;
-using YG;
-using Player;
-
 namespace Scripts
 {
+    using Player;
+    using UnityEngine;
+    using YG;
+
     public class GameHandler : MonoBehaviour
     {
         private readonly float _normalTime = 1f;
         private readonly float _stopTime = 0f;
         private readonly int _timeBeforeStoppingGame = 1;
 
-        [SerializeField] private PlayerEngine _player;
-        [SerializeField] private GameObject _gameOverPanel;
+        [SerializeField]
+        private PlayerEngine _player;
+        [SerializeField]
+        private GameObject _gameOverPanel;
 
         private bool _isLoseGame = false;
         private bool _isAdOpen = false;
@@ -65,11 +67,17 @@ namespace Scripts
         private void OnVisibilityWindowGame(bool isVisible)
         {
             if (isVisible && !_isAdOpen && !_isLoseGame)
+            {
                 ResumeGame();
+            }
             else if (isVisible && !_isAdOpen)
+            {
                 AudioListener.pause = false;
+            }
             else
+            {
                 StopGame();
+            }
         }
 
         private void OnAdOpen()
@@ -78,7 +86,7 @@ namespace Scripts
 
             StopGame();
         }
-        
+
         private void OnAdClose()
         {
             _isAdOpen = false;

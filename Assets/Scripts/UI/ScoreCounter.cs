@@ -1,10 +1,9 @@
-using TMPro;
-using UnityEngine;
-using YG;
-using Player;
-
 namespace UI
 {
+    using Player;
+    using TMPro;
+    using UnityEngine;
+
     public class ScoreCounter : MonoBehaviour
     {
         [SerializeField] private PlayerEngine _player;
@@ -17,15 +16,15 @@ namespace UI
 
         private void OnEnable()
         {
-            _player.GetBoosted += AddPoint;
+            _player.GetBoosted += OnAddPoint;
         }
 
         private void OnDisable()
         {
-            _player.GetBoosted -= AddPoint;
+            _player.GetBoosted -= OnAddPoint;
         }
 
-        private void AddPoint()
+        private void OnAddPoint()
         {
             _playerScore++;
 

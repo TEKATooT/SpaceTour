@@ -1,8 +1,8 @@
-using UnityEngine;
-using YG;
-
 namespace Player
 {
+    using UnityEngine;
+    using YG;
+
     [RequireComponent(typeof(PlayerEngine))]
     [RequireComponent(typeof(Animator))]
     public class PlayerMover : MonoBehaviour
@@ -59,10 +59,8 @@ namespace Player
         {
             if (_strafeDirection.x > 0f)
                 _tiltRotation = _leftTilt;
-
             else if (_strafeDirection.x < 0f)
                 _tiltRotation = _rightTilt;
-
             else if (_strafeDirection.y == 0f)
                 _tiltRotation = _noTilt;
 
@@ -74,7 +72,7 @@ namespace Player
             if (YandexGame.EnvironmentData.isDesktop)
                 _strafeDirection = _input.Player.Move.ReadValue<Vector2>();
 
-            _transform.Translate(_strafeDirection * _engine.StrafeSpeed * Time.deltaTime);
+            _transform.Translate((_strafeDirection * _engine.StrafeSpeed) * Time.deltaTime);
 
             AcceptTilt();
         }

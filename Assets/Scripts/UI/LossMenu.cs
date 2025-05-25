@@ -1,10 +1,10 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using YG;
-using System.Collections;
-
 namespace UI
 {
+    using System.Collections;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using YG;
+
     public class LossMenu : MonoBehaviour
     {
         private const int One = 1;

@@ -1,7 +1,7 @@
-using UnityEngine;
-
 namespace Planets
 {
+    using UnityEngine;
+
     public class ModelPlanet : MonoBehaviour
     {
         private readonly float _visible = 1.1f;
@@ -44,9 +44,9 @@ namespace Planets
             foreach (var material in _defaultsMaterials)
             {
                 Color newColor = material.color;
-                float _alfa = material.color.a;
+                float alfa = material.color.a;
 
-                float newAlfa = Mathf.Lerp(_alfa, _visible, _speedToVisible * Time.deltaTime);
+                float newAlfa = Mathf.Lerp(alfa, _visible, _speedToVisible * Time.deltaTime);
 
                 newColor.a = newAlfa;
 

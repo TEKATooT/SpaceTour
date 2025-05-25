@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Planets
 {
+    using System.Collections.Generic;
+    using UnityEngine;
+
     [RequireComponent(typeof(Pool))]
     public class PlanetsRespawner : MonoBehaviour
     {
@@ -12,7 +12,8 @@ namespace Planets
         private readonly int _oneSpawnQuantuty = 1;
         private readonly float _offsetZPosition = 4f;
 
-        [SerializeField] private ParticleSystem _destroyEffect;
+        [SerializeField]
+        private ParticleSystem _destroyEffect;
 
         private Pool _pool;
         private Planet _planetToTarget;
@@ -21,7 +22,7 @@ namespace Planets
 
         private Vector3 _nextPosition;
 
-        private float _lastPositon = 10;
+        private int _lastPositon = 10;
 
         private void Awake()
         {
@@ -34,7 +35,7 @@ namespace Planets
         {
             _planetToTarget = _planetInQueue.Dequeue();
 
-            _planetToTarget.Destroyed += Loop;
+            _planetToTarget.Destroyed += OnLoop;
 
             return _planetToTarget.transform.position;
         }
@@ -52,10 +53,12 @@ namespace Planets
 
         private Vector3 GetPosition()
         {
-            float positionX = Random.Range(_minPositionX, _maxPositionX);
+            int positionX = Random.Range(_minPositionX, _maxPositionX);
 
             if (_lastPositon == positionX)
+            {
                 positionX = RerollPosition(_lastPositon);
+            }
 
             _nextPosition = new Vector3(positionX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
 
@@ -64,21 +67,23 @@ namespace Planets
             return _nextPosition;
         }
 
-        private float RerollPosition(float lastPositon)
+        private int RerollPosition(int lastPositon)
         {
-            float newPosition = Random.Range(_minPositionX, _maxPositionX);
+            int newPosition = Random.Range(_minPositionX, _maxPositionX);
 
             while (lastPositon == newPosition)
+            {
                 newPosition = Random.Range(_minPositionX, _maxPositionX);
+            }
 
             return newPosition;
         }
 
-        private void Loop()
+        private void OnLoop()
         {
             DestroyEffect();
 
-            _planetToTarget.Destroyed -= Loop;
+            _planetToTarget.Destroyed -= OnLoop;
             _pool.Release(_planetToTarget);
 
             GenerateNextPlanet(_oneSpawnQuantuty);

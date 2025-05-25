@@ -1,9 +1,9 @@
-using System;
-using UnityEngine;
-using UnityEngine.Pool;
-
 namespace Planets
 {
+    using System;
+    using UnityEngine;
+    using UnityEngine.Pool;
+
     public class Pool : MonoBehaviour
     {
         [SerializeField] private Planet _planet;
@@ -22,19 +22,14 @@ namespace Planets
 
         public ObjectPool<Planet> CreatePool(Planet planet)
         {
-            return new ObjectPool<Planet>(() =>
-            {
-                return Instantiate(planet);
-            }, pollObject =>
-            {
-                pollObject.gameObject.SetActive(true);
-            }, pollObject =>
-            {
-                pollObject.gameObject.SetActive(false);
-            }, pollObject =>
-            {
-                Destroy(pollObject.gameObject);
-            }, false, _minSize, _maxSize);
+            return new ObjectPool<Planet>(
+            () => Instantiate(planet),
+            pollObject => pollObject.gameObject.SetActive(true),
+            pollObject => pollObject.gameObject.SetActive(false),
+            pollObject => Destroy(pollObject.gameObject),
+            false,
+            _minSize,
+            _maxSize);
         }
 
         public Planet GetPlanet()

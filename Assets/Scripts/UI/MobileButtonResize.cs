@@ -1,9 +1,9 @@
-using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace UI
 {
+    using System.Collections;
+    using UnityEngine;
+    using UnityEngine.UI;
+
     public class MobileButtonResize : MonoBehaviour
     {
         private readonly float _learningTime = 30f;

@@ -1,18 +1,13 @@
 {
-  "idSave": 57,
-  "isFirstSession": false,
-  "language": "ru",
-  "promptDone": false,
-  "money": 1,
-  "newPlayerName": "Hello!",
-  "openLevels": [
-    false,
-    true,
-    false
-  ],
-  "ScoreSave": {
-    "Midle": 51,
-    "High": 30,
-    "Low": 20
-  }
+    "idSave": 65,
+    "isFirstSession": false,
+    "language": "ru",
+    "promptDone": false,
+    "money": 1,
+    "newPlayerName": "Hello!",
+    "openLevels": [
+        false,
+        true,
+        false
+    ]
 }

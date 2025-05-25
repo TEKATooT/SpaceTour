@@ -1,10 +1,10 @@
-using System;
-using System.Linq;
-using UnityEngine;
-using Player;
-
 namespace Planets
 {
+    using Player;
+    using System;
+    using System.Linq;
+    using UnityEngine;
+
     public class Planet : MonoBehaviour
     {
         private readonly float _minRotationSpeed = -500f;
@@ -12,7 +12,8 @@ namespace Planets
         private readonly float _minAngle = -180f;
         private readonly float _maxRAngle = 180f;
 
-        [SerializeField] private ModelPlanet[] _planets;
+        [SerializeField]
+        private ModelPlanet[] _planets;
 
         private ModelPlanet _planet;
 
@@ -54,7 +55,9 @@ namespace Planets
             Destroyed?.Invoke();
 
             if (other.TryGetComponent(out PlayerEngine player))
+            {
                 player.UpBoost();
+            }
         }
 
         private void MakeRandomPlanetAngles()
@@ -80,22 +83,27 @@ namespace Planets
         private void ApplyInvisibleStatus()
         {
             if (!_isFirstPlanet)
+            {
                 _planet.ApplyInvisibleStatus();
+            }
             else
+            {
                 _isFirstPlanet = false;
+            }
         }
 
         private void ApplyPlanetSize(int randomSize)
         {
             int defaultSize = 1;
-
             float correctRatio = 1.3f;
             float divisor = 10f;
 
             if (randomSize <= defaultSize)
+            {
                 ++randomSize;
+            }
 
-                transform.localScale *= correctRatio + randomSize/divisor;
+            transform.localScale *= (correctRatio + randomSize / divisor);
         }
     }
 }

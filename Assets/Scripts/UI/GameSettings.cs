@@ -1,10 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
-using YG;
-using Player;
-
 namespace UI
 {
+    using Player;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using YG;
+
     public class GameSettings : MonoBehaviour
     {
         private readonly float _midleDifference = 1;
