@@ -4,15 +4,11 @@ namespace Player
     using YG;
 
     [RequireComponent(typeof(PlayerEngine))]
-    [RequireComponent(typeof(Animator))]
-    public class PlayerMover : MonoBehaviour
+    public class PlayerInputHandler : MonoBehaviour
     {
-        private readonly float _timeLimitAnimation = 2;
-
         private PlayerEngine _engine;
         private PlayerInput _input;
         private Transform _transform;
-        private Animator _animator;
 
         private Vector3 _forwardMove = new Vector2(0, 0);
         private Vector3 _leftTilt = new Vector3(0, 0, -35);
@@ -29,15 +25,11 @@ namespace Player
             _input = new PlayerInput();
 
             _transform = transform;
-
-            _animator = GetComponent<Animator>();
         }
 
         private void OnEnable()
         {
             _input.Enable();
-
-            Invoke(nameof(AnimatiorOff), _timeLimitAnimation);
         }
 
         private void OnDisable()
@@ -48,11 +40,6 @@ namespace Player
         private void Update()
         {
             OnStrafeMove();
-        }
-
-        private void AnimatiorOff()
-        {
-            _animator.enabled = false;
         }
 
         private void AcceptTilt()
@@ -67,6 +54,17 @@ namespace Player
             _transform.Rotate(_tiltRotation);
         }
 
+        public void OnStrafeMoveMobileButton(int vector)
+        {
+            _strafeDirection = new Vector2(vector, 0);
+        }
+
+        public void OnStrafeStopMobileButton()
+        {
+            if (Input.touchCount > 0)
+                _strafeDirection = _forwardMove;
+        }
+
         private void OnStrafeMove()
         {
             if (YandexGame.EnvironmentData.isDesktop)
@@ -75,16 +73,6 @@ namespace Player
             _transform.Translate((_strafeDirection * _engine.StrafeSpeed) * Time.deltaTime);
 
             AcceptTilt();
-        }
-
-        public void OnStrafeMoveMobileButton(int vector)
-        {
-            _strafeDirection = new Vector2(vector, 0);
-        }
-
-        public void OnStrafeStopMobileButton()
-        {
-            _strafeDirection = _forwardMove;
         }
     }
 }

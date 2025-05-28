@@ -61,8 +61,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameLB: MidleScoree
   maxQuantityPlayers: 20
-  quantityTop: 3
-  quantityAround: 2
+  quantityTop: 5
+  quantityAround: 3
   updateLBMethod: 1
   entriesText: {fileID: 0}
   advanced: 1

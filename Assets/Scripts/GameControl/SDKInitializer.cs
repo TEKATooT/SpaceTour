@@ -1,4 +1,4 @@
-namespace Scripts
+namespace GameControl
 {
     using UnityEngine;
     using UnityEngine.SceneManagement;

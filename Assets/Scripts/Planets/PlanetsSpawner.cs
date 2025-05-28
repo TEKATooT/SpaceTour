@@ -4,7 +4,7 @@ namespace Planets
     using UnityEngine;
 
     [RequireComponent(typeof(Pool))]
-    public class PlanetsRespawner : MonoBehaviour
+    public class PlanetsSpawner : MonoBehaviour
     {
         private readonly int _minPositionX = -5;
         private readonly int _maxPositionX = 5;
@@ -12,8 +12,7 @@ namespace Planets
         private readonly int _oneSpawnQuantuty = 1;
         private readonly float _offsetZPosition = 4f;
 
-        [SerializeField]
-        private ParticleSystem _destroyEffect;
+        [SerializeField] private ParticleSystem _destroyEffect;
 
         private Pool _pool;
         private Planet _planetToTarget;
@@ -56,9 +55,7 @@ namespace Planets
             int positionX = Random.Range(_minPositionX, _maxPositionX);
 
             if (_lastPositon == positionX)
-            {
                 positionX = RerollPosition(_lastPositon);
-            }
 
             _nextPosition = new Vector3(positionX, _nextPosition.y, _nextPosition.z + _offsetZPosition);
 
@@ -79,6 +76,13 @@ namespace Planets
             return newPosition;
         }
 
+        private void DestroyEffect()
+        {
+            _destroyEffect.transform.position = _planetToTarget.transform.position;
+
+            _destroyEffect.Play();
+        }
+
         private void OnLoop()
         {
             DestroyEffect();
@@ -87,13 +91,6 @@ namespace Planets
             _pool.Release(_planetToTarget);
 
             GenerateNextPlanet(_oneSpawnQuantuty);
-        }
-
-        private void DestroyEffect()
-        {
-            _destroyEffect.transform.position = _planetToTarget.transform.position;
-
-            _destroyEffect.Play();
         }
     }
 }

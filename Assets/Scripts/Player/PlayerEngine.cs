@@ -4,17 +4,19 @@ namespace Player
     using System;
     using UnityEngine;
 
+    [RequireComponent(typeof(Animator))]
     public class PlayerEngine : MonoBehaviour
     {
         private readonly float _startAccelerateSpeed = 1f;
         private readonly float _defaultDifference = 1;
         private readonly float _deadHight = 0.45f;
+        private readonly float _timeLimitAnimation = 2;
 
-        [SerializeField] private PlanetsRespawner _planetSpawner;
+        [SerializeField] private AudioSource _audioSource;
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private ParticleSystem _destroyPlanetEffect;
         [SerializeField] private ParticleSystem _destroyEffect;
-        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private PlanetsSpawner _planetSpawner;
 
         [SerializeField] private float _forwardSpeed = 3f;
         [SerializeField] private float _strafeSpeed = 5f;
@@ -22,13 +24,13 @@ namespace Player
 
         private ParticleSystem.MainModule _mainParticleSystem;
         private Transform _transform;
+        private Animator _animator;
         private Vector3 _targetPosition;
         private Vector3 _deadLine;
 
         private float _accelerateSpeedFrequency;
 
         public event Action GetBoosted;
-
         public event Action LoseBoosted;
 
         public float StrafeSpeed => _strafeSpeed;
@@ -36,6 +38,8 @@ namespace Player
         private void Awake()
         {
             _transform = transform;
+
+            _animator = GetComponent<Animator>();
         }
 
         private void Start()
@@ -46,6 +50,7 @@ namespace Player
                 _accelerateSpeedFrequency = _defaultDifference;
 
             InvokeRepeating(nameof(AccelerateSpeed), _startAccelerateSpeed, _accelerateSpeedFrequency);
+            Invoke(nameof(AnimatiorOff), _timeLimitAnimation);
 
             _targetPosition = _planetSpawner.GetTargetPosition();
         }
@@ -53,11 +58,6 @@ namespace Player
         private void Update()
         {
             MoveForward();
-        }
-
-        public void ChangeAccelerateSpeedFrequency(float frequency)
-        {
-            _accelerateSpeedFrequency = frequency;
         }
 
         public void UpBoost()
@@ -69,6 +69,16 @@ namespace Player
             _destroyPlanetEffect.Play();
 
             _targetPosition = _planetSpawner.GetTargetPosition();
+        }
+
+        public void ChangeAccelerateSpeedFrequency(float frequency)
+        {
+            _accelerateSpeedFrequency = frequency;
+        }
+
+        private void AnimatiorOff()
+        {
+            _animator.enabled = false;
         }
 
         private void MoveForward()

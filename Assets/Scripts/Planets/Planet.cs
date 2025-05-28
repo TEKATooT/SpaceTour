@@ -12,8 +12,7 @@ namespace Planets
         private readonly float _minAngle = -180f;
         private readonly float _maxRAngle = 180f;
 
-        [SerializeField]
-        private ModelPlanet[] _planets;
+        [SerializeField] private ModelPlanet[] _planets;
 
         private ModelPlanet _planet;
         private Vector3 _defaultSize;
@@ -52,9 +51,7 @@ namespace Planets
             Destroyed?.Invoke();
 
             if (other.TryGetComponent(out PlayerEngine player))
-            {
                 player.UpBoost();
-            }
         }
 
         private void MakeRandomPlanetAngles()
@@ -82,13 +79,9 @@ namespace Planets
         private void ApplyInvisibleStatus()
         {
             if (!_isFirstPlanet)
-            {
                 _planet.ApplyInvisibleStatus();
-            }
             else
-            {
                 _isFirstPlanet = false;
-            }
         }
 
         private void ApplyPlanetSize(int randomSize)
@@ -98,9 +91,7 @@ namespace Planets
             float divisor = 10f;
 
             if (randomSize <= defaultSize)
-            {
                 ++randomSize;
-            }
 
             transform.localScale *= (correctRatio + randomSize / divisor);
         }

@@ -1,6 +1,5 @@
-namespace Scripts
+namespace Player
 {
-    using Player;
     using UnityEngine;
     using YG;
 
@@ -9,10 +8,8 @@ namespace Scripts
         private readonly float _defaultView = 90;
         private readonly float _zoomViewForLandScape = 55;
 
-        [SerializeField]
-        private PlayerMover _player;
-        [SerializeField]
-        private float _zOffset = -9f;
+        [SerializeField] private PlayerInputHandler _player;
+        [SerializeField] private float _zOffset = -9f;
 
         private Transform _transform;
         private Vector3 _position;
@@ -23,14 +20,10 @@ namespace Scripts
             _transform = transform;
 
             if (gameObject.TryGetComponent(out Camera camera))
-            {
                 _camera = camera;
-            }
 
             if (YandexGame.EnvironmentData.isMobile)
-            {
                 CorrectionVision();
-            }
         }
 
         private void Update()
@@ -50,13 +43,9 @@ namespace Scripts
         private void CorrectionVision()
         {
             if (Screen.orientation != ScreenOrientation.Portrait)
-            {
                 _camera.fieldOfView = _zoomViewForLandScape;
-            }
             else
-            {
                 _camera.fieldOfView = _defaultView;
-            }
         }
     }
 }

@@ -33,7 +33,9 @@ namespace UI
                     transform.localScale += _step;
 
                     if (transform.localScale.x >= _maxSize.x)
+                    {
                         isTimeGrow = false;
+                    }
                 }
                 else if (!isTimeGrow)
                 {

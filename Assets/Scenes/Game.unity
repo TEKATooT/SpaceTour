@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2150,7 +2150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 496b87c595efb204b99f32aad3111b06, type: 3}
+  m_Script: {fileID: 11500000, guid: 3283648e96587ef4d9cfa719e8c8516d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyEffect: {fileID: 680271505}
@@ -9226,11 +9226,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f05e2c641fc35849901c03a0b10b612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _planetSpawner: {fileID: 963194230}
+  _audioSource: {fileID: 2098246719}
   _particleSystem: {fileID: 1399222971}
   _destroyPlanetEffect: {fileID: 94961282}
   _destroyEffect: {fileID: 686617048}
-  _audioSource: {fileID: 2098246719}
+  _planetSpawner: {fileID: 963194230}
   _forwardSpeed: 3
   _strafeSpeed: 5
   _speedBooster: 1.05
@@ -9351,7 +9351,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2098246708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd3b0db7505efe479fa0e594bbb3460, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1e2e6482f89014ea6125af7b54491e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!33 &2098246718
