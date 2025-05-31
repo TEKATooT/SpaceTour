@@ -25,8 +25,13 @@ namespace Player
         private ParticleSystem.MainModule _mainParticleSystem;
         private Transform _transform;
         private Animator _animator;
+
         private Vector3 _targetPosition;
         private Vector3 _deadLine;
+        private Vector3 _tiltRotation;
+        private Vector3 _leftTilt = new Vector3(0, 0, -35);
+        private Vector3 _rightTilt = new Vector3(0, 0, 35);
+        private Vector3 _noTilt = new Vector3(0, 0, 0);
 
         private float _accelerateSpeedFrequency;
 
@@ -71,6 +76,13 @@ namespace Player
             _targetPosition = _planetSpawner.GetTargetPosition();
         }
 
+        public void StrafeMove(Vector2 strafeDirection)
+        {
+            _transform.Translate((strafeDirection * StrafeSpeed) * Time.deltaTime);
+
+            AcceptTilt(strafeDirection);
+        }
+
         public void ChangeAccelerateSpeedFrequency(float frequency)
         {
             _accelerateSpeedFrequency = frequency;
@@ -96,6 +108,18 @@ namespace Player
 
                 LoseBoosted?.Invoke();
             }
+        }
+
+        private void AcceptTilt(Vector2 strafeDirection)
+        {
+            if (strafeDirection.x > 0f)
+                _tiltRotation = _leftTilt;
+            else if (strafeDirection.x < 0f)
+                _tiltRotation = _rightTilt;
+            else if (strafeDirection.y == 0f)
+                _tiltRotation = _noTilt;
+
+            _transform.Rotate(_tiltRotation);
         }
 
         private void AccelerateSpeed()
