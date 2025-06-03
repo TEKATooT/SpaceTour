@@ -8,19 +8,19 @@ namespace UI
 
     public class MainMenu : MonoBehaviour
     {
+        public static bool IsMute;
+        public static float Volume;
+        public static Language CorrectLanguage;
+        public static Difference CorrectDifference;
+
+        private static bool s_isFirstStart = true;
+
         private const int First = 0;
         private const int Second = 1;
         private const int Third = 2;
 
         private const string RussianYaCode = "ru";
         private const string TurkishYaCode = "tr";
-
-        static public bool IsMute;
-        static public float Volume;
-        static public Language CorrectLanguage;
-        static public Difference CorrectDifference;
-
-        static private bool s_isFirstStart = true;
 
         private readonly float _normalTime = 1f;
         private readonly float _stopTime = 0f;
