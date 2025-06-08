@@ -70,7 +70,6 @@ namespace Player
             GetBoosted?.Invoke();
 
             _audioSource.Play();
-
             _destroyPlanetEffect.Play();
 
             _targetPosition = _planetSpawner.GetTargetPosition();
