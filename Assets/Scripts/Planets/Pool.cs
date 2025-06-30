@@ -1,8 +1,8 @@
+using UnityEngine;
+using UnityEngine.Pool;
+
 namespace Planets
 {
-    using UnityEngine;
-    using UnityEngine.Pool;
-
     public class Pool : MonoBehaviour
     {
         [SerializeField] private Planet _planet;

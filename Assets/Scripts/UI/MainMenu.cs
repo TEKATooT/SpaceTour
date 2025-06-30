@@ -1,11 +1,11 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using YG;
+
 namespace UI
 {
-    using TMPro;
-    using UnityEngine;
-    using UnityEngine.SceneManagement;
-    using UnityEngine.UI;
-    using YG;
-
     public class MainMenu : MonoBehaviour
     {
         public static bool IsMute;

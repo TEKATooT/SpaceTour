@@ -1,7 +1,7 @@
+using UnityEngine;
+
 namespace Planets
 {
-    using UnityEngine;
-
     public class ModelPlanet : MonoBehaviour
     {
         private readonly float _visible = 1.1f;

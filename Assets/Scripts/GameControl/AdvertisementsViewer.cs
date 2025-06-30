@@ -1,8 +1,8 @@
+using UnityEngine;
+using YG;
+
 namespace GameControl
 {
-    using UnityEngine;
-    using YG;
-
     public class AdvertisementsViewer : MonoBehaviour
     {
         private static long s_timeShowAd;

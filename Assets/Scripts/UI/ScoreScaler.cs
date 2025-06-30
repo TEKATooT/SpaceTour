@@ -1,7 +1,7 @@
+using UnityEngine;
+
 namespace UI
 {
-    using UnityEngine;
-
     public class ScoreScaler : MonoBehaviour
     {
         private readonly float _delay = 0.25f;

@@ -1,9 +1,9 @@
+using Planets;
+using System;
+using UnityEngine;
+
 namespace Player
 {
-    using Planets;
-    using System;
-    using UnityEngine;
-
     [RequireComponent(typeof(Animator))]
     public class PlayerEngine : MonoBehaviour
     {

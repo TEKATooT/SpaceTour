@@ -1,9 +1,9 @@
+using Player;
+using UnityEngine;
+using YG;
+
 namespace GameControl
 {
-    using Player;
-    using UnityEngine;
-    using YG;
-
     public class GameHandler : MonoBehaviour
     {
         private readonly float _normalTime = 1f;

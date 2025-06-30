@@ -1,8 +1,8 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace Planets
 {
-    using System.Collections.Generic;
-    using UnityEngine;
-
     [RequireComponent(typeof(Pool))]
     public class PlanetsSpawner : MonoBehaviour
     {

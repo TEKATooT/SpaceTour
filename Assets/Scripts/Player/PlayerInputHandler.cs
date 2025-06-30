@@ -1,8 +1,8 @@
+using UnityEngine;
+using YG;
+
 namespace Player
 {
-    using UnityEngine;
-    using YG;
-
     [RequireComponent(typeof(PlayerEngine))]
     public class PlayerInputHandler : MonoBehaviour
     {

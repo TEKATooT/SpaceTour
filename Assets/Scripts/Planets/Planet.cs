@@ -1,10 +1,10 @@
+using Player;
+using System;
+using System.Linq;
+using UnityEngine;
+
 namespace Planets
 {
-    using Player;
-    using System;
-    using System.Linq;
-    using UnityEngine;
-
     public class Planet : MonoBehaviour
     {
         private readonly float _minRotationSpeed = -500f;

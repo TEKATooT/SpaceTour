@@ -1,9 +1,9 @@
+using Player;
+using TMPro;
+using UnityEngine;
+
 namespace UI
 {
-    using Player;
-    using TMPro;
-    using UnityEngine;
-
     public class ScoreCounter : MonoBehaviour
     {
         [SerializeField] private PlayerEngine _player;

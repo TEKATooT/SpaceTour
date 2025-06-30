@@ -1,8 +1,8 @@
+using UnityEngine;
+using YG;
+
 namespace Player
 {
-    using UnityEngine;
-    using YG;
-
     public class CameraFollows : MonoBehaviour
     {
         private readonly float _defaultView = 90;
